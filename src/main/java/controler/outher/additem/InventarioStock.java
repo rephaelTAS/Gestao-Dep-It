@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import model.Module_InventarioStock;
+import notificacao.Notificacao;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -32,6 +33,9 @@ public class InventarioStock{
     @FXML private ComboBox<String> line_situacao;
     @FXML private TextField line_obs;
 
+    Module_InventarioStock inventarioStock = new Module_InventarioStock();
+
+    Notificacao notificacao = new Notificacao();
 
     // Método chamado ao clicar no botão "Enviar"
     @FXML
@@ -53,40 +57,11 @@ public class InventarioStock{
         // Validação dos campos obrigatórios
         if (codigoDep.isEmpty() || tipoEquipamento.isEmpty() || marcaEquipamento.isEmpty() || quantidade.isEmpty() || dataEntradaServico == null || operadorEquipamento.isEmpty() || funcaoEquipamento.isEmpty() ||
                 localizacaoSala.isEmpty() || departamentoEquipamento.isEmpty() || situacao == null) {
-            showAlert("Erro", "Todos os campos obrigatórios devem ser preenchidos!");
+            notificacao.showAlert("Erro", "Todos os campos obrigatórios devem ser preenchidos!");
             return;
         }
 
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        Connection connection = dbConnection.connect();
-
-        String sql = "INSERT INTO inventario_stock (cod_dep, tipo_equipamento, marca, quantidade, data_entrada, data_verificacao, operador, funcao, local_sala, departamento, situacao, obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, codigoDep);
-            stmt.setString(2, tipoEquipamento);
-            stmt.setString(3, marcaEquipamento);
-            stmt.setString(4, quantidade);
-            stmt.setDate(5, java.sql.Date.valueOf(dataEntradaServico));
-            stmt.setDate(6, dataUltimaVerificacao != null ? java.sql.Date.valueOf(dataUltimaVerificacao) : null);
-            stmt.setString(7, operadorEquipamento);
-            stmt.setString(8, funcaoEquipamento);
-            stmt.setString(9, localizacaoSala);
-            stmt.setString(10, departamentoEquipamento);
-            stmt.setString(11, situacao);
-            stmt.setString(12, observacoes);
-
-            int rowsAffected = stmt.executeUpdate();
-            if (rowsAffected > 0) {
-                showAlert("Sucesso", "Equipamento cadastrado com sucesso!");
-                limparCampos();
-            } else {
-                showAlert("Erro", "Falha ao cadastrar equipamento.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            showAlert("Erro", "Erro ao conectar ao banco de dados.");
-        }
+        inventarioStock.cadastrar_inventarioStock();
     }
 
     // Método para consultar o banco de dados e preencher os campos
@@ -96,7 +71,7 @@ public class InventarioStock{
         String codigoDep = line_cod_dep.getText();
 
         if (codigoDep.isEmpty()) {
-            showAlert("Erro", "O campo Código do Departamento está vazio.");
+            notificacao.showAlert("Erro", "O campo Código do Departamento está vazio.");
             return;
         }
 
@@ -115,12 +90,12 @@ public class InventarioStock{
                 line_local.setText(rs.getString("local"));
                 line_departamento.setText(rs.getString("departamento"));
             } else {
-                showAlert("Aviso", "Nenhum funcionário encontrado com o código informado.");
+                notificacao.showAlert("Aviso", "Nenhum funcionário encontrado com o código informado.");
                 limparCamposFuncionario();
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert("Erro", "Erro ao consultar o banco de dados.");
+            notificacao.showAlert("Erro", "Erro ao consultar o banco de dados.");
         }
 
     }
@@ -149,15 +124,6 @@ public class InventarioStock{
         line_situacao.getSelectionModel().clearSelection();
 
         line_obs.clear();
-    }
-
-    // Método para exibir alertas
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     // Método para inicializar o controlador (opcional)

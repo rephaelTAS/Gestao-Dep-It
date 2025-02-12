@@ -1,9 +1,10 @@
 package model;
 
+import database.DB_Inventario_Stock;
+
 import java.time.LocalDate;
 
 public class Module_InventarioStock {
-    private int id;
     private String codDep;
     private String tipoEquipamento;
     private String marca;
@@ -17,8 +18,9 @@ public class Module_InventarioStock {
     private String situacaoEquipamento;
     private String obs;
 
-    public Module_InventarioStock(int id, String codDep, String tipoEquipamento, String marca, int quantidade, LocalDate dataEntradaServico, LocalDate ultimaVerificacao, String operador, String funcao, String localizacao, String departamento, String situacaoEquipamento, String obs) {
-        this.id = id;
+
+
+    public void module_InventarioStock(String codDep, String tipoEquipamento, String marca, int quantidade, LocalDate dataEntradaServico, LocalDate ultimaVerificacao, String operador, String funcao, String localizacao, String departamento, String situacaoEquipamento, String obs) {
         this.codDep = codDep;
         this.tipoEquipamento = tipoEquipamento;
         this.marca = marca;
@@ -31,14 +33,6 @@ public class Module_InventarioStock {
         this.departamento = departamento;
         this.situacaoEquipamento = situacaoEquipamento;
         this.obs = obs;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCodDep() {
@@ -136,4 +130,12 @@ public class Module_InventarioStock {
     public void setObs(String obs) {
         this.obs = obs;
     }
+
+    public void cadastrar_inventarioStock(){
+        DB_Inventario_Stock data = new DB_Inventario_Stock();
+        data.inserir_DadosInventarioStock(this);
+
+    }
+
+
 }

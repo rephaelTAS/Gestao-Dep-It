@@ -108,7 +108,7 @@ public class RelaInventario {
 
         if (file != null) {
             ExportToExcel exporter = new ExportToExcel();
-            exporter.exportarParaExcel(inventarioList, file.getAbsolutePath());
+            exporter.exportarInventParaExcel(inventarioList, file.getAbsolutePath());
         } else {
             System.out.println("Exportação cancelada.");
         }
