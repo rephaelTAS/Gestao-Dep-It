@@ -1,23 +1,17 @@
 package controler.outher.additem;
 
-import database.DatabaseConnection;
+
 import filtragem.Filtro_codDep;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.event.ActionEvent;
-import javafx.scene.input.KeyEvent;
+
 import model.Module_Inventario;
 import notificacao.Notificacao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.time.LocalDate;
 
 public class Inventario {
@@ -99,10 +93,12 @@ public class Inventario {
                 numeroSerie.isEmpty() || dataEntradaServico == null || operadorEquipamento.isEmpty() || funcaoEquipamento.isEmpty() ||
                 localizacaoSala.isEmpty() || departamentoEquipamento.isEmpty() || status == null || situacao == null) {
             notificacao.showAlert("Erro", "Todos os campos obrigatórios devem ser preenchidos!");
-            return;
+
         }else {
             Module_Inventario inventario = new Module_Inventario();
             inventario.module_inventario(codigoDep, tipoEquipamento, marcaEquipamento, modeloEquipamento, numeroSerie, dataEntradaServico, dataUltimaVerificacao, operadorEquipamento, funcaoEquipamento, localizacaoSala, departamentoEquipamento, status, situacao, observacoes);
+            inventario.cadastrar_inventario();
+            limparCampos();
         }
 
     }
@@ -118,7 +114,7 @@ public class Inventario {
 
         if (codigoDep.isEmpty()) {
             notificacao.showAlert("Erro", "O campo Código do Departamento está vazio.");
-            return;
+
         }else {
             filtro.filtrar_codDep(codigoDep);
             operador.setText(filtro.getOperador());
@@ -129,13 +125,6 @@ public class Inventario {
 
     }
 
-    // Método para limpar os campos relacionados ao funcionário
-    private void limparCamposFuncionario() {
-        operador.clear();
-        funcao.clear();
-        localSala.clear();
-        departamento.clear();
-    }
 
     // Método para limpar os campos do formulário
     @FXML

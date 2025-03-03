@@ -18,6 +18,9 @@ public class Relatorio {
     private Button btn_inventario;
 
     @FXML
+    private Button btn_historicoUtilizacao;
+
+    @FXML
     private Button btn_inventarioStock;
 
     @FXML
@@ -52,6 +55,7 @@ public class Relatorio {
 
         // Adiciona eventos aos botões
         btn_inventario.setOnAction(event -> handleInventario());
+        btn_historicoUtilizacao.setOnAction(event -> handleHistoricoUtilizacao());
         btn_inventarioStock.setOnAction(event -> handleInventarioStock());
         btn_comDefeitos.setOnAction(event -> handleComDefeitos());
         btn_avariados.setOnAction(event -> handleAvariados());
@@ -124,6 +128,10 @@ public class Relatorio {
     private void handleAvariados() {
         loadView("/templates/outher/relatorio/rela_avariados.fxml");
         // Lógica para o botão "Avariados"
+    }
+
+    private void handleHistoricoUtilizacao(){
+        loadView("/templates/outher/relatorio/rela_historicoUtilizcao.fxml");
     }
 
 }

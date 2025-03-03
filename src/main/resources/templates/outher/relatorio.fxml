@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="941.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.outher.Relatorio">
+<AnchorPane prefHeight="400.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.outher.Relatorio">
    <children>
       <BorderPane layoutX="117.0" layoutY="74.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -16,6 +16,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" StackPane.alignment="CENTER">
                      <children>
                         <Button fx:id="btn_inventario" mnemonicParsing="false" text="Inventario" />
+                        <Button fx:id="btn_historicoUtilizacao" mnemonicParsing="false" text="Historico de Utilizacao" />
                         <Button fx:id="btn_inventarioStock" mnemonicParsing="false" text="Inventario Stock" />
                         <Button fx:id="btn_comDefeitos" mnemonicParsing="false" text="Com Defeitos" />
                         <Button fx:id="btn_avariados" mnemonicParsing="false" text="Avariados" />
@@ -36,7 +37,7 @@
             </StackPane>
          </top>
          <center>
-            <StackPane fx:id="stackPane_relatorio" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <StackPane fx:id="stackPane_relatorio" prefHeight="330.0" prefWidth="1074.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>
