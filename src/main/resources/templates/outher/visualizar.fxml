@@ -19,7 +19,6 @@
                         <Button fx:id="btn_historicoUtilizacao" mnemonicParsing="false" text="Historico de Utilizacao" />
                         <Button fx:id="btn_inventarioStock" mnemonicParsing="false" text="Inventario Stock" />
                         <Button fx:id="btn_comDefeitos" mnemonicParsing="false" text="Com Defeitos" />
-                        <Button fx:id="btn_avariados" mnemonicParsing="false" text="Avariados" />
                         <Button fx:id="btn_centroResidos" mnemonicParsing="false" text="Centro de Resido" />
                         <Button fx:id="btn_wifi" mnemonicParsing="false" text="Wifi" />
                         <Button fx:id="btn_wifiStock" mnemonicParsing="false" text="Wifi Stock" />
