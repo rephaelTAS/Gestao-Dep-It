@@ -1,4 +1,4 @@
 package controler.outher.additem;
 
-public class HistoricoUtilizacao {
+public class AddToner {
 }

@@ -98,6 +98,7 @@ public class Inventario {
             Module_Inventario inventario = new Module_Inventario();
             inventario.module_inventario(codigoDep, tipoEquipamento, marcaEquipamento, modeloEquipamento, numeroSerie, dataEntradaServico, dataUltimaVerificacao, operadorEquipamento, funcaoEquipamento, localizacaoSala, departamentoEquipamento, status, situacao, observacoes);
             inventario.cadastrar_inventario();
+            inventario.cadastrar_historico();
             limparCampos();
         }
 

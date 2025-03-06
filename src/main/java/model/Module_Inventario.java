@@ -1,6 +1,8 @@
 package model;
 
 import java.time.LocalDate;
+
+import database.DB_HistoUtilizacao;
 import database.DB_Inventario;
 
 public class Module_Inventario {
@@ -152,4 +154,10 @@ public class Module_Inventario {
         DB_Inventario database = new DB_Inventario();
         database.inserir_DadosInventario(this);
     }
+
+    public void cadastrar_historico(){
+        DB_HistoUtilizacao database = new DB_HistoUtilizacao();
+        database.inserir_historico(this);
+    }
+
 }

@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controler.outher.relatorio.RelaComDefeitos"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.outher.relatorio.RelaComDefeitos">
+    <children>
+        <BorderPane layoutX="10.0" layoutY="8.0" prefHeight="383.0" prefWidth="580.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <TableView fx:id="tab_comDefeitos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="colCodDep" prefWidth="75.0" text="Cod_Dep" />
+                        <TableColumn fx:id="colTipoEquipamento" prefWidth="75.0" text="Tipo de Equipamento" />
+                        <TableColumn fx:id="colMarca" prefWidth="75.0" text="Marca" />
+                        <TableColumn fx:id="colNumSerie" prefWidth="75.0" text="Número de série" />
+                        <TableColumn fx:id="colDataEntrada" prefWidth="75.0" text="Data de entrada" />
+                        <TableColumn fx:id="colUltimaVerificacao" prefWidth="75.0" text="Ultima verificação" />
+                        <TableColumn fx:id="colOperador" prefWidth="75.0" text="Operador" />
+                        <TableColumn fx:id="colFuncao" prefWidth="75.0" text="Função" />
+                        <TableColumn fx:id="colLocalSala" prefWidth="75.0" text="Localização / Sala" />
+                        <TableColumn fx:id="colDepartamento" prefWidth="75.0" text="Departamento" />
+                  <TableColumn fx:id="colOBS" prefWidth="75.0" text="OBS" />
+                    </columns>
+                </TableView>
+            </center>
+        </BorderPane>
+    </children>
 </AnchorPane>

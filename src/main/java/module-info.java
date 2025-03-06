@@ -25,6 +25,8 @@ module packt.sample {
     opens controler.outher to javafx.fxml;
     opens controler.outher.additem to javafx.fxml;
 
+    opens controler.outher.visualizar to javafx.fxml;
+
 
     exports app to javafx.graphics;
     opens app to javafx.fxml; // Necessário para o controlador

@@ -74,5 +74,8 @@ public class Additem implements Initializable {
 
     }
 
+    public void Btn_TonerOnAction(ActionEvent e) throws IOException{
+        loadView("/templates/outher/addItem/add_toner.fxml");
+    }
 
 }
