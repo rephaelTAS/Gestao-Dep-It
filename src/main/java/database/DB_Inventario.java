@@ -1,6 +1,5 @@
 package database;
 
-import controler.outher.additem.Inventario;
 import model.Module_Inventario;
 import notificacao.Notificacao;
 
@@ -8,20 +7,27 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DB_Inventario {
-    Notificacao notificacao = new Notificacao();
 
+    Notificacao notificacao = new Notificacao();
     DatabaseConnection dbConnection = new DatabaseConnection();
 
+    /**
+     * Método para inserir um novo registro na tabela inventario.
+     *
+     * @param inventario O objeto Module_Inventario contendo os dados a serem inseridos.
+     */
     public void inserir_DadosInventario(Module_Inventario inventario) {
-        String sql = "INSERT INTO inventario (cod_dep, tipo_equipamento, marca, modelo, num_serie, data_entrada, data_verificacao, operador, funcao, local_sala, departamento, status, situacao, obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO inventario (cod_dep, tipo_equipamento, marca, modelo, num_serie, data_entrada, data_verificacao, operador, funcao, local_sala, departamento, status, situacao, obs) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = dbConnection.connect();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            // Define os valores dos parâmetros
             stmt.setString(1, inventario.getCodDep());
             stmt.setString(2, inventario.getTipoEquipamento());
             stmt.setString(3, inventario.getMarca());
@@ -37,23 +43,28 @@ public class DB_Inventario {
             stmt.setString(13, inventario.getSituacaoEquipamento());
             stmt.setString(14, inventario.getObs());
 
+            // Executa a inserção
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
-                notificacao.showAlert("Sucesso", "Equipamento cadastrado com sucesso!");
-
+                notificacao.showSuccess("Sucesso. Equipamento cadastrado com sucesso!");
             } else {
-                notificacao.showAlert("Erro", "Falha ao cadastrar equipamento.");
+                notificacao.showError("Erro. Falha ao cadastrar equipamento.");
             }
         } catch (SQLException e) {
+            System.err.println("Erro ao inserir dados na tabela inventario:");
             e.printStackTrace();
-            notificacao.showAlert("Erro", "Erro ao conectar ao banco de dados.");
+            notificacao.showError("Erro. Erro ao conectar ao banco de dados.");
         }
     }
 
-
+    /**
+     * Método para buscar todos os registros da tabela inventario.
+     *
+     * @return Uma lista de objetos Module_Inventario com os dados da tabela.
+     */
     public List<Module_Inventario> mostrarInventario() {
-        List<Module_Inventario> inventarios = new ArrayList<>();
-        String sql = "SELECT * FROM inventario";
+        List<Module_Inventario> dados = new ArrayList<>();
+        String sql = "SELECT * FROM inventario"; // Certifique-se de que o nome da tabela está correto
 
         try (Connection connection = dbConnection.connect();
              PreparedStatement stmt = connection.prepareStatement(sql);
@@ -61,30 +72,30 @@ public class DB_Inventario {
 
             while (rs.next()) {
                 Module_Inventario inventario = new Module_Inventario();
-                inventario.module_inventario(
-                        rs.getString("cod_dep"),
-                        rs.getString("tipo_equipamento"),
-                        rs.getString("marca"),
-                        rs.getString("modelo"),
-                        rs.getString("num_serie"),
-                        rs.getDate("data_entrada").toLocalDate(),
-                        rs.getDate("data_verificacao") != null ? rs.getDate("data_verificacao").toLocalDate() : null,
-                        rs.getString("operador"),
-                        rs.getString("funcao"),
-                        rs.getString("local_sala"),
-                        rs.getString("departamento"),
-                        rs.getString("status"),
-                        rs.getString("situacao"),
-                        rs.getString("obs")
-                );
-                inventarios.add(inventario);
+
+                // Preenche o objeto Module_Inventario usando os métodos set
+                inventario.setCodDep(rs.getString("cod_dep"));
+                inventario.setTipoEquipamento(rs.getString("tipo_equipamento"));
+                inventario.setMarca(rs.getString("marca"));
+                inventario.setModelo(rs.getString("modelo"));
+                inventario.setNum_serie(rs.getString("num_serie"));
+                inventario.setDataEntradaServico(rs.getDate("data_entrada") != null ? rs.getDate("data_entrada").toLocalDate() : null);
+                inventario.setUltimaVerificacao(rs.getDate("data_verificacao") != null ? rs.getDate("data_verificacao").toLocalDate() : null);
+                inventario.setOperador(rs.getString("operador"));
+                inventario.setFuncao(rs.getString("funcao"));
+                inventario.setLocalizacao(rs.getString("local_sala"));
+                inventario.setDepartamento(rs.getString("departamento"));
+                inventario.setStatus(rs.getString("status"));
+                inventario.setSituacaoEquipamento(rs.getString("situacao"));
+                inventario.setObs(rs.getString("obs"));
+
+                dados.add(inventario);
             }
         } catch (SQLException e) {
+            System.err.println("Erro ao buscar dados da tabela inventario:");
             e.printStackTrace();
         }
 
-        return inventarios; // Retorna a lista de inventários
+        return dados;
     }
 }
-
-

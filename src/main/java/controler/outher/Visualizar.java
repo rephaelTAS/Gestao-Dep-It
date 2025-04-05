@@ -1,7 +1,6 @@
 package controler.outher;
 
 import controler.main.MainControler;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +15,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static util.FXMLCacheLoader.loadView;
+
 public class Visualizar implements Initializable {
     @FXML
     private Button btn_inventario;
@@ -29,8 +30,6 @@ public class Visualizar implements Initializable {
     @FXML
     private Button btn_comDefeitos;
 
-    @FXML
-    private Button btn_avariados;
 
     @FXML
     private Button btn_centroResidos;
@@ -53,14 +52,13 @@ public class Visualizar implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadInitialView();
+        loadView("/templates/outher/visualizar/inventario.fxml", multpage, "");
 
         // Adiciona eventos aos botões
         btn_inventario.setOnAction(event -> inventario());
         btn_historicoUtilizacao.setOnAction(event -> historicoUtilizacao());
         btn_inventarioStock.setOnAction(event -> handleInventarioStock());
         btn_comDefeitos.setOnAction(event -> handleComDefeitos());
-        btn_avariados.setOnAction(event -> handleAvariados());
         btn_centroResidos.setOnAction(event -> handleCentroResidos());
         btn_wifi.setOnAction(event -> handleWifi());
         btn_wifiStock.setOnAction(event -> handleWifiStock());
@@ -68,77 +66,47 @@ public class Visualizar implements Initializable {
         btn_tonerStock.setOnAction(event -> handleTonerStock());
     }
 
-    private void loadInitialView(){
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/templates/outher/visualizar/inventario.fxml"));
-            Parent fxml = loader.load();
-            multpage.getChildren().clear();
-            multpage.getChildren().add(fxml);
-        } catch (IOException e) {
-            Logger.getLogger(MainControler.class.getName()).log(Level.SEVERE, null, e);
-            notificacao.showErrorAlert("Erro ao carregar a visualização inicial.");
-        }
-    }
-
-    private void loadlView(String fxmlPatch){
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPatch));
-            Parent fxml = loader.load();
-            multpage.getChildren().clear();
-            multpage.getChildren().add(fxml);
-        } catch (IOException e) {
-            Logger.getLogger(MainControler.class.getName()).log(Level.SEVERE, null, e);
-            notificacao.showErrorAlert("Erro ao carregar a visualização inicial.");
-        }
-    }
-
-
     public void inventario(){
-        loadlView("/templates/outher/visualizar/inventario.fxml");
+        loadView("/templates/outher/visualizar/inventario.fxml", multpage, "");
 
     }
 
     public void historicoUtilizacao(){
-        loadlView("/templates/outher/visualizar/historicoUtilizacao.fxml");
+        loadView("/templates/outher/visualizar/historicoUtilizacao.fxml", multpage, "");
 
     }
 
 
     private void handleWifiStock() {
-        loadlView("/templates/outher/visualizar/rela_wifiStock.fxml");
+        loadView("/templates/outher/visualizar/rela_wifiStock.fxml", multpage, "");
     }
 
     private void handleWifi() {
-        loadlView("/templates/outher/visualizar/rela_wifi.fxml");
+        loadView("/templates/outher/visualizar/rela_wifi.fxml", multpage, "");
     }
 
     private void handleCentroResidos() {
-        loadlView("/templates/outher/visualizar/rela_centroResido.fxml");
+        loadView("/templates/outher/visualizar/rela_centroResido.fxml", multpage, "");
     }
 
 
     private void handleInventarioStock() {
-        loadlView("/templates/outher/visualizar/rela_inventarioStock.fxml");
+        loadView("/templates/outher/visualizar/rela_inventarioStock.fxml", multpage, "");
         // Lógica para o botão "Inventário Stock"visualizar
     }
 
     private void handleComDefeitos() {
-        loadlView("/templates/outher/visualizar/rela_comDefeitos.fxml");
+        loadView("/templates/outher/visualizar/rela_comDefeitos.fxml", multpage, "");
         // Lógica para o botão "Com Defeitos"
-    }
-
-    private void handleAvariados() {
-        loadlView("/templates/outher/visualizar/rela_avariados.fxml");
-        // Lógica para o botão "Avariados"
     }
 
 
 
     private void handleTonerStock() {
-        loadlView("/templates/outher/visualizar/rela_tonerStock.fxml");
+        loadView("/templates/outher/visualizar/rela_tonerStock.fxml", multpage, "");
     }
 
     private void handleUsuToner() {
-        loadlView("/templates/outher/visualizar/rela_usuToner.fxml");
+        loadView("/templates/outher/visualizar/rela_usuToner.fxml", multpage, "");
     }
 }

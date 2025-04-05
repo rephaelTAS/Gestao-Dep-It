@@ -18,8 +18,6 @@ public class Module_InventarioStock {
     private String situacaoEquipamento;
     private String obs;
 
-
-
     public void module_InventarioStock(String codDep, String tipoEquipamento, String marca, int quantidade, LocalDate dataEntradaServico, LocalDate ultimaVerificacao, String operador, String funcao, String localizacao, String departamento, String situacaoEquipamento, String obs) {
         this.codDep = codDep;
         this.tipoEquipamento = tipoEquipamento;

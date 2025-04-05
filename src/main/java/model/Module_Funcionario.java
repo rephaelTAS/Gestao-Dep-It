@@ -7,7 +7,7 @@ public class Module_Funcionario {
     private String localizacao;
     private String departamento;
 
-    public Module_Funcionario(String codDep, String nome, String funcao, String localizacao, String departamento) {
+    public void module_Funcionario(String codDep, String nome, String funcao, String localizacao, String departamento) {
         this.codDep = codDep;
         this.nome = nome;
         this.funcao = funcao;

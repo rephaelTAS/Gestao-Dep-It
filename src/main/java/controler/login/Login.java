@@ -1,6 +1,8 @@
 package controler.login;
 
+import app.styles.config.StyleConfig;
 import database.DatabaseConnection;
+import app.styles.StyleManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import notificacao.Notificacao;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -32,14 +36,21 @@ public class Login {
     @FXML
     private Button btn_cancelar;
 
+    @FXML private BorderPane rootPane;
+
+    Notificacao notificacao = new Notificacao();
+
+
     private DatabaseConnection dbConnection;
+
+
 
     // Método de ação do botão de login
     public void LoginBtnAction(ActionEvent e) {
         if (!usuario.getText().isBlank() && !senha.getText().isBlank()) {
             validarLogin();
         } else {
-            showAlert(AlertType.WARNING, "Campos obrigatórios", "Preencha todos os campos.");
+            notificacao.showInfo("Campos obrigatórios. Preencha todos os campos.");
         }
     }
 
@@ -67,12 +78,12 @@ public class Login {
                 if (queryResult.next() && queryResult.getInt(1) == 1) {
                     Main(); // Chama o método para abrir a tela principal
                 } else {
-                    showAlert(AlertType.ERROR, "Login inválido", "Nome de usuário ou senha incorretos.");
+                    notificacao.showError("Login inválido. Nome de usuário ou senha incorretos.");
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert(AlertType.ERROR, "Erro no banco de dados", "Erro ao tentar se conectar ao banco de dados.");
+            notificacao.showError("Erro no banco de dados. Erro ao tentar se conectar ao banco de dados.");
         } finally {
             if (connectDB != null) {
                 try {
@@ -84,20 +95,20 @@ public class Login {
         }
     }
 
-    // Exibe uma janela de alerta com a mensagem especificada
-    private void showAlert(AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+
 
     // Método de abrir a tela principal
     public void Main() {
+
+
+        StyleManager styleManager = StyleManager.getInstance();
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/templates/main/main.fxml"));
             AnchorPane root = fxmlLoader.load();
+
+            StyleConfig.init();
+            styleManager.applyComponentStyles(root,  "main");
 
             Stage newStage = new Stage();
             newStage.setTitle("Tela Inicial");
@@ -109,7 +120,7 @@ public class Login {
             newStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert(AlertType.ERROR, "Erro", "Falha ao abrir a tela principal.");
+            notificacao.showError("Falha ao abrir a tela principal.");
         }
     }
 }

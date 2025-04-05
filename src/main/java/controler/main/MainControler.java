@@ -1,19 +1,23 @@
 package controler.main;
 
+import app.styles.config.StyleConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import notificacao.Notificacao;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static util.FXMLCacheLoader.loadView;
 
 public class MainControler implements Initializable {
 
@@ -24,45 +28,24 @@ public class MainControler implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadInitialView();
-    }
-
-    private void loadInitialView() {
-        try {
-            Parent fxml = FXMLLoader.load(getClass().getResource("/templates/outher/dashboard.fxml"));
-            multiploPanel.getChildren().clear();
-            multiploPanel.getChildren().add(fxml);
-        } catch (IOException e) {
-            Logger.getLogger(MainControler.class.getName()).log(Level.SEVERE, null, e);
-            notificacao.showErrorAlert("Erro ao carregar a visualização inicial.");
-        }
-    }
-
-    private void loadView(String fxmlPath) {
-        try {
-            Parent fxml = FXMLLoader.load(getClass().getResource(fxmlPath));
-            multiploPanel.getChildren().clear();
-            multiploPanel.getChildren().add(fxml);
-        } catch (IOException e) {
-            Logger.getLogger(MainControler.class.getName()).log(Level.SEVERE, null, e);
-            notificacao.showErrorAlert("Erro ao carregar a visualização.");
-        }
+        StyleConfig.init();
+        loadView("/templates/outher/dashboard.fxml", multiploPanel, "");
     }
 
     public void home(ActionEvent e) throws IOException{
-        loadView("/templates/outher/dashboard.fxml");
+        loadView("/templates/outher/dashboard.fxml", multiploPanel, "");
     }
 
     public void add_item(ActionEvent e) throws IOException{
-        loadView("/templates/outher/additem.fxml");
+        loadView("/templates/outher/additem.fxml", multiploPanel, "additem");
     }
 
     public void realotrios(ActionEvent e) throws IOException{
-        loadView("/templates/outher/relatorio.fxml");
+        loadView("/templates/outher/relatorio.fxml", multiploPanel, "relatorio");
     }
 
     public void visualizar(ActionEvent e) throws IOException{
-        loadView("/templates/outher/visualizar.fxml");
+        loadView("/templates/outher/visualizar.fxml", multiploPanel, "visualizar");
 
     }
 }

@@ -1,22 +1,18 @@
 package controler.outher.additem;
 
 
-import database.DB_Inventario_Stock;
 import database.DatabaseConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import model.Module_InventarioStock;
 import notificacao.Notificacao;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 public class InventarioStock{
 
@@ -57,7 +53,7 @@ public class InventarioStock{
         // Validação dos campos obrigatórios
         if (codigoDep.isEmpty() || tipoEquipamento.isEmpty() || marcaEquipamento.isEmpty() || quantidade.isEmpty() || dataEntradaServico == null || operadorEquipamento.isEmpty() || funcaoEquipamento.isEmpty() ||
                 localizacaoSala.isEmpty() || departamentoEquipamento.isEmpty() || situacao == null) {
-            notificacao.showAlert("Erro", "Todos os campos obrigatórios devem ser preenchidos!");
+            notificacao.showError("Erro");
             return;
         }
 
@@ -71,7 +67,7 @@ public class InventarioStock{
         String codigoDep = line_cod_dep.getText();
 
         if (codigoDep.isEmpty()) {
-            notificacao.showAlert("Erro", "O campo Código do Departamento está vazio.");
+            notificacao.showError("Erro");
             return;
         }
 
@@ -90,12 +86,12 @@ public class InventarioStock{
                 line_local.setText(rs.getString("local"));
                 line_departamento.setText(rs.getString("departamento"));
             } else {
-                notificacao.showAlert("Aviso", "Nenhum funcionário encontrado com o código informado.");
+                notificacao.showSuccess("Aviso. Nenhum funcionário encontrado com o código informado.");
                 limparCamposFuncionario();
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            notificacao.showAlert("Erro", "Erro ao consultar o banco de dados.");
+            notificacao.showError("Erro");
         }
 
     }

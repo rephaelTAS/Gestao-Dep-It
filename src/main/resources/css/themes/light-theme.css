@@ -1,0 +1,14 @@
+/* Light Theme - Tema Claro Padrão */
+.root {
+    -fx-primary-color: #2c3e50;
+    -fx-secondary-color: #3498db;
+    -fx-accent-color: #e74c3c;
+    -fx-light-color: #ecf0f1;
+    -fx-dark-color: #2c3e50;
+
+    -fx-base-font-size: 14px;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+
+    -fx-background-color: -fx-light-color;
+    -fx-text-fill: -fx-dark-color;
+}

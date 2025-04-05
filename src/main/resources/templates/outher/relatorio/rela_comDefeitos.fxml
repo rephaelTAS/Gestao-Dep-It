@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.outher.relatorio.RelaComDefeitos">
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.outher.relatorio.RelaComDefeitos">
     <children>
-        <BorderPane layoutX="10.0" layoutY="8.0" prefHeight="383.0" prefWidth="580.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <BorderPane layoutX="10.0" layoutY="8.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
             <center>
-                <TableView fx:id="tab_comDefeitos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                <TableView fx:id="tab_comDefeitos" BorderPane.alignment="CENTER">
                     <columns>
                         <TableColumn fx:id="colCodDep" prefWidth="75.0" text="Cod_Dep" />
                         <TableColumn fx:id="colTipoEquipamento" prefWidth="75.0" text="Tipo de Equipamento" />
@@ -23,8 +26,21 @@
                         <TableColumn fx:id="colDepartamento" prefWidth="75.0" text="Departamento" />
                   <TableColumn fx:id="colOBS" prefWidth="75.0" text="OBS" />
                     </columns>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" />
+               </BorderPane.margin>
                 </TableView>
             </center>
+         <bottom>
+            <StackPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <opaqueInsets>
+                  <Insets bottom="10.0" />
+               </opaqueInsets>
+               <children>
+                  <Button fx:id="Btn_GerarExcel" mnemonicParsing="false" text="Gerar Excel" />
+               </children>
+            </StackPane>
+         </bottom>
         </BorderPane>
     </children>
 </AnchorPane>

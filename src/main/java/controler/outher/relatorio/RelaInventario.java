@@ -12,11 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Module_Inventario;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -55,7 +52,7 @@ public class RelaInventario {
     private TableColumn<Module_Inventario, String> colObs;
 
     @FXML
-    private Button btn_exportar; // Adicione este botão no seu FXML
+    private Button Btn_GerarExcel; // Adicione este botão no seu FXML
 
     private ObservableList<Module_Inventario> inventarioList = FXCollections.observableArrayList();
 
@@ -65,7 +62,13 @@ public class RelaInventario {
     private void initialize() {
         mostrarInventario();
 
-        btn_exportar.setOnAction(event -> handleExportButton());
+        Btn_GerarExcel.setOnAction(event -> {
+            try {
+                handleExportButton();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         // Configurar as colunas da tabela
         colCodDep.setCellValueFactory(new PropertyValueFactory<>("codDep"));
         colTipoEquipamento.setCellValueFactory(new PropertyValueFactory<>("tipoEquipamento"));
@@ -98,8 +101,8 @@ public class RelaInventario {
     }
 
     @FXML
-    private void handleExportButton() {
-        Stage primaryStage = (Stage) btn_exportar.getScene().getWindow(); // Obtendo a referência ao Stage
+    private void handleExportButton() throws IOException {
+        Stage primaryStage = (Stage) Btn_GerarExcel.getScene().getWindow(); // Obtendo a referência ao Stage
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Salvar Arquivo Excel");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
@@ -108,7 +111,7 @@ public class RelaInventario {
 
         if (file != null) {
             ExportToExcel exporter = new ExportToExcel();
-            exporter.exportarInventParaExcel(inventarioList, file.getAbsolutePath());
+            exporter.exportarInventarioParaExcel(inventarioList, file.getAbsolutePath());
         } else {
             System.out.println("Exportação cancelada.");
         }

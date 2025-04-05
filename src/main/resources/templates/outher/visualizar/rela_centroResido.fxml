@@ -7,21 +7,21 @@
 
 <AnchorPane prefHeight="522.0" prefWidth="1054.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.outher.visualizar.VisCentroResido">
     <children>
-        <BorderPane layoutX="64.0" layoutY="54.0" prefHeight="296.0" prefWidth="498.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <BorderPane layoutX="64.0" layoutY="54.0" prefHeight="296.0" prefWidth="498.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <center>
-                <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <columns>
-                        <TableColumn prefWidth="75.0" text="COd_dep" />
-                        <TableColumn prefWidth="75.0" text="Tipo de Equipamento" />
-                        <TableColumn prefWidth="75.0" text="Marca" />
-                        <TableColumn prefWidth="75.0" text="Modelo" />
-                        <TableColumn prefWidth="75.0" text="Número de serie" />
-                        <TableColumn prefWidth="75.0" text="Data de entrada" />
-                        <TableColumn prefWidth="75.0" text="Operador" />
-                        <TableColumn prefWidth="75.0" text="Função" />
-                        <TableColumn prefWidth="75.0" text="Localização / Sala" />
-                        <TableColumn prefWidth="75.0" text="Departamento" />
-                        <TableColumn prefWidth="75.0" text="OBS" />
+                        <TableColumn fx:id="codDepColumn" prefWidth="75.0" text="Cod_dep" />
+                        <TableColumn fx:id="tipoEquipamentoColumn" prefWidth="75.0" text="Tipo de Equipamento" />
+                        <TableColumn fx:id="marcaColumn" prefWidth="75.0" text="Marca" />
+                        <TableColumn fx:id="modeloColumn" prefWidth="75.0" text="Modelo" />
+                        <TableColumn fx:id="numeroSerieColumn" prefWidth="75.0" text="Número de serie" />
+                        <TableColumn fx:id="dataEntradaColumn" prefWidth="75.0" text="Data de entrada" />
+                        <TableColumn fx:id="operadorColumn" prefWidth="75.0" text="Operador" />
+                        <TableColumn fx:id="funcaoColumn" prefWidth="75.0" text="Função" />
+                        <TableColumn fx:id="localizacaoSalaColumn" prefWidth="75.0" text="Localização / Sala" />
+                        <TableColumn fx:id="departamentoColumn" prefWidth="75.0" text="Departamento" />
+                        <TableColumn fx:id="obsColumn" prefWidth="75.0" text="OBS" />
                     </columns>
                 </TableView>
             </center>

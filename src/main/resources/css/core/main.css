@@ -1,0 +1,101 @@
+/* Estilo para a raiz */
+.root {
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    -fx-background-color: #f5f7fa; /* Fundo suave e clean */
+    -fx-padding: 20px;
+}
+
+/* Estilo do BorderPane principal */
+.main-border-pane {
+    -fx-background-color: #ffffff; /* Fundo branco */
+    -fx-border-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 10);
+}
+
+/* Estilo do cabeçalho */
+.header-pane {
+    -fx-background-color: #00796B; /* Cor suave de verde */
+    -fx-padding: 10px;
+}
+
+/* Título do cabeçalho */
+.header-title {
+    -fx-font-size: 24px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Nome do usuário no cabeçalho */
+.header-user {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-font-style: italic;
+}
+
+/* Estilo da barra de navegação */
+.navigation-menu {
+    -fx-background-color: #ffffff; /* Fundo branco */
+    -fx-border-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 5);
+    -fx-spacing: 10px;
+}
+
+/* Estilo dos botões de navegação */
+.nav-button {
+    -fx-background-color: #00838f;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    -fx-background-color: #004d40; /* Cor mais escura no hover */
+}
+
+/* Estilo do painel de conteúdo */
+.content-pane {
+    -fx-background-color: #ffffff; /* Fundo branco */
+    -fx-border-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 10);
+    -fx-padding: 20px;
+}
+
+/* Estilo do StackPane no centro */
+.stack-pane {
+    -fx-alignment: CENTER;
+}
+
+/* Margem da tabela no conteúdo */
+.table-view {
+    -fx-pref-width: 100%;
+    -fx-pref-height: 350px;
+    -fx-background-color: #ffffff; /* Fundo branco */
+    -fx-border-radius: 10px;
+}
+
+/* Estilo dos títulos das colunas da tabela */
+.table-view .column-header {
+    -fx-background-color: #00796B;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+/* Estilo do botão de ação "Gerar Excel" */
+.button {
+    -fx-background-color: #00796B;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease;
+}
+
+.button:hover {
+    -fx-background-color: #004D40;
+}

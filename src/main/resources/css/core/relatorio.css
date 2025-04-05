@@ -1,0 +1,78 @@
+/* Estilo geral do AnchorPane */
+.anchor-pane {
+    -fx-background-color: #f5f5f5; /* Cor de fundo clara e suave */
+    -fx-padding: 20px;
+}
+
+/* Estilo do BorderPane */
+.border-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+}
+
+/* Estilo do StackPane no topo */
+.stack-pane {
+    -fx-background-color: #2e3b47; /* Cor de fundo escura para o topo */
+    -fx-border-radius: 10px 10px 0 0;
+    -fx-padding: 10px;
+    -fx-alignment: center;
+}
+
+/* Estilos para o HBox que contém os botões no topo */
+.hbox {
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+    -fx-wrap-text: true; /* Permite que os botões se ajustem se necessário */
+    -fx-padding: 20px 0;
+}
+
+/* Estilo dos botões no HBox */
+.hbox button {
+    -fx-background-color: #4CAF50; /* Cor de fundo do botão */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-transition: background-color 0.3s ease;
+}
+
+.hbox button:hover {
+    -fx-background-color: #45a049; /* Cor de hover */
+}
+
+.hbox button:focus {
+    -fx-background-color: #388e3c; /* Cor quando o botão estiver em foco */
+}
+
+.hbox button:pressed {
+    -fx-background-color: #388e3c;
+}
+
+/* Estilos para o StackPane no centro */
+.center {
+    -fx-background-color: #e0e0e0; /* Cor mais clara para o centro */
+    -fx-border-radius: 0 0 10px 10px;
+    -fx-padding: 20px;
+}
+
+/* Botões do HBox responsivos */
+.hbox button:nth-child(1) { -fx-min-width: 120px; }
+.hbox button:nth-child(2) { -fx-min-width: 180px; }
+.hbox button:nth-child(3) { -fx-min-width: 140px; }
+.hbox button:nth-child(4) { -fx-min-width: 120px; }
+.hbox button:nth-child(5) { -fx-min-width: 160px; }
+.hbox button:nth-child(6) { -fx-min-width: 120px; }
+.hbox button:nth-child(7) { -fx-min-width: 140px; }
+.hbox button:nth-child(8) { -fx-min-width: 160px; }
+.hbox button:nth-child(9) { -fx-min-width: 150px; }
+
+/* Estilo do StackPane central */
+.stack-pane#stackPane_relatorio {
+    -fx-background-color: #ffffff; /* Fundo branco para o conteúdo central */
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+    -fx-padding: 20px;
+}

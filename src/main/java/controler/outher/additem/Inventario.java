@@ -92,11 +92,11 @@ public class Inventario {
         if (codigoDep.isEmpty() || tipoEquipamento.isEmpty() || marcaEquipamento.isEmpty() || modeloEquipamento.isEmpty() ||
                 numeroSerie.isEmpty() || dataEntradaServico == null || operadorEquipamento.isEmpty() || funcaoEquipamento.isEmpty() ||
                 localizacaoSala.isEmpty() || departamentoEquipamento.isEmpty() || status == null || situacao == null) {
-            notificacao.showAlert("Erro", "Todos os campos obrigatórios devem ser preenchidos!");
+            notificacao.showError("Erro: Todos os campos obrigatórios devem ser preenchidos!");
 
         }else {
             Module_Inventario inventario = new Module_Inventario();
-            inventario.module_inventario(codigoDep, tipoEquipamento, marcaEquipamento, modeloEquipamento, numeroSerie, dataEntradaServico, dataUltimaVerificacao, operadorEquipamento, funcaoEquipamento, localizacaoSala, departamentoEquipamento, status, situacao, observacoes);
+            inventario.module_Inventario(codigoDep, tipoEquipamento, marcaEquipamento, modeloEquipamento, numeroSerie, dataEntradaServico, dataUltimaVerificacao, operadorEquipamento, funcaoEquipamento, localizacaoSala, departamentoEquipamento, status, situacao, observacoes);
             inventario.cadastrar_inventario();
             inventario.cadastrar_historico();
             limparCampos();
@@ -114,7 +114,7 @@ public class Inventario {
 
 
         if (codigoDep.isEmpty()) {
-            notificacao.showAlert("Erro", "O campo Código do Departamento está vazio.");
+            notificacao.showError("Erro O campo Código do Departamento está vazio.");
 
         }else {
             filtro.filtrar_codDep(codigoDep);

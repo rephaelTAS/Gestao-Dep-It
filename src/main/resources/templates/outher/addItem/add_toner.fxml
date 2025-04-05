@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.outher.additem.AddToner">
+<?import javafx.scene.control.DatePicker?>
+<AnchorPane maxHeight="510.0" maxWidth="480.0" minHeight="510.0" minWidth="480.0" prefHeight="510.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controler.outher.additem.AddToner">
     <children>
         <BorderPane layoutX="-14.0" prefHeight="290.0" prefWidth="328.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <left>
@@ -55,22 +56,22 @@
                                 <Insets left="10.0" />
                             </padding>
                         </Label>
-                  <Label maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" text="Unidade">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
-                  <Label maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" text="Status">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
+                        <Label maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" text="Unidade">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                            <padding>
+                                <Insets left="10.0" />
+                            </padding>
+                        </Label>
+                        <Label maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" text="Data">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                            <padding>
+                                <Insets left="10.0" />
+                            </padding>
+                        </Label>
                         <Label maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" text="Operador">
                             <VBox.margin>
                                 <Insets top="10.0" />
@@ -136,16 +137,16 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </TextField>
-                  <TextField fx:id="texFil_unidade" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <TextField fx:id="texFil_status" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </TextField>
+                        <TextField fx:id="texFil_unidade" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <DatePicker fx:id="data" maxHeight="25.0" maxWidth="170.0" minHeight="25.0" minWidth="170.0" prefHeight="25.0" prefWidth="170.0">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </DatePicker>
                         <TextField fx:id="operador" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0">
                             <VBox.margin>
                                 <Insets top="10.0" />
@@ -175,10 +176,10 @@
                 </VBox>
             </right>
             <bottom>
-                <Pane prefHeight="76.0" prefWidth="608.0" BorderPane.alignment="CENTER">
+                <Pane prefHeight="76.0" prefWidth="492.0" BorderPane.alignment="CENTER">
                     <children>
                         <Button fx:id="btnEnviar" layoutX="138.0" layoutY="26.0" mnemonicParsing="false" text="Enviar" />
-                        <Button fx:id="btnLimpar" layoutX="390.0" layoutY="25.0" mnemonicParsing="false"  text="Limpar" />
+                        <Button fx:id="btnLimpar" layoutX="390.0" layoutY="25.0" mnemonicParsing="false" text="Limpar" />
                     </children></Pane>
             </bottom>
         </BorderPane>

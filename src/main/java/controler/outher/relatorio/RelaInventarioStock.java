@@ -1,64 +1,71 @@
 package controler.outher.relatorio;
 
 import database.DB_Inventario_Stock;
-import export_import.ExportToExcel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import model.Module_InventarioStock;
 
-import java.io.File;
+import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class RelaInventarioStock {
+public class RelaInventarioStock implements Initializable {
 
     @FXML
     private TableView<Module_InventarioStock> tab_inventario;
 
     @FXML
     private TableColumn<Module_InventarioStock, String> colCodDep;
+
     @FXML
     private TableColumn<Module_InventarioStock, String> colTipoEquipamento;
+
     @FXML
     private TableColumn<Module_InventarioStock, String> colMarca;
+
     @FXML
     private TableColumn<Module_InventarioStock, Integer> colQuantidade;
+
     @FXML
-    private TableColumn<Module_InventarioStock, String> colDataEntrada;
+    private TableColumn<Module_InventarioStock, LocalDate> colDataEntrada;
+
     @FXML
-    private TableColumn<Module_InventarioStock, String> colUltimaVerificacao;
+    private TableColumn<Module_InventarioStock, LocalDate> colUltimaVerificacao;
+
     @FXML
     private TableColumn<Module_InventarioStock, String> colOperador;
+
     @FXML
     private TableColumn<Module_InventarioStock, String> colFuncao;
+
     @FXML
     private TableColumn<Module_InventarioStock, String> colLocalSala;
+
     @FXML
     private TableColumn<Module_InventarioStock, String> colDepartamento;
+
     @FXML
     private TableColumn<Module_InventarioStock, String> colSituacaoEquipamento;
+
     @FXML
     private TableColumn<Module_InventarioStock, String> colObs;
 
-    @FXML
-    private Button btn_gerarExcel; // Botão "Gerar Excel"
+    private DB_Inventario_Stock dbInventarioStock = new DB_Inventario_Stock();
 
-    private ObservableList<Module_InventarioStock> inventarioListStock = FXCollections.observableArrayList();
-
-    @FXML
-    private void initialize() {
-        // Configurar as colunas da tabela
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Configura as colunas da TableView
         colCodDep.setCellValueFactory(new PropertyValueFactory<>("codDep"));
         colTipoEquipamento.setCellValueFactory(new PropertyValueFactory<>("tipoEquipamento"));
         colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
         colQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-        colDataEntrada.setCellValueFactory(new PropertyValueFactory<>("dataEntrada"));
+        colDataEntrada.setCellValueFactory(new PropertyValueFactory<>("dataEntradaServico"));
         colUltimaVerificacao.setCellValueFactory(new PropertyValueFactory<>("ultimaVerificacao"));
         colOperador.setCellValueFactory(new PropertyValueFactory<>("operador"));
         colFuncao.setCellValueFactory(new PropertyValueFactory<>("funcao"));
@@ -67,40 +74,18 @@ public class RelaInventarioStock {
         colSituacaoEquipamento.setCellValueFactory(new PropertyValueFactory<>("situacaoEquipamento"));
         colObs.setCellValueFactory(new PropertyValueFactory<>("obs"));
 
-        // Carregar os dados do inventário
-        mostrarInventario();
-
-        // Configurar o botão "Gerar Excel"
-        btn_gerarExcel.setOnAction(event -> handleGerarExcel());
+        // Carrega os dados do banco de dados
+        carregarDados();
     }
 
-    private void mostrarInventario() {
-        DB_Inventario_Stock dbInventario = new DB_Inventario_Stock();
-        List<Module_InventarioStock> inventariosStock = dbInventario.mostrarInventarioStock();
+    private void carregarDados() {
+        // Obtém os dados do banco de dados
+        List<Module_InventarioStock> dados = dbInventarioStock.mostrarDadosInventarioStock();
 
-        // Limpar a lista antes de adicionar novos itens
-        inventarioListStock.clear();
+        // Converte a lista para um ObservableList
+        ObservableList<Module_InventarioStock> listaObservavel = FXCollections.observableArrayList(dados);
 
-        // Adicionar os dados recebidos à lista observável
-        inventarioListStock.addAll(inventariosStock);
-
-        // Definir a lista na TableView
-        tab_inventario.setItems(inventarioListStock);
-    }
-
-    private void handleGerarExcel() {
-        Stage primaryStage = (Stage) btn_gerarExcel.getScene().getWindow(); // Obtendo a referência ao Stage
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Salvar Arquivo Excel");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
-
-        File file = fileChooser.showSaveDialog(primaryStage); // Abrindo o diálogo para salvar o arquivo
-
-        if (file != null) {
-            ExportToExcel exporter = new ExportToExcel();
-            exporter.exportarInventStockParaExcel(inventarioListStock, file.getAbsolutePath());
-        } else {
-            System.out.println("Exportação cancelada.");
-        }
+        // Define os dados na TableView
+        tab_inventario.setItems(listaObservavel);
     }
 }

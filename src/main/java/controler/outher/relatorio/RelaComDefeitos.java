@@ -85,7 +85,8 @@ public class RelaComDefeitos {
         for (Module_Inventario item : inventarios) {
             if ("Com Defeitos".equalsIgnoreCase(item.getSituacaoEquipamento())) {
                 // Converter Module_Inventario para Module_ComDefeitos
-                Module_ComDefeitos defeito = new Module_ComDefeitos(
+                Module_ComDefeitos defeito = new Module_ComDefeitos();
+                        defeito.module_ComDefeitos(
                         item.getCodDep(),
                         item.getTipoEquipamento(),
                         item.getMarca(),

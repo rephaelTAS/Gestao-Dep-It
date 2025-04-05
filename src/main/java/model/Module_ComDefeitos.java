@@ -16,7 +16,7 @@ public class Module_ComDefeitos {
     private String departamento;
     private String obs;
 
-    public Module_ComDefeitos(String codDep, String tipoEquipamento, String marca, String numSerie, LocalDate dataEntrada, LocalDate ultimaVerificacao, String operador, String funcao, String localSala, String departamento, String obs) {
+    public void module_ComDefeitos(String codDep, String tipoEquipamento, String marca, String numSerie, LocalDate dataEntrada, LocalDate ultimaVerificacao, String operador, String funcao, String localSala, String departamento, String obs) {
         this.codDep = codDep;
         this.tipoEquipamento = tipoEquipamento;
         this.marca = marca;

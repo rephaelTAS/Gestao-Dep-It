@@ -21,7 +21,7 @@ public class Module_Inventario {
     private String situacaoEquipamento;
     private String obs;
 
-    public  void module_inventario(String codDep, String tipoEquipamento, String marca, String modelo, String num_serie, LocalDate dataEntradaServico, LocalDate ultimaVerificacao, String operador, String funcao, String localizacao, String departamento, String status, String situacaoEquipamento, String obs) {
+    public void module_Inventario(String codDep, String tipoEquipamento, String marca, String modelo, String num_serie, LocalDate dataEntradaServico, LocalDate ultimaVerificacao, String operador, String funcao, String localizacao, String departamento, String status, String situacaoEquipamento, String obs) {
         this.codDep = codDep;
         this.tipoEquipamento = tipoEquipamento;
         this.marca = marca;

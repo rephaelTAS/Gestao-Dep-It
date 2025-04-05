@@ -15,6 +15,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static util.FXMLCacheLoader.loadView;
+
 public class Additem implements Initializable {
 
     @FXML
@@ -24,58 +26,42 @@ public class Additem implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadInitialView();
+        loadView("/templates/outher/addItem/inventario.fxml", add_multPage, "");
     }
 
-    private void loadInitialView() {
-        try {
-            Parent fxml = FXMLLoader.load(getClass().getResource("/templates/outher/addItem/inventario.fxml"));
-            add_multPage.getChildren().clear();
-            add_multPage.getChildren().add(fxml);
-        } catch (IOException e) {
-            Logger.getLogger(MainControler.class.getName()).log(Level.SEVERE, null, e);
-            notificacao.showErrorAlert("Erro ao carregar a visualização inicial.");
-        }
-    }
 
-    private void loadView(String fxmlPath) {
-        try {
-            Parent fxml = FXMLLoader.load(getClass().getResource(fxmlPath));
-            add_multPage.getChildren().clear();
-            add_multPage.getChildren().add(fxml);
-        } catch (IOException e) {
-            Logger.getLogger(MainControler.class.getName()).log(Level.SEVERE, null, e);
-            notificacao.showErrorAlert("Erro ao carregar a visualização.");
-        }
-    }
 
     public void inventario(ActionEvent e) throws IOException{
-        loadView("/templates/outher/addItem/inventario.fxml");
+        loadView("/templates/outher/addItem/inventario.fxml", add_multPage, "");
 
     }
 
     public void inventario_stock(ActionEvent e) throws IOException{
-        loadView("/templates/outher/addItem/inventario_stock.fxml");
-
-    }
-
-    public void wifi(ActionEvent e) throws IOException{
-        loadView("/templates/outher/addItem/wifi.fxml");
-
-    }
-
-    public void wifi_stock(ActionEvent e) throws IOException{
-        loadView("/templates/outher/addItem/wifi_stock.fxml");
-
-    }
-
-    public void db_funcionarios(ActionEvent e) throws IOException{
-        loadView("/templates/outher/addItem/add_funcionario.fxml");
+        loadView("/templates/outher/addItem/inventario_stock.fxml", add_multPage, "");
 
     }
 
     public void Btn_TonerOnAction(ActionEvent e) throws IOException{
-        loadView("/templates/outher/addItem/add_toner.fxml");
+        loadView("/templates/outher/addItem/add_toner.fxml", add_multPage, "");
+    }
+
+    public void Btn_TonerStockOnAction(ActionEvent e) throws IOException{
+        loadView("/templates/outher/addItem/toner_stock.fxml", add_multPage, "");
+    }
+
+    public void wifi(ActionEvent e) throws IOException{
+        loadView("/templates/outher/addItem/wifi.fxml", add_multPage, "");
+
+    }
+
+    public void wifi_stock(ActionEvent e) throws IOException{
+        loadView("/templates/outher/addItem/wifi_stock.fxml", add_multPage, "");
+
+    }
+
+    public void db_funcionarios(ActionEvent e) throws IOException{
+        loadView("/templates/outher/addItem/add_funcionario.fxml", add_multPage, "");
+
     }
 
 }

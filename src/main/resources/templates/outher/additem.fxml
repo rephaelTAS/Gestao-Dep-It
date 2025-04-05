@@ -14,28 +14,36 @@
                <children>
                   <Button fx:id="btn_inventario" mnemonicParsing="false" onAction="#inventario" text="Inventario" StackPane.alignment="CENTER">
                      <StackPane.margin>
-                        <Insets right="500.0" />
+                        <Insets right="600.0" />
                      </StackPane.margin>
                   </Button>
                   <Button fx:id="btn_invent_stock" mnemonicParsing="false" onAction="#inventario_stock" text="Invent_stock">
                      <StackPane.margin>
-                        <Insets right="300.0" />
+                        <Insets right="400.0" />
                      </StackPane.margin>
                   </Button>
-                  <Button fx:id="btn_wifi" mnemonicParsing="false" onAction="#wifi" text="Wifi" />
+                  <Button fx:id="btn_wifi" mnemonicParsing="false" onAction="#wifi" text="Wifi">
+                     <StackPane.margin>
+                        <Insets left="230.0" />
+                     </StackPane.margin></Button>
                   <Button fx:id="btn_wifistock" mnemonicParsing="false" onAction="#wifi_stock" text="Wifi_Stock">
                      <StackPane.margin>
-                        <Insets left="180.0" />
+                        <Insets left="350.0" />
                      </StackPane.margin>
                   </Button>
                   <Button fx:id="btn_dbFuncionarios" mnemonicParsing="false" onAction="#db_funcionarios" text="DB_Funcionarios">
                      <StackPane.margin>
-                        <Insets left="400.0" />
+                        <Insets left="550.0" />
                      </StackPane.margin>
                   </Button>
-                  <Button fx:id="btn_toner" mnemonicParsing="false" onAction="#Btn_TonerOnAction" text="Toner">
+                  <Button fx:id="btn_tonerStock" mnemonicParsing="false" onAction="#Btn_TonerStockOnAction" text="Toner Stock">
                      <StackPane.margin>
-                        <Insets right="150.0" />
+                        <Insets left="100.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Button fx:id="btn_toner" mnemonicParsing="false" onAction="#Btn_TonerOnAction" text="Toner ">
+                     <StackPane.margin>
+                        <Insets right="120.0" />
                      </StackPane.margin>
                   </Button>
                </children>

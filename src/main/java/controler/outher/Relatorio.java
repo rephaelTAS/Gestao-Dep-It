@@ -1,5 +1,6 @@
 package controler.outher;
 
+import app.styles.config.StyleConfig;
 import controler.main.MainControler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,8 @@ import notificacao.Notificacao;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static util.FXMLCacheLoader.loadView;
 
 public class Relatorio {
 
@@ -26,8 +29,6 @@ public class Relatorio {
     @FXML
     private Button btn_comDefeitos;
 
-    @FXML
-    private Button btn_avariados;
 
     @FXML
     private Button btn_centroResidos;
@@ -51,14 +52,14 @@ public class Relatorio {
 
     @FXML
     private void initialize() {
-        loadInitialView();
+        StyleConfig.init();
+        loadView("/templates/outher/relatorio/rela_tonerStock.fxml", stackPane_relatorio, "relatorioTonerStock");
 
         // Adiciona eventos aos botões
         btn_inventario.setOnAction(event -> handleInventario());
         btn_historicoUtilizacao.setOnAction(event -> handleHistoricoUtilizacao());
         btn_inventarioStock.setOnAction(event -> handleInventarioStock());
         btn_comDefeitos.setOnAction(event -> handleComDefeitos());
-        btn_avariados.setOnAction(event -> handleAvariados());
         btn_centroResidos.setOnAction(event -> handleCentroResidos());
         btn_wifi.setOnAction(event -> handleWifi());
         btn_wifiStock.setOnAction(event -> handleWifiStock());
@@ -66,72 +67,46 @@ public class Relatorio {
         btn_tonerStock.setOnAction(event -> handleTonerStock());
     }
 
-    private void loadInitialView() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/templates/outher/relatorio/rela_inventario.fxml"));
-            Parent fxml = loader.load();
-            stackPane_relatorio.getChildren().clear();
-            stackPane_relatorio.getChildren().add(fxml);
-        } catch (IOException e) {
-            Logger.getLogger(MainControler.class.getName()).log(Level.SEVERE, null, e);
-            notificacao.showErrorAlert("Erro ao carregar a visualização inicial.");
-        }
-    }
 
-    private void loadView(String fxmlPath) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent fxml = loader.load();
-            stackPane_relatorio.getChildren().clear();
-            stackPane_relatorio.getChildren().add(fxml);
-        } catch (IOException e) {
-            Logger.getLogger(MainControler.class.getName()).log(Level.SEVERE, null, e);
-            notificacao.showErrorAlert("Erro ao carregar a visualização.");
-        }
-    }
 
     private void handleTonerStock() {
-        loadView("/templates/outher/relatorio/rela_tonerStock.fxml");
+        loadView("/templates/outher/relatorio/rela_tonerStock.fxml", stackPane_relatorio, "relatorioTonerStock");
     }
 
     private void handleUsuToner() {
-        loadView("/templates/outher/relatorio/rela_usuToner.fxml");
+        loadView("/templates/outher/relatorio/rela_usuToner.fxml", stackPane_relatorio, "relatorioUsuToner");
     }
 
     private void handleWifiStock() {
-        loadView("/templates/outher/relatorio/rela_wifiStock.fxml");
+        loadView("/templates/outher/relatorio/rela_wifiStock.fxml", stackPane_relatorio, "relatorioWifiStock");
     }
 
     private void handleWifi() {
-        loadView("/templates/outher/relatorio/rela_wifi.fxml");
+        loadView("/templates/outher/relatorio/rela_wifi.fxml", stackPane_relatorio, "relatorioWifi");
     }
 
     private void handleCentroResidos() {
-        loadView("/templates/outher/relatorio/rela_centroResido.fxml");
+        loadView("/templates/outher/relatorio/rela_centroResido.fxml", stackPane_relatorio, "");
     }
 
     private void handleInventario() {
-        loadView("/templates/outher/relatorio/rela_inventario.fxml");
+        loadView("/templates/outher/relatorio/rela_inventario.fxml", stackPane_relatorio, "");
     }
 
 
     private void handleInventarioStock() {
-        loadView("/templates/outher/relatorio/rela_inventarioStock.fxml");
+        loadView("/templates/outher/relatorio/rela_inventarioStock.fxml", stackPane_relatorio, "");
         // Lógica para o botão "Inventário Stock"
     }
 
     private void handleComDefeitos() {
-        loadView("/templates/outher/relatorio/rela_comDefeitos.fxml");
+        loadView("/templates/outher/relatorio/rela_comDefeitos.fxml", stackPane_relatorio, "");
         // Lógica para o botão "Com Defeitos"
     }
 
-    private void handleAvariados() {
-        loadView("/templates/outher/relatorio/rela_avariados.fxml");
-        // Lógica para o botão "Avariados"
-    }
 
     private void handleHistoricoUtilizacao(){
-        loadView("/templates/outher/relatorio/rela_historicoUtilizcao.fxml");
+        loadView("/templates/outher/relatorio/rela_historicoUtilizcao.fxml", stackPane_relatorio, "");
     }
 
 }
