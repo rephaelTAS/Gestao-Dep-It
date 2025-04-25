@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="packt.app.MainConfig.controlers.outher.editar.EditarInventario">
+    <children>
+        <VBox spacing="10.0" alignment="TOP_LEFT" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Campos -->
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50" />
+                    <ColumnConstraints percentWidth="50" />
+                </columnConstraints>
+
+                <!-- Coluna Esquerda -->
+                <children>
+                    <Label text="Código Dep." GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="codDep" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Tipo Equipamento" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tipoEqui" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Marca" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="marca" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="Modelo" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="modelo" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                    <Label text="Número de Série" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <TextField fx:id="numSerie" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                    <Label text="Data Entrada" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="dataEntrada" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                    <Label text="Data Verificação" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="dataVerificacao" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                    <Label text="Operador" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                    <TextField fx:id="operador" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                    <Label text="Função" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                    <TextField fx:id="funcao" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                    <Label text="Local / Sala" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                    <TextField fx:id="localSala" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+                    <Label text="Departamento" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                    <TextField fx:id="departamento" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+
+                    <Label text="Status" GridPane.rowIndex="11" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="statusCombo" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
+
+                    <Label text="Situação" GridPane.rowIndex="12" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="situacaoCombo" GridPane.rowIndex="12" GridPane.columnIndex="1"/>
+
+                    <Label text="Observações" GridPane.rowIndex="13" GridPane.columnIndex="0"/>
+                    <TextField fx:id="obs" GridPane.rowIndex="13" GridPane.columnIndex="1"/>
+                </children>
+            </GridPane>
+
+            <!-- Botões -->
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="btnSalvar" text="Salvar" />
+                <Button fx:id="btnCancelar" text="Cancelar" />
+            </HBox>
+        </VBox>
+    </children>
+
+    <!-- Efeito Espelho -->
+    <effect>
+        <Reflection fraction="0.3" topOffset="-10" />
+    </effect>
+</AnchorPane>

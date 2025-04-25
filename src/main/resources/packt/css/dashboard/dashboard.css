@@ -1,0 +1,59 @@
+/* Paleta de Cores */
+.root {
+    -fx-background-color: #0F1926;
+    -fx-padding: 20;
+}
+
+/* Título Principal */
+.title-text {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-fill: #F2F2F2;
+    -fx-effect: dropshadow(three-pass-box, rgba(15, 25, 38, 0.7), 5, 0, 0, 1);
+}
+
+.separator {
+    -fx-background-color: #8694A6;
+    -fx-padding: 0 0 5 0;
+}
+
+/* Cards */
+.card {
+    -fx-background-color: #4F5F73;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #8694A6;
+    -fx-border-width: 1;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(15, 25, 38, 0.5), 8, 0, 0, 2);
+}
+
+.card-title {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #BAC8D9;
+}
+
+.card-separator {
+    -fx-background-color: #8694A6;
+    -fx-padding: 5 0 5 0;
+}
+
+.card-content {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-text-fill: #F2F2F2;
+    -fx-padding: 10 0 0 0;
+}
+
+/* Seção de Toner */
+.toner-section {
+    -fx-padding: 20 0 0 0;
+}
+
+/* Efeitos de Hover (opcional) */
+.card:hover {
+    -fx-background-color: #3A4859;
+    -fx-effect: dropshadow(three-pass-box, rgba(186, 200, 217, 0.3), 10, 0, 0, 0);
+}

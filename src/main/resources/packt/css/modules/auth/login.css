@@ -1,0 +1,102 @@
+/* ===== VARIÁVEIS DE CORES ===== */
+.root {
+    -fx-primary: #4361ee;
+    -fx-secondary: #3f37c9;
+    -fx-accent: #4895ef;
+    -fx-light: #f8f9fa;
+    -fx-dark: #212529;
+    -fx-danger: #e63946;
+    -fx-success: #4cc9f0;
+}
+
+/* ===== ESTILO BASE ===== */
+.anchor-pane {
+    -fx-background-color: -fx-light;
+}
+
+/* ===== PAINEL ESQUERDO (BANNER) ===== */
+.left-pane {
+    -fx-background-color: linear-gradient(to bottom right, -fx-primary, -fx-secondary);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+}
+
+.welcome-label {
+    -fx-text-fill: white;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 0, 0, 2, 2);
+}
+
+/* ===== PAINEL CENTRAL (FORMULÁRIO) ===== */
+.form-pane {
+    -fx-padding: 40px;
+    -fx-spacing: 15px;
+}
+
+.form-label {
+    -fx-text-fill: -fx-dark;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.form-field {
+    -fx-pref-height: 40px;
+    -fx-background-color: white;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 0 10px;
+    -fx-font-size: 14px;
+}
+
+.form-field:focused {
+    -fx-border-color: -fx-accent;
+    -fx-effect: innershadow(gaussian, rgba(67, 97, 238, 0.3), 10, 0, 0, 0);
+}
+
+/* ===== BOTÕES ===== */
+.login-btn {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 40px;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+.login-btn:hover {
+    -fx-background-color: -fx-secondary;
+}
+
+.cancel-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-dark;
+    -fx-border-color: -fx-dark;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1px;
+}
+
+.cancel-btn:hover {
+    -fx-background-color: rgba(33, 37, 41, 0.1);
+}
+
+/* ===== EFEITOS MODERNOS ===== */
+@keyframes fadeIn {
+    from { -fx-opacity: 0; }
+    to { -fx-opacity: 1; }
+}
+
+.form-container {
+    -fx-opacity: 0;
+    -fx-animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 600px) {
+    .left-pane {
+        -fx-pref-width: 0;
+        -fx-visible: false;
+    }
+}

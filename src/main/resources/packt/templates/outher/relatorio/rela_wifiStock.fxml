@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packt.app.MainConfig.controlers.outher.relatorio.RelaWifiStock">
+
+    <children>
+        <BorderPane layoutX="42.0" layoutY="83.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <TableView fx:id="tab_wifiStock">
+                            <columns>
+                                <TableColumn fx:id="colCodDep" prefWidth="75.0" text="Cod_Dep" />
+                                <TableColumn fx:id="colTipoEquipamento" prefWidth="75.0" text="Tipo Equipamento" />
+                                <TableColumn fx:id="colMarca" prefWidth="75.0" text="Marca" />
+                                <TableColumn fx:id="colModelo" prefWidth="75.0" text="Modelo" />
+                                <TableColumn fx:id="colQuantidade" prefWidth="75.0" text="Quantidade" />
+                                <TableColumn fx:id="colDataEntrada" prefWidth="75.0" text="Data Emtrada" />
+                                <TableColumn fx:id="colDataVerificacao" prefWidth="75.0" text="Ultima Verificaçãoi" />
+                                <TableColumn fx:id="colOperador" prefWidth="75.0" text="Operado" />
+                                <TableColumn fx:id="colSituacao" prefWidth="75.0" text="Situação de Equipamento" />
+                                <TableColumn fx:id="colObs" prefWidth="75.0" text="OBS" />
+                            </columns>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                        </TableView>
+                    </children>
+                </StackPane>
+            </center>
+            <bottom>
+                <StackPane BorderPane.alignment="CENTER">
+                    <children>
+                        <Button fx:id="Btn_GerarExcel" mnemonicParsing="false" text="Gerar Excel" />
+                    </children>
+                </StackPane>
+            </bottom>
+        </BorderPane>
+    </children>
+</AnchorPane>

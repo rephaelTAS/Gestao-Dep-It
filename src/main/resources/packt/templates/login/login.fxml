@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packt.app.MainConfig.controlers.login.Login">
+   <children>
+      <BorderPane styleClass="form-container" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <AnchorPane styleClass="left-pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label styleClass="welcome-label" layoutX="14.0" layoutY="69.0" text="Bem Vindo"/>
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane styleClass="form-pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label styleClass="form-label" layoutX="41.0" layoutY="59.0" text="Usuario" />
+                  <TextField styleClass="form-field" fx:id="usuario" layoutX="41.0" layoutY="91.0" promptText="Usuario" />
+                  <Label styleClass="form-label" layoutX="41.0" layoutY="165.0" text="Senha" />
+                  <PasswordField styleClass="form-field" fx:id="senha" layoutX="42.0" layoutY="200.0" promptText="Senha" />
+                  <Button styleClass="login-btn" fx:id="btn_log" layoutX="69.0" layoutY="259.0" mnemonicParsing="false" onAction="#LoginBtnAction" text="Login" />
+                  <Button styleClass="cancel-btn" fx:id="btn_cancelar" layoutX="174.0" layoutY="259.0" mnemonicParsing="false" onAction="#closetBtn" text="Cancelar" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

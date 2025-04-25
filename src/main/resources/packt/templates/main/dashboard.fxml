@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packt.app.MainConfig.controlers.outher.Dashboard">
+   <children>
+      <VBox alignment="TOP_CENTER" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+         <Text fx:id="mainTitle" text="Gestão de Equipamentos e Derivados" styleClass="title-text" />
+         <Separator styleClass="separator" />
+
+         <GridPane hgap="20" vgap="20" alignment="CENTER">
+            <columnConstraints>
+               <ColumnConstraints percentWidth="33" />
+               <ColumnConstraints percentWidth="33" />
+               <ColumnConstraints percentWidth="33" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints percentHeight="50" />
+               <RowConstraints percentHeight="50" />
+            </rowConstraints>
+
+            <!-- Inventário -->
+            <VBox styleClass="card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+               <Label text="Inventário" styleClass="card-title" />
+               <Separator styleClass="card-separator" />
+               <VBox spacing="5" styleClass="card-content">
+                  <Label fx:id="printersInUseLabel" text="Impressoras: " />
+                  <Label fx:id="miceInUseLabel" text="Ratos: " />
+                  <Label fx:id="keyboardsInUseLabel" text="Teclados: " />
+                  <Label fx:id="monitorsInUseLabel" text="Monitores: " />
+                  <Label fx:id="computersInUseLabel" text="Computadores: " />
+                  <Label fx:id="activeUsersLabel" text="Utentes: " />
+               </VBox>
+            </VBox>
+
+            <!-- Histórico -->
+            <VBox styleClass="card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+               <Label text="Histórico de Utilização" styleClass="card-title" />
+               <Separator styleClass="card-separator" />
+               <VBox spacing="5" styleClass="card-content">
+                  <Label fx:id="lastPrinterUsedLabel" text="Última impressora: " />
+                  <Label fx:id="mostUsedComputerLabel" text="Computador mais usado: " />
+                  <Label fx:id="totalMovementsLabel" text="Total movimentos: " />
+               </VBox>
+            </VBox>
+
+            <!-- Stock -->
+            <VBox styleClass="card" GridPane.columnIndex="2" GridPane.rowIndex="0">
+               <Label text="Inventário em Stock" styleClass="card-title" />
+               <Separator styleClass="card-separator" />
+               <VBox spacing="5" styleClass="card-content">
+                  <Label fx:id="printersStockLabel" text="Impressoras: " />
+                  <Label fx:id="miceStockLabel" text="Ratos: " />
+                  <Label fx:id="keyboardsStockLabel" text="Teclados: " />
+                  <Label fx:id="monitorsStockLabel" text="Monitores: " />
+                  <Label fx:id="computersStockLabel" text="Computadores: " />
+               </VBox>
+            </VBox>
+
+            <!-- Avariados -->
+            <VBox styleClass="card" GridPane.columnIndex="0" GridPane.rowIndex="1">
+               <Label text="Avariados" styleClass="card-title" />
+               <Separator styleClass="card-separator" />
+               <VBox spacing="5" styleClass="card-content">
+                  <Label fx:id="brokenPrintersLabel" text="Impressoras: " />
+                  <Label fx:id="brokenMonitorsLabel" text="Monitores: " />
+                  <Label fx:id="brokenKeyboardsLabel" text="Teclados: " />
+                  <Label fx:id="underRepairLabel" text="Em reparação: " />
+               </VBox>
+            </VBox>
+
+            <!-- Resíduos -->
+            <VBox styleClass="card" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <Label text="Centro de Resíduos" styleClass="card-title" />
+               <Separator styleClass="card-separator" />
+               <VBox spacing="5" styleClass="card-content">
+                  <Label fx:id="discardedThisMonthLabel" text="Descarte este mês: " />
+                  <Label fx:id="recycledLabel" text="Reciclados: " />
+                  <Label fx:id="pendingProcessingLabel" text="Aguardando processamento: " />
+               </VBox>
+            </VBox>
+
+            <!-- WiFi -->
+            <VBox styleClass="card" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <Label text="Equipamentos Wi-Fi" styleClass="card-title" />
+               <Separator styleClass="card-separator" />
+               <VBox spacing="5" styleClass="card-content">
+                  <Label fx:id="wifiInUseLabel" text="Em uso: " />
+                  <Label fx:id="wifiStockLabel" text="Em stock: " />
+                  <Label fx:id="wifiModelsLabel" text="Modelos: " />
+               </VBox>
+            </VBox>
+         </GridPane>
+
+         <!-- Toner -->
+         <HBox alignment="CENTER" spacing="20" styleClass="toner-section">
+            <VBox styleClass="card" prefWidth="500">
+               <Label text="Toner em Uso" styleClass="card-title" />
+               <Separator styleClass="card-separator" />
+               <VBox spacing="5" styleClass="card-content">
+                  <Label fx:id="tonerHpUsageLabel" text="Impressora HP: " />
+                  <Label fx:id="tonerEpsonUsageLabel" text="Impressora Epson: " />
+                  <Label fx:id="nextReplacementLabel" text="Próxima reposição: " />
+               </VBox>
+            </VBox>
+
+            <VBox styleClass="card" prefWidth="500">
+               <Label text="Toner em Stock" styleClass="card-title" />
+               <Separator styleClass="card-separator" />
+               <VBox spacing="5" styleClass="card-content">
+                  <Label fx:id="tonerHpStockLabel" text="HP 1234: " />
+                  <Label fx:id="tonerEpsonStockLabel" text="Epson 567: " />
+                  <Label fx:id="tonerCriticalStockLabel" text="Stock crítico: " />
+               </VBox>
+            </VBox>
+         </HBox>
+      </VBox>
+   </children>
+</AnchorPane>
