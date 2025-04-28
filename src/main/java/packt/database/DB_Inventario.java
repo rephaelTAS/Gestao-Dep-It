@@ -99,7 +99,72 @@ public class DB_Inventario {
         return dados;
     }
 
-    public void atualizarInventario(Module_Inventario moduleInventario) {
-        String sql = "UPDATE INTO inventario  (tipo_equipamento, marca, modelo, num_serie, data_entrada, data_verificacao, operador, funcao, local_sala, departamento, status, situacao, obs) WHERE cod_dep =  " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    /**
+     * Método para atualizar um registro existente na tabela inventario.
+     *
+     * @param moduleInventario O objeto Module_Inventario contendo os dados a serem atualizados.
+     * @param codDep O código do departamento do registro a ser atualizado.
+     */
+    public void atualizarInventario(Module_Inventario moduleInventario, String codDep) {
+        String sql = "UPDATE inventario SET tipo_equipamento = ?, marca = ?, modelo = ?, num_serie = ?, data_entrada = ?, data_verificacao = ?, operador = ?, funcao = ?, local_sala = ?, departamento = ?, status = ?, situacao = ?, obs = ? WHERE cod_dep = ?";
+
+        try (Connection connection = dbConnection.connect();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            // Define os valores dos parâmetros
+            stmt.setString(1, moduleInventario.getTipoEquipamento());
+            stmt.setString(2, moduleInventario.getMarca());
+            stmt.setString(3, moduleInventario.getModelo());
+            stmt.setString(4, moduleInventario.getNum_serie());
+            stmt.setDate(5, java.sql.Date.valueOf(moduleInventario.getDataEntradaServico()));
+            stmt.setDate(6, moduleInventario.getUltimaVerificacao() != null ? java.sql.Date.valueOf(moduleInventario.getUltimaVerificacao()) : null);
+            stmt.setString(7, moduleInventario.getOperador());
+            stmt.setString(8, moduleInventario.getFuncao());
+            stmt.setString(9, moduleInventario.getLocalizacao());
+            stmt.setString(10, moduleInventario.getDepartamento());
+            stmt.setString(11, moduleInventario.getStatus());
+            stmt.setString(12, moduleInventario.getSituacaoEquipamento());
+            stmt.setString(13, moduleInventario.getObs());
+            stmt.setString(14, codDep);
+
+            // Executa a atualização
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected > 0) {
+                notificacao.showSuccess("Sucesso. Equipamento atualizado com sucesso!");
+            } else {
+                notificacao.showError("Erro. Falha ao atualizar equipamento.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao atualizar dados na tabela inventario:");
+            e.printStackTrace();
+            notificacao.showError("Erro. Erro ao conectar ao banco de dados.");
+        }
+    }
+
+    /**
+     * Método para excluir um registro da tabela inventario.
+     *
+     * @param codDep O código do departamento do registro a ser excluído.
+     */
+    public void excluirInventario(String codDep) {
+        String sql = "DELETE FROM inventario WHERE cod_dep = ?";
+
+        try (Connection connection = dbConnection.connect();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, codDep);
+
+            // Executa a exclusão
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected > 0) {
+                notificacao.showSuccess("Sucesso. Equipamento excluído com sucesso!");
+            } else {
+                notificacao.showError("Erro. Falha ao excluir equipamento.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir dados da tabela inventario:");
+            e.printStackTrace();
+            notificacao.showError("Erro. Erro ao conectar ao banco de dados.");
+        }
     }
 }

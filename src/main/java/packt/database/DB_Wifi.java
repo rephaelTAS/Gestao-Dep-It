@@ -88,4 +88,57 @@ public class DB_Wifi {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Método para atualizar um registro na tabela equipa_wifi.
+     *
+     * @param wifi O objeto Module_Wifi contendo os dados a serem atualizados.
+     */
+    public void atualizarDadosWifi(Module_Wifi wifi) {
+        String sql = "UPDATE equipa_wifi SET tipo_equipamento = ?, marca = ?, modelo = ?, quantidade = ?, data_entrada = ?, ultima_verificacao = ?, operador = ?, funcao = ?, status = ?, situacao = ?, obs = ? WHERE cod_dep = ?";
+
+        try (Connection connection = dbConnection.connect();
+        PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, wifi.getTipoEquipamento());
+            stmt.setString(2, wifi.getMarca());
+            stmt.setString(3, wifi.getModelo());
+            stmt.setInt(4, wifi.getQuantidade());
+            stmt.setDate(5, wifi.getDataEntrada() != null ? java.sql.Date.valueOf(wifi.getDataEntrada()) : null);
+            stmt.setDate(6, wifi.getDataVerificacao() != null ? java.sql.Date.valueOf(wifi.getDataVerificacao()) : null);
+            stmt.setString(7, wifi.getOperador());
+            stmt.setString(8, wifi.getFuncao());
+            stmt.setString(9, wifi.getStatus());
+            stmt.setString(10, wifi.getSituacaoEquipamento());
+            stmt.setString(11, wifi.getObs());
+            stmt.setString(12, wifi.getCodDep());
+
+            int rowsUpdated = stmt.executeUpdate();
+            System.out.println(rowsUpdated + " registro(s) atualizado(s) com sucesso!");
+        } catch (SQLException e) {
+            System.err.println("Erro ao atualizar dados na tabela equipa_wifi:");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Método para excluir um registro da tabela equipa_wifi.
+     *
+     * @param codDep O código do departamento do registro a ser excluído.
+     */
+    public void excluirDadosWifi(String codDep) {
+        String sql = "DELETE FROM equipa_wifi WHERE cod_dep = ?";
+
+        try (Connection connection = dbConnection.connect();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, codDep);
+
+            int rowsDeleted = stmt.executeUpdate();
+            System.out.println(rowsDeleted + " registro(s) excluído(s) com sucesso!");
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir dados da tabela equipa_wifi:");
+            e.printStackTrace();
+        }
+    }
 }

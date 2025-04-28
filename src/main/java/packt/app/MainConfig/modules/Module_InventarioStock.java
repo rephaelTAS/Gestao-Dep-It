@@ -135,5 +135,10 @@ public class Module_InventarioStock {
 
     }
 
+    public void atualizar_invetStock(String codDep){
+        DB_Inventario_Stock database = new DB_Inventario_Stock();
+        database.atualizarInventarioStock(this, codDep);
+    }
+
 
 }

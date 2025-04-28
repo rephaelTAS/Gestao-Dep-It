@@ -25,6 +25,8 @@ module packt.sample {
     exports packt.app.MainConfig.controlers.outher.additem to javafx.fxml;
     exports packt.app.MainConfig.controlers.outher.relatorio to javafx.fxml;
     exports packt.app.MainConfig.controlers.outher.visualizar to javafx.fxml;
+    opens packt.app.MainConfig.controlers.outher.editar to  javafx.fxml;
+    exports packt.app.MainConfig.controlers.outher.editar to  javafx.fxml;
     // Exportação de pacotes
 
 

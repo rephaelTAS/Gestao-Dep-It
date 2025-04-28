@@ -56,6 +56,7 @@ public final class ViewConfig {
 
     public static final class Editar{
         public static final String INVENTARIO = "editar_inventario";
+        public static final String INVENTARIOSTOCK = "editar_inventarioStock";
     }
 
 
@@ -102,6 +103,7 @@ public final class ViewConfig {
         registry.registerView(Relatorio.TONER_STOCK, "/packt/templates/outher/relatorio/rela_tonerStock.fxml");
 
         // Editar
-        registry.registerView(Editar.INVENTARIO, "/packt/templates/outher/editar/EditarInventario.fxml");
+        registry.registerView(Editar.INVENTARIO, "/packt/templates/outher/editar/Editar_Inventario.fxml");
+        registry.registerView(Editar.INVENTARIOSTOCK, "/packt/templates/outher/editar/Editar_inventarioStock.fxml");
     }
 }

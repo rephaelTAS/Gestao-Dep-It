@@ -1,6 +1,5 @@
 package packt.database;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +11,7 @@ import packt.app.MainConfig.modules.Module_UsuToner;
 
 public class DB_UsuToner {
 
-    private  DatabaseConnection dbConnection = new DatabaseConnection();
+    private DatabaseConnection dbConnection = new DatabaseConnection();
 
     // CREATE: Inserir um novo registro na tabela usutoner
     public void createToner(Module_UsuToner toner) {
@@ -38,6 +37,7 @@ public class DB_UsuToner {
             System.out.println(rowsInserted + " registro(s) inserido(s).");
 
         } catch (SQLException e) {
+            System.err.println("Erro ao inserir registro na tabela usutoner:");
             e.printStackTrace();
         }
     }
@@ -70,6 +70,7 @@ public class DB_UsuToner {
             }
 
         } catch (SQLException e) {
+            System.err.println("Erro ao buscar registros da tabela usutoner:");
             e.printStackTrace();
         }
 
@@ -99,12 +100,13 @@ public class DB_UsuToner {
             System.out.println(rowsUpdated + " registro(s) atualizado(s).");
 
         } catch (SQLException e) {
+            System.err.println("Erro ao atualizar registro na tabela usutoner:");
             e.printStackTrace();
         }
     }
 
     // DELETE: Excluir um registro da tabela usutoner
-    public void deleteToner(String codDep) {
+    public void deleteToner(String codDep ) {
         String sql = "DELETE FROM usutoner WHERE codDep = ?";
 
         try (Connection conn = dbConnection.connect();
@@ -116,8 +118,8 @@ public class DB_UsuToner {
             System.out.println(rowsDeleted + " registro(s) excluído(s).");
 
         } catch (SQLException e) {
+            System.err.println("Erro ao excluir registro da tabela usutoner:");
             e.printStackTrace();
         }
     }
-
 }

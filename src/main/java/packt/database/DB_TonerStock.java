@@ -14,7 +14,7 @@ public class DB_TonerStock {
 
     // CREATE: Inserir um novo registro na tabela tonerstock
     public void createTonerStock(Module_TonerStock tonerStock) {
-        String sql = "INSERT INTO tonerstock (codDep, toner, marca, cor, impressora, unidade, Status, operador, funcao, localizacao, departamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tonerstock (codDep, toner, marca, cor, impressora, unidade, Status, operador, funcao, localizacao, departamento, Obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = dbconnection.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -30,11 +30,13 @@ public class DB_TonerStock {
             stmt.setString(9, tonerStock.getFuncao());
             stmt.setString(10, tonerStock.getLocalizacao());
             stmt.setString(11, tonerStock.getDepartamento());
+            stmt.setString(12, tonerStock.getObs()); // Adicionando o campo Obs
 
             int rowsInserted = stmt.executeUpdate();
             System.out.println(rowsInserted + " registro(s) inserido(s).");
 
         } catch (SQLException e) {
+            System.err.println("Erro ao inserir registro na tabela tonerstock:");
             e.printStackTrace();
         }
     }
@@ -61,12 +63,13 @@ public class DB_TonerStock {
                         rs.getString("funcao"),
                         rs.getString("localizacao"),
                         rs.getString("departamento"),
-                        rs.getString("Obs")
+                        rs.getString("Obs") // Adicionando o campo Obs
                 );
                 tonerStocks.add(tonerStock);
             }
 
         } catch (SQLException e) {
+            System.err.println("Erro ao buscar registros da tabela tonerstock:");
             e.printStackTrace();
         }
 
@@ -75,7 +78,7 @@ public class DB_TonerStock {
 
     // UPDATE: Atualizar um registro na tabela tonerstock
     public void updateTonerStock(Module_TonerStock tonerStock) {
-        String sql = "UPDATE tonerstock SET toner = ?, marca = ?, cor = ?, impressora = ?, unidade = ?, Status = ?, operador = ?, funcao = ?, localizacao = ?, departamento = ? WHERE codDep = ?";
+        String sql = "UPDATE tonerstock SET toner = ?, marca = ?, cor = ?, impressora = ?, unidade = ?, Status = ?, operador = ?, funcao = ?, localizacao = ?, departamento = ?, Obs = ? WHERE codDep = ?";
 
         try (Connection conn = dbconnection.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -90,12 +93,14 @@ public class DB_TonerStock {
             stmt.setString(8, tonerStock.getFuncao());
             stmt.setString(9, tonerStock.getLocalizacao());
             stmt.setString(10, tonerStock.getDepartamento());
-            stmt.setString(11, tonerStock.getCodDep());
+            stmt.setString(11, tonerStock.getObs()); // Adicionando o campo Obs
+            stmt.setString(12, tonerStock.getCodDep());
 
             int rowsUpdated = stmt.executeUpdate();
             System.out.println(rowsUpdated + " registro(s) atualizado(s).");
 
         } catch (SQLException e) {
+            System.err.println("Erro ao atualizar registro na tabela tonerstock:");
             e.printStackTrace();
         }
     }
@@ -113,8 +118,8 @@ public class DB_TonerStock {
             System.out.println(rowsDeleted + " registro(s) excluído(s).");
 
         } catch (SQLException e) {
+            System.err.println("Erro ao excluir registro da tabela tonerstock:");
             e.printStackTrace();
         }
     }
-
 }

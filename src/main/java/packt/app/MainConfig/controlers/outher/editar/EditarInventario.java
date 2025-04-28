@@ -3,11 +3,12 @@ package packt.app.MainConfig.controlers.outher.editar;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import packt.app.MainConfig.filtragem.Filtro_codDep;
 import packt.app.MainConfig.modules.Module_Inventario;
 import packt.app.MainConfig.notificacao.Notificacao;
 
 public class EditarInventario {
-
+    // Campos do formulário
     @FXML private TextField codDep;
     @FXML private TextField tipoEqui;
     @FXML private TextField marca;
@@ -22,107 +23,96 @@ public class EditarInventario {
     @FXML private ComboBox<String> statusCombo;
     @FXML private ComboBox<String> situacaoCombo;
     @FXML private TextField obs;
+
+    private String itemSelecionado = "";
+
+    // Botões
     @FXML private Button btnSalvar;
     @FXML private Button btnCancelar;
 
+    private boolean itemEdited;
+
+    // Dados e estado
     private Module_Inventario itemAtual;
+    private boolean dadosSalvos = false;
     private final Notificacao notificacao = new Notificacao();
-
-    public void inicializarCampos(Module_Inventario item) {
-        this.itemAtual = item;
-
-        codDep.setText(item.getCodDep());
-        tipoEqui.setText(item.getTipoEquipamento());
-        marca.setText(item.getMarca());
-        modelo.setText(item.getModelo());
-        numSerie.setText(item.getNum_serie());
-        dataEntrada.setValue(item.getDataEntradaServico());
-        dataVerificacao.setValue(item.getUltimaVerificacao());
-        operador.setText(item.getOperador());
-        funcao.setText(item.getFuncao());
-        localSala.setText(item.getLocalizacao());
-        departamento.setText(item.getDepartamento());
-        statusCombo.setValue(item.getStatus());
-        situacaoCombo.setValue(item.getSituacaoEquipamento());
-        obs.setText(item.getObs());
-    }
+    private Stage dialogStage;
 
     @FXML
     private void initialize() {
-        statusCombo.getItems().addAll("Em Funcionamento", "Ligado", "Desligado");
-        situacaoCombo.getItems().addAll("Novo Equipamento", "Bom Estado", "Com Defeitos", "Avariado");
-
-        btnSalvar.setOnAction(e -> salvarAlteracoes());
-        btnCancelar.setOnAction(e -> fecharJanela());
-
-        // Configura as opções dos ComboBoxes
         configurarComboboxes();
+        configurarBotoes();
 
-        // Configura os listeners para detectar alterações
-        configurarListeners();
-
+        codDep.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) { // Verifica se o campo perdeu o foco
+                buscarDadosFuncionario(); // Chama o método para buscar os dados do funcionário
+            }
+        });
     }
-
-
-
-
-    private boolean dadosAlterados = false;
-
-    /**
-     * Inicializa os campos com os dados do item
-     */
-    public void carregarDados(Module_Inventario item) {
-        this.itemAtual = item;
-
-        // Preenche os campos com os valores do item
-        codDep.setText(item.getCodDep());
-        tipoEqui.setText(item.getTipoEquipamento());
-        marca.setText(item.getMarca());
-        modelo.setText(item.getModelo());
-        numSerie.setText(item.getNum_serie());
-        dataEntrada.setValue(item.getDataEntradaServico());
-        dataVerificacao.setValue(item.getUltimaVerificacao());
-        operador.setText(item.getOperador());
-        funcao.setText(item.getFuncao());
-        localSala.setText(item.getLocalizacao());
-        departamento.setText(item.getDepartamento());
-        statusCombo.setValue(item.getStatus());
-        situacaoCombo.setValue(item.getSituacaoEquipamento());
-        obs.setText(item.getObs());
-    }
-
 
     private void configurarComboboxes() {
         statusCombo.getItems().addAll("Em Funcionamento", "Ligado", "Desligado");
         situacaoCombo.getItems().addAll("Novo Equipamento", "Bom Estado", "Com Defeitos", "Avariado");
     }
 
-    private void configurarListeners() {
+    private void configurarBotoes() {
         btnSalvar.setOnAction(e -> salvarAlteracoes());
-        btnCancelar.setOnAction(e -> fecharJanela());
+        btnCancelar.setOnAction(e -> cancelar());
     }
 
-    /**
-     * Salva as alterações no item
-     */
-    private void salvarAlteracoes() {
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
 
-        // Atualiza o item com os novos valores
-        atualizarItem();
+    public void setItem(Module_Inventario item) {
+        this.itemAtual = item;
+        carregarDados();
+    }
 
-        try {
-            itemAtual.atualizar_inventario();
-            dadosAlterados = true;
-            notificacao.showSuccess("Item atualizado com sucesso!");
-            fecharJanela();
-        } catch (Exception e) {
-            notificacao.showError("Erro ao atualizar item: " + e.getMessage());
+    private void carregarDados() {
+        if (itemAtual != null) {
+            itemSelecionado = itemAtual.getCodDep();
+            codDep.setText(itemAtual.getCodDep());
+            tipoEqui.setText(itemAtual.getTipoEquipamento());
+            marca.setText(itemAtual.getMarca());
+            modelo.setText(itemAtual.getModelo());
+            numSerie.setText(itemAtual.getNum_serie());
+            dataEntrada.setValue(itemAtual.getDataEntradaServico());
+            dataVerificacao.setValue(itemAtual.getUltimaVerificacao());
+            operador.setText(itemAtual.getOperador());
+            funcao.setText(itemAtual.getFuncao());
+            localSala.setText(itemAtual.getLocalizacao());
+            departamento.setText(itemAtual.getDepartamento());
+            statusCombo.setValue(itemAtual.getStatus());
+            situacaoCombo.setValue(itemAtual.getSituacaoEquipamento());
+            obs.setText(itemAtual.getObs());
         }
     }
 
-    /**
-     * Atualiza o objeto itemAtual com os valores dos campos
-     */
+    private void salvarAlteracoes() {
+        if (validarCampos()) {
+            atualizarItem();
+            try {
+                itemAtual.atualizar_inventario(itemSelecionado);
+                dadosSalvos = true;
+                notificacao.showSuccess("Item atualizado com sucesso!");
+                fecharJanela();
+            } catch (Exception e) {
+                notificacao.showError("Erro ao atualizar item: " + e.getMessage());
+            }
+        }
+    }
+
+    private boolean validarCampos() {
+        // Implemente a validação dos campos conforme necessário
+        if (codDep.getText().isEmpty()) {
+            notificacao.showWarning("O campo Código do Departamento é obrigatório!");
+            return false;
+        }
+        // Adicione outras validações conforme necessário
+        return true;
+    }
+
     private void atualizarItem() {
         itemAtual.setCodDep(codDep.getText());
         itemAtual.setTipoEquipamento(tipoEqui.getText());
@@ -140,29 +130,49 @@ public class EditarInventario {
         itemAtual.setObs(obs.getText());
     }
 
-    /**
-     * Valida se todos os campos obrigatórios foram preenchidos
-     */
-
-
-    /**
-     * Fecha a janela de edição
-     */
-    public void fecharJanela() {
-        ((Stage) btnCancelar.getScene().getWindow()).close();
+    private void cancelar() {
+        dadosSalvos = false;
+        fecharJanela();
     }
 
-    /**
-     * Indica se os dados foram alterados e salvos
-     */
-    public boolean foramDadosAlterados() {
-        return dadosAlterados;
+    private void fecharJanela() {
+        if (dialogStage != null) {
+            dialogStage.close();
+        } else {
+            ((Stage) btnCancelar.getScene().getWindow()).close();
+        }
     }
 
-    /**
-     * Obtém o item com as alterações
-     */
+    public boolean foiSalvo() {
+        return dadosSalvos;
+    }
+
     public Module_Inventario getItemAtualizado() {
         return itemAtual;
+    }
+
+    public boolean isItemEdited() {
+        return itemEdited;
+    }
+
+    @FXML
+    private void buscarDadosFuncionario() {
+        // Executa ao pressionar Enter
+        String codigoDep = codDep.getText();
+
+        Filtro_codDep filtro = new Filtro_codDep();
+
+
+        if (codigoDep.isEmpty()) {
+            notificacao.showError("Erro O campo Código do Departamento está vazio.");
+
+        }else {
+            filtro.filtrar_codDep(codigoDep);
+            operador.setText(filtro.getOperador());
+            funcao.setText(filtro.getFuncao());
+            localSala.setText(filtro.getLocalSala());
+            departamento.setText(filtro.getDepartamento());
+        }
+
     }
 }

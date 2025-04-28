@@ -1,43 +1,70 @@
 package packt.app.services;
 
-
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import packt.app.MainConfig.controlers.outher.editar.EditarInventario;
 import packt.app.MainConfig.modules.Module_Inventario;
-import packt.app.MainConfig.notificacao.Notificacao;
-import packt.app.views.FXMLManager;
 import packt.app.views.ModalDialog;
 import packt.app.views.config.ViewConfig;
 
 import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Function;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InventarioService {
-    private static Function<String, Object> controllerProvider = FXMLManager::getController;
+    private static final Logger LOGGER = Logger.getLogger(InventarioService.class.getName());
 
-    // Para testes
-    public static void setControllerProvider(Function<String, Object> provider) {
-        controllerProvider = provider;
+    private InventarioService() {
+        // Construtor privado para evitar instanciação
     }
 
-    public static void editarItem(Module_Inventario item, Window owner, Consumer<Boolean> callback) {
-        boolean resultado = editarItemComRetorno(item, owner);
-        if (callback != null) {
-            callback.accept(resultado);
-        }
-    }
-
+    /**
+     * Abre o diálogo de edição e retorna se os dados foram alterados
+     *
+     * @param item Item a ser editado
+     * @param owner Janela pai para o modal
+     * @return true se os dados foram salvos, false caso contrário
+     */
     public static boolean editarItemComRetorno(Module_Inventario item, Window owner) {
         try {
-            Optional<Boolean> result = ModalDialog.showModalWithResult(...);
+            String title = "Editar Item - " + item.getCodDep();
+
+            Optional<Boolean> result = ModalDialog.showModalWithResult(
+                    ViewConfig.Editar.INVENTARIO,
+                    owner,
+                    title,
+                    StageStyle.UTILITY,
+                    controller -> ((EditarInventario) controller).setItem(item),
+                    EditarInventario::foiSalvo
+            );
+
             return result.orElse(false);
         } catch (Exception e) {
-            new Notificacao().showError("Falha ao editar item");
-            LOGGER.error("Erro na edição", e);
+            LOGGER.log(Level.SEVERE, "Erro ao editar item do inventário: " + item.getCodDep(), e);
             return false;
         }
     }
 
+    /**
+     * Versão simplificada sem retorno
+     *
+     * @param item Item a ser editado
+     * @param owner Janela pai para o modal
+     */
+    public static void editarItem(Module_Inventario item, Window owner) {
+        try {
+            String title = "Editar Item - " + item.getCodDep();
+
+            ModalDialog.showModalWithResult(
+                    ViewConfig.Editar.INVENTARIO,
+                    owner,
+                    title,
+                    StageStyle.UTILITY,
+                    controller -> ((EditarInventario) controller).setItem(item),
+                    null
+            );
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Erro ao abrir editor de inventário: " + item.getCodDep(), e);
+        }
+    }
 }

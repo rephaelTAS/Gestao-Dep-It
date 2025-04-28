@@ -157,11 +157,11 @@ public class Module_Inventario {
 
     public void cadastrar_historico(){
         DB_HistoUtilizacao database = new DB_HistoUtilizacao();
-        database.inserir_historico(this);
+        database.inserirHistorico(this);
     }
 
-    public void atualizar_inventario() {
+    public void atualizar_inventario(String codDep) {
         DB_Inventario database = new DB_Inventario();
-        database.atualizarInventario(this);
+        database.atualizarInventario(this, codDep);
     }
 }

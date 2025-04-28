@@ -10,19 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DB_HistoUtilizacao {
-
-    DatabaseConnection dbconection = new DatabaseConnection();
+    private DatabaseConnection dbConnection = new DatabaseConnection();
 
     /**
      * Método para inserir um novo registro na tabela historico_utilizacao.
      *
      * @param inventario O objeto Module_Inventario contendo os dados a serem inseridos.
      */
-    public void inserir_historico(Module_Inventario inventario) {
+    public void inserirHistorico(Module_Inventario inventario) {
         String sql = "INSERT INTO historico_utilizacao (cod_dep, tipo_equipamento, marca, modelo, num_serie, data_entrada, data_verificacao, operador, funcao, local_sala, departamento, status, situacao, obs) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = dbconection.connect();
+        try (Connection connection = dbConnection.connect();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             // Define os valores dos parâmetros
@@ -59,7 +58,7 @@ public class DB_HistoUtilizacao {
         List<Module_Inventario> inventarios = new ArrayList<>();
         String sql = "SELECT * FROM historico_utilizacao";
 
-        try (Connection connection = dbconection.connect();
+        try (Connection connection = dbConnection.connect();
              PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -90,5 +89,63 @@ public class DB_HistoUtilizacao {
         }
 
         return inventarios;
+    }
+
+    /**
+     * Método para atualizar um registro na tabela historico_utilizacao.
+     *
+     * @param inventario O objeto Module_Inventario contendo os dados a serem atualizados.
+     */
+    public void atualizarHistorico(Module_Inventario inventario, String codDep) {
+        String sql = "UPDATE historico_utilizacao SET cod_dep = ?, tipo_equipamento = ?, marca = ?, modelo = ?, num_serie = ?, data_entrada = ?, data_verificacao = ?, operador = ?, funcao = ?, local_sala = ?, departamento = ?, status = ?, situacao = ?, obs = ? WHERE cod_dep = ?";
+
+        try (Connection connection = dbConnection.connect();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            // Define os valores dos parâmetros
+            stmt.setString(1, inventario.getCodDep());
+            stmt.setString(2, inventario.getTipoEquipamento());
+            stmt.setString(3, inventario.getMarca());
+            stmt.setString(4, inventario.getModelo());
+            stmt.setString(5, inventario.getNum_serie());
+            stmt.setDate(6, java.sql.Date.valueOf(inventario.getDataEntradaServico()));
+            stmt.setDate(7, inventario.getUltimaVerificacao() != null ? java.sql.Date.valueOf(inventario.getUltimaVerificacao()) : null);
+            stmt.setString(8, inventario.getOperador());
+            stmt.setString(9, inventario.getFuncao());
+            stmt.setString(10, inventario.getLocalizacao());
+            stmt.setString(11, inventario.getDepartamento());
+            stmt.setString(12, inventario.getStatus());
+            stmt.setString(13, inventario.getSituacaoEquipamento());
+            stmt.setString(14, inventario.getObs());
+            stmt.setString(15, codDep); // Usando num_serie como identificador
+
+            // Executa a atualização
+            int rowsAffected = stmt.executeUpdate();
+            System.out.println(rowsAffected + " linha(s) atualizada(s).");
+        } catch (SQLException e) {
+            System.err.println("Erro ao atualizar dados na tabela historico_utilizacao:");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Método para deletar um registro da tabela historico_utilizacao.
+     *
+     * @param codDep O número de série do equipamento a ser deletado.
+     */
+    public void deletarHistorico(String codDep) {
+        String sql = "DELETE FROM historico_utilizacao WHERE num_serie = ?";
+
+        try (Connection connection = dbConnection.connect();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, codDep);
+
+            // Executa a deleção
+            int rowsAffected = stmt.executeUpdate();
+            System.out.println(rowsAffected + " linha(s) deletada(s).");
+        } catch (SQLException e) {
+            System.err.println("Erro ao deletar dados da tabela historico_utilizacao:");
+            e.printStackTrace();
+        }
     }
 }
