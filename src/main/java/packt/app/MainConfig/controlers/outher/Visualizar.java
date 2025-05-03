@@ -72,7 +72,7 @@ public class Visualizar implements Initializable {
 
     private void loadView(String viewId) {
         try {
-            Parent view = FXMLManager.loadView(viewId);
+            Parent view = FXMLManager.loadStaticView(viewId);
             multpage.getChildren().setAll(view);
         } catch (Exception e) {
             notificacao.showError("Erro ao carregar a view: " + viewId + "\n" + e.getMessage());

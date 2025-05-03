@@ -11,6 +11,7 @@ public final class ViewInitializer {
     private static final Logger LOGGER = Logger.getLogger(ViewInitializer.class.getName());
     private static boolean initialized = false;
 
+    // Construtor privado para evitar instância
     private ViewInitializer() {
         throw new AssertionError("Classe utilitária não deve ser instanciada");
     }

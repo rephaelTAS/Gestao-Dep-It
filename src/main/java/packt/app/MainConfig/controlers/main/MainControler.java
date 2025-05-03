@@ -37,7 +37,6 @@ public class MainControler implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ViewInitializer.initialize();
         loadView(ViewConfig.Main.DASHBOARD);
 
         btn_dashboard.setOnAction(event -> home());
@@ -64,7 +63,7 @@ public class MainControler implements Initializable {
 
     private void loadView(String viewId) {
         try {
-            Parent view = FXMLManager.loadView(viewId);
+            Parent view = FXMLManager.loadStaticView(viewId);
             multiploPanel.getChildren().setAll(view);
         } catch (Exception e) {
             notificacao.showError("Erro ao carregar a view: " + viewId + "\n" + e.getMessage());

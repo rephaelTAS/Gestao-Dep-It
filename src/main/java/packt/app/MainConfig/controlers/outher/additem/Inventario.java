@@ -65,6 +65,7 @@ public class Inventario {
     private Button btnLimpar;
 
     Notificacao notificacao = new Notificacao();
+    Module_Inventario inventario = new Module_Inventario();
 
 
 
@@ -95,8 +96,7 @@ public class Inventario {
             notificacao.showError("Erro: Todos os campos obrigatórios devem ser preenchidos!");
 
         }else {
-            Module_Inventario inventario = new Module_Inventario();
-            inventario.module_Inventario(codigoDep, tipoEquipamento, marcaEquipamento, modeloEquipamento, numeroSerie, dataEntradaServico, dataUltimaVerificacao, operadorEquipamento, funcaoEquipamento, localizacaoSala, departamentoEquipamento, status, situacao, observacoes);
+            definirDados();
             inventario.cadastrar_inventario();
             inventario.cadastrar_historico();
             limparCampos();
@@ -126,6 +126,28 @@ public class Inventario {
 
     }
 
+    public void definirDados() {
+        // Coleta os dados dos campos
+        inventario.setCodDep(codDep.getText());
+        inventario.setTipoEquipamento(tipoEqui.getText());
+        inventario.setMarca(marca.getText());
+        inventario.setModelo(modelo.getText());
+        inventario.setNum_serie(numSerie.getText());
+        LocalDate dataEntradaServico = dataEntrada.getValue();
+        LocalDate dataUltimaVerificacao = dataVerificacao.getValue();
+        inventario.setDataEntradaServico(dataEntradaServico);
+        inventario.setUltimaVerificacao(dataUltimaVerificacao);
+        inventario.setOperador(operador.getText());
+        inventario.setFuncao(funcao.getText());
+        inventario.setLocalizacao(localSala.getText());
+        inventario.setDepartamento(departamento.getText());
+        inventario.setStatus(statusCombo.getValue());
+        inventario.setSituacaoEquipamento(situacaoCombo.getValue());
+        inventario.setObs(obs.getText());
+
+
+
+    }
 
     // Método para limpar os campos do formulário
     @FXML

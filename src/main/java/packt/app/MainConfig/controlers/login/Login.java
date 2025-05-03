@@ -99,7 +99,7 @@ public class Login {
     // Método de abrir a tela principal
     public void Main() {
         try {
-            Parent root = FXMLManager.loadView(ViewConfig.Main.MAIN);
+            Parent root = FXMLManager.loadStaticView(ViewConfig.Main.MAIN);
 
             Stage newStage = new Stage();
             newStage.setTitle("Tela Inicial");

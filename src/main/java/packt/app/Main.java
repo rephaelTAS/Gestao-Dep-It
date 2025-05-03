@@ -16,7 +16,7 @@ public class Main extends Application {
         ViewInitializer.initialize();
 
         // Carrega a view de login
-        Parent root = FXMLManager.loadView(ViewConfig.Main.LOGIN);
+        Parent root = FXMLManager.loadStaticView(ViewConfig.Main.LOGIN);
 
         // Cria a cena
         Scene scene = new Scene(root, 600, 400);

@@ -40,7 +40,6 @@ public class Additem implements Initializable {
     // ---- Lifecycle ----
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ViewInitializer.initialize();
         loadDefaultView();
         btn_inventario.setOnAction(event ->handleInventory() );
         btn_invent_stock.setOnAction(event -> handleInventoryStock());
@@ -62,7 +61,7 @@ public class Additem implements Initializable {
 
     private void loadView(String viewId) {
         try {
-            Parent view = FXMLManager.loadView(viewId);
+            Parent view = FXMLManager.loadStaticView(viewId);
             add_multPage.getChildren().setAll(view);
         } catch (Exception e) {
             notificacao.showError("Erro ao carregar a view: " + viewId + "\n" + e.getMessage());

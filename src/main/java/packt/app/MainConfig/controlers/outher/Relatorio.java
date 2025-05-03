@@ -70,7 +70,7 @@ public class Relatorio {
 
     private void loadView(String viewId) {
         try {
-            Parent view = FXMLManager.loadView(viewId);
+            Parent view = FXMLManager.loadStaticView(viewId);
             stackPane_relatorio.getChildren().setAll(view);
         } catch (Exception e) {
             notificacao.showError("Erro ao carregar a view: " + viewId + "\n" + e.getMessage());

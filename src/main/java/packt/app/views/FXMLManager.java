@@ -10,73 +10,122 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Gerenciador avançado para carregamento de views FXML com suporte a:
- * - Cache inteligente de views
- * - Controle de ciclo de vida
- * - Integração com registro de views
- * - Aplicação automática de estilos
+ * Gerenciador avançado de recursos FXML com:
+ * - Controle preciso de instâncias
+ * - Prevenção de duplicação
+ * - Cache inteligente
+ * - Gerenciamento de ciclo de vida
  */
 public final class FXMLManager {
     private static final Logger LOGGER = Logger.getLogger(FXMLManager.class.getName());
     private static final FXMLRegistry registry = FXMLRegistry.getInstance();
 
-    // Caches separados para diferentes finalidades
-    private static final Map<String, FXMLLoader> loaderCache = new ConcurrentHashMap<>();
-    private static final Map<String, Parent> viewCache = new ConcurrentHashMap<>();
-    private static final Map<String, Object> controllerCache = new ConcurrentHashMap<>();
+    // Estruturas thread-safe para armazenamento
+    private static final Map<String, FXMLLoader> activeLoaders = new ConcurrentHashMap<>();
+    private static final Map<String, Parent> staticViewsCache = new ConcurrentHashMap<>();
+    private static final Map<String, Object> controllersCache = new ConcurrentHashMap<>();
 
     private FXMLManager() {
         throw new AssertionError("Classe utilitária não deve ser instanciada");
     }
 
     /**
-     * Carrega uma nova instância da view (sem cache)
+     * Carrega uma nova instância única da view (para diálogos modais)
      */
-    public static Parent loadFreshView(String viewId) throws IOException {
+    public static Parent loadUniqueView(String viewId) throws IOException {
         validateViewId(viewId);
         FXMLLoader loader = createNewLoader(viewId);
         Parent view = loader.load();
-        cacheResources(viewId, loader, view);
+        registerActiveLoader(viewId, loader);
+        cacheController(viewId, loader.getController());
         applyStyles(view, viewId);
         return view;
     }
 
     /**
-     * Carrega view com cache (para uso em cenários estáticos)
+     * Carrega view estática (com cache controlado)
      */
-    public static Parent loadView(String viewId) throws IOException {
+    public static Parent loadStaticView(String viewId) throws IOException {
         validateViewId(viewId);
-        return viewCache.computeIfAbsent(viewId, id -> {
+        return staticViewsCache.computeIfAbsent(viewId, id -> {
             try {
                 FXMLLoader loader = createNewLoader(id);
                 Parent view = loader.load();
-                cacheResources(id, loader, view);
+                cacheController(id, loader.getController());
                 applyStyles(view, id);
                 return view;
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Falha ao carregar view: " + id, e);
-                throw new RuntimeException("Falha ao carregar view: " + id, e);
+                LOGGER.log(Level.SEVERE, "Falha ao carregar view estática: " + id, e);
+                throw new IllegalStateException("Falha ao carregar view: " + id, e);
             }
         });
     }
 
     /**
-     * Obtém o controller associado (para views cacheadas)
+     * Obtém controller associado a uma view
      */
     @SuppressWarnings("unchecked")
     public static <T> T getController(String viewId) {
-        if (!controllerCache.containsKey(viewId)) {
-            throw new IllegalStateException("Controller não carregado para: " + viewId);
+        if (!controllersCache.containsKey(viewId)) {
+            throw new IllegalStateException("Controller não disponível para: " + viewId);
         }
-        return (T) controllerCache.get(viewId);
+        return (T) controllersCache.get(viewId);
     }
 
     /**
-     * Cria um novo loader para a view (sem cache)
+     * Libera recursos de uma view ativa
      */
-    public static FXMLLoader createNewLoader(String viewId) {
-        String fxmlPath = getViewPath(viewId);
+    public static void releaseView(String viewId) {
+        activeLoaders.remove(viewId);
+        LOGGER.log(Level.FINE, "View liberada: {0}", viewId);
+    }
+
+    /**
+     * Limpa todos os caches (para reinicialização)
+     */
+    public static void purgeAllCaches() {
+        staticViewsCache.clear();
+        controllersCache.clear();
+        activeLoaders.clear();
+        LOGGER.info("Todos os caches foram purgados");
+    }
+
+    private static FXMLLoader createNewLoader(String viewId) {
+        String fxmlPath = registry.getFxmlPath(viewId);
+        if (fxmlPath == null) {
+            throw new IllegalArgumentException("Caminho FXML não encontrado para: " + viewId);
+        }
         return new FXMLLoader(FXMLManager.class.getResource(fxmlPath));
+    }
+
+    private static void registerActiveLoader(String viewId, FXMLLoader loader) {
+        if (activeLoaders.containsKey(viewId)) {
+            throw new IllegalStateException("View já está ativa: " + viewId);
+        }
+        activeLoaders.put(viewId, loader);
+    }
+
+    private static void cacheController(String viewId, Object controller) {
+        if (controller != null) {
+            controllersCache.put(viewId, controller);
+        }
+    }
+
+    private static void applyStyles(Parent view, String viewId) {
+        try {
+            StyleManager.getInstance().applyComponentStyles(view, viewId);
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, "Falha ao aplicar estilos à view: " + viewId, e);
+        }
+    }
+
+    private static void validateViewId(String viewId) {
+        if (viewId == null || viewId.trim().isEmpty()) {
+            throw new IllegalArgumentException("View ID não pode ser nulo ou vazio");
+        }
+        if (!registry.isRegistered(viewId)) {
+            throw new IllegalArgumentException("View ID não registrado: " + viewId);
+        }
     }
 
     public static String getViewPath(String viewId) {
@@ -84,39 +133,9 @@ public final class FXMLManager {
     }
 
     /**
-     * Limpa todos os caches
+     * Verifica se uma view está ativa (em uso)
      */
-    public static void clearAllCaches() {
-        loaderCache.clear();
-        viewCache.clear();
-        controllerCache.clear();
-        LOGGER.info("Todos os caches foram limpos");
-    }
-
-    /**
-     * Remove uma view específica dos caches
-     */
-    public static void removeFromCache(String viewId) {
-        loaderCache.remove(viewId);
-        viewCache.remove(viewId);
-        controllerCache.remove(viewId);
-        LOGGER.log(Level.FINE, "Recursos removidos do cache: {0}", viewId);
-    }
-
-    private static void cacheResources(String viewId, FXMLLoader loader, Parent view) {
-        controllerCache.put(viewId, loader.getController());
-        loaderCache.put(viewId, loader);
-    }
-
-    private static void applyStyles(Parent view, String viewId) {
-        StyleManager.getInstance().applyComponentStyles(view, viewId);
-    }
-
-    private static void validateViewId(String viewId) {
-        if (!registry.isRegistered(viewId)) {
-            String errorMsg = "View ID não registrado: " + viewId;
-            LOGGER.log(Level.SEVERE, errorMsg);
-            throw new IllegalArgumentException(errorMsg);
-        }
+    public static boolean isViewActive(String viewId) {
+        return activeLoaders.containsKey(viewId);
     }
 }
