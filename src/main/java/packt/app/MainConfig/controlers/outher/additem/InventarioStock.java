@@ -57,7 +57,23 @@ public class InventarioStock{
             return;
         }
 
+        inventarioStock.module_InventarioStock(
+            codigoDep,
+            tipoEquipamento,
+            marcaEquipamento,
+            Integer.parseInt(quantidade),
+            dataEntradaServico,
+            dataUltimaVerificacao,
+            operadorEquipamento,
+            funcaoEquipamento,
+            localizacaoSala,
+            departamentoEquipamento,
+            situacao,
+            observacoes
+        );
         inventarioStock.cadastrar_inventarioStock();
+        notificacao.showSuccess("Cadastrado com Sucesso");
+        limparCampos();
     }
 
     // Método para consultar o banco de dados e preencher os campos

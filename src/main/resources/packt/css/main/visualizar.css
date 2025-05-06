@@ -1,0 +1,49 @@
+/* Estilo geral do AnchorPane */
+.anchor-pane {
+    -fx-background-color: #f0f0f0; /* Cor de fundo suave */
+}
+
+/* Estilo do BorderPane */
+.border-pane {
+    -fx-background-color: #ffffff; /* Cor de fundo branca */
+    -fx-border-color: #B2BACA; /* Cor da borda */
+    -fx-border-width: 1; /* Largura da borda */
+    -fx-background-radius: 10; /* Bordas arredondadas */
+}
+
+/* Estilo do StackPane no topo */
+.stack-pane {
+    -fx-background-color: #B2BACA; /* Cor de fundo do StackPane */
+    -fx-padding: 10; /* Espaçamento interno */
+}
+
+/* Estilo do HBox */
+.hbox {
+    -fx-background-color: #ccc; /* Cor de fundo do HBox */
+    -fx-padding: 10; /* Espaçamento interno */
+    -fx-spacing: 10; /* Espaçamento entre os botões */
+}
+
+/* Estilo dos botões */
+.button {
+    -fx-background-color: #4CAF50; /* Cor de fundo verde */
+    -fx-text-fill: white; /* Cor do texto */
+    -fx-font-size: 14px; /* Tamanho da fonte */
+    -fx-padding: 10 20; /* Espaçamento interno do botão */
+    -fx-background-radius: 5; /* Bordas arredondadas */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1); /* Sombra suave */
+    -fx-cursor: hand; /* Cursor de mão ao passar sobre o botão */
+}
+
+/* Estilo dos botões ao passar o mouse */
+.button:hover {
+    -fx-background-color: #45a049; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo do StackPane central */
+#multpage {
+    -fx-background-color: #ffffff; /* Cor de fundo branca */
+    -fx-border-color: #ccc; /* Cor da borda */
+    -fx-border-width: 1; /* Largura da borda */
+    -fx-background-radius: 10; /* Bordas arredondadas */
+}

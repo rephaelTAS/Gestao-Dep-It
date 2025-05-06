@@ -1,0 +1,97 @@
+/* Cores principais */
+.root {
+    -fx-primary-color: #2C3E50;
+    -fx-secondary-color: #34495E;
+    -fx-accent-color: #3498DB;
+    -fx-light-color: #ECF0F1;
+    -fx-dark-color: #2C3E50;
+}
+
+/* Barra superior */
+.top-bar {
+    -fx-background-color: -fx-primary-color;
+    -fx-padding: 10px;
+}
+
+.welcome-text, .user-text {
+    -fx-text-fill: -fx-light-color;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Menu lateral */
+.sidebar {
+    -fx-background-color: -fx-secondary-color;
+    -fx-spacing: 10px;
+    -fx-padding: 10px;
+    -fx-transition: all 0.3s ease;
+}
+
+.menu-container {
+    -fx-spacing: 5px;
+}
+
+.menu-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-light-color;
+    -fx-font-size: 14px;
+    -fx-alignment: center-left;
+    -fx-padding: 10px 15px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.menu-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-btn .graphic {
+    -fx-padding: 0 10px 0 0;
+}
+
+.menu-icon {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 2, 0, 0, 1);
+}
+
+/* Botão de toggle */
+.toggle-menu-btn {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-padding: 5px;
+}
+
+.toggle-menu-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Área de conteúdo */
+.content-pane {
+    -fx-background-color: -fx-light-color;
+    -fx-padding: 20px;
+}
+
+/* Efeitos de transição */
+.transition-all {
+    -fx-transition: all 0.3s ease;
+}
+
+/* Estado recolhido do menu */
+.sidebar.collapsed {
+    -fx-pref-width: 60px;
+}
+
+.sidebar.collapsed .menu-btn {
+    -fx-padding: 10px;
+    -fx-alignment: center;
+}
+
+.sidebar.collapsed .menu-btn .text {
+    -fx-visible: false;
+    -fx-managed: false;
+}
+
+.sidebar.collapsed .menu-btn .graphic {
+    -fx-padding: 0;
+}

@@ -1,11 +1,9 @@
-package packt.app.MainConfig.controlers.outher;
+package packt.app.MainConfig.controlers.main;
 
 import javafx.scene.control.Button;
 import packt.app.MainConfig.notificacao.Notificacao;
-import packt.app.ViewInitializer;
 import packt.app.views.FXMLManager;
 import packt.app.views.config.ViewConfig;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;

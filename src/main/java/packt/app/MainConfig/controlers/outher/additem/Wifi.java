@@ -178,6 +178,12 @@ public class Wifi {
         // Configuração do botão "Enviar"
         enviarButton.setOnAction(event -> handleEnviar());
 
+        codDepField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue){
+                buscarDadosFuncionario();
+            }
+        });
+
         // Configuração do botão "Limpar"
         limparButton.setOnAction(event -> handleLimpar());
     }

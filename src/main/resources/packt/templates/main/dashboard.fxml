@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packt.app.MainConfig.controlers.outher.Dashboard">
-   <children>
-      <VBox alignment="TOP_CENTER" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+<?import javafx.scene.layout.Region?>
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="packt.app.MainConfig.controlers.main.Dashboard">
+
+   <ScrollPane fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="TOP_CENTER" spacing="20" styleClass="dashboard-container">
          <Text fx:id="mainTitle" text="Gestão de Equipamentos e Derivados" styleClass="title-text" />
          <Separator styleClass="separator" />
 
-         <GridPane hgap="20" vgap="20" alignment="CENTER">
+         <GridPane alignment="CENTER" hgap="20" vgap="20">
             <columnConstraints>
                <ColumnConstraints percentWidth="33" />
                <ColumnConstraints percentWidth="33" />
@@ -24,7 +36,7 @@
 
             <!-- Inventário -->
             <VBox styleClass="card" GridPane.columnIndex="0" GridPane.rowIndex="0">
-               <Label text="Inventário" styleClass="card-title" />
+               <Label styleClass="card-title" text="Inventário" />
                <Separator styleClass="card-separator" />
                <VBox spacing="5" styleClass="card-content">
                   <Label fx:id="printersInUseLabel" text="Impressoras: " />
@@ -38,7 +50,7 @@
 
             <!-- Histórico -->
             <VBox styleClass="card" GridPane.columnIndex="1" GridPane.rowIndex="0">
-               <Label text="Histórico de Utilização" styleClass="card-title" />
+               <Label styleClass="card-title" text="Histórico de Utilização" />
                <Separator styleClass="card-separator" />
                <VBox spacing="5" styleClass="card-content">
                   <Label fx:id="lastPrinterUsedLabel" text="Última impressora: " />
@@ -49,7 +61,7 @@
 
             <!-- Stock -->
             <VBox styleClass="card" GridPane.columnIndex="2" GridPane.rowIndex="0">
-               <Label text="Inventário em Stock" styleClass="card-title" />
+               <Label styleClass="card-title" text="Inventário em Stock" />
                <Separator styleClass="card-separator" />
                <VBox spacing="5" styleClass="card-content">
                   <Label fx:id="printersStockLabel" text="Impressoras: " />
@@ -62,7 +74,7 @@
 
             <!-- Avariados -->
             <VBox styleClass="card" GridPane.columnIndex="0" GridPane.rowIndex="1">
-               <Label text="Avariados" styleClass="card-title" />
+               <Label styleClass="card-title" text="Avariados" />
                <Separator styleClass="card-separator" />
                <VBox spacing="5" styleClass="card-content">
                   <Label fx:id="brokenPrintersLabel" text="Impressoras: " />
@@ -74,7 +86,7 @@
 
             <!-- Resíduos -->
             <VBox styleClass="card" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <Label text="Centro de Resíduos" styleClass="card-title" />
+               <Label styleClass="card-title" text="Centro de Resíduos" />
                <Separator styleClass="card-separator" />
                <VBox spacing="5" styleClass="card-content">
                   <Label fx:id="discardedThisMonthLabel" text="Descarte este mês: " />
@@ -85,7 +97,7 @@
 
             <!-- WiFi -->
             <VBox styleClass="card" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <Label text="Equipamentos Wi-Fi" styleClass="card-title" />
+               <Label styleClass="card-title" text="Equipamentos Wi-Fi" />
                <Separator styleClass="card-separator" />
                <VBox spacing="5" styleClass="card-content">
                   <Label fx:id="wifiInUseLabel" text="Em uso: " />
@@ -98,7 +110,7 @@
          <!-- Toner -->
          <HBox alignment="CENTER" spacing="20" styleClass="toner-section">
             <VBox styleClass="card" prefWidth="500">
-               <Label text="Toner em Uso" styleClass="card-title" />
+               <Label styleClass="card-title" text="Toner em Uso" />
                <Separator styleClass="card-separator" />
                <VBox spacing="5" styleClass="card-content">
                   <Label fx:id="tonerHpUsageLabel" text="Impressora HP: " />
@@ -108,7 +120,7 @@
             </VBox>
 
             <VBox styleClass="card" prefWidth="500">
-               <Label text="Toner em Stock" styleClass="card-title" />
+               <Label styleClass="card-title" text="Toner em Stock" />
                <Separator styleClass="card-separator" />
                <VBox spacing="5" styleClass="card-content">
                   <Label fx:id="tonerHpStockLabel" text="HP 1234: " />
@@ -117,6 +129,9 @@
                </VBox>
             </VBox>
          </HBox>
+
+         <!-- Espaço extra no final para melhor scroll -->
+         <Region prefHeight="20" />
       </VBox>
-   </children>
+   </ScrollPane>
 </AnchorPane>

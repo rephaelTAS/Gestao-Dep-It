@@ -11,8 +11,11 @@ public final class StyleConfig {
     // ==================== MÓDULO PRINCIPAL ====================
     public static final class Main {
         public static final String DASHBOARD = "dashboard";
-        public static final String LOGIN = "login-form";
-        public static final String NAVIGATION = "main-navigation";
+        public static final String LOGIN = "login_form";
+        public static final String MAIN = "main";
+        public static final String ADD = "add_item";
+        public static final String RELA = "relatorio";
+        public static final String VISUALI = "visualizar";
     }
 
     // ==================== MÓDULO ADD ITEM ====================
@@ -46,8 +49,12 @@ public final class StyleConfig {
         StyleManager styleManager = StyleManager.getInstance();
 
         // Módulo Principal
-        styleManager.registerStyle(Main.DASHBOARD, "/packt/styles/main/dashboard.css");
+        styleManager.registerStyle(Main.DASHBOARD, "/packt/css/main/dashboard.css");
         styleManager.registerStyle(Main.LOGIN, "/packt/css/modules/auth/login.css");
+        styleManager.registerStyle(Main.MAIN, "/packt/css/main/main.css");
+        styleManager.registerStyle(Main.ADD, "/packt/css/main/addItem.css");
+        styleManager.registerStyle(Main.RELA, "/packt/css/main/relatorio.css");
+        styleManager.registerStyle(Main.VISUALI, "/packt/css/main/visualizar.css");
 
     }
 }

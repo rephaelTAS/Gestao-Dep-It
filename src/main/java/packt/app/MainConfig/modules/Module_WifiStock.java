@@ -15,7 +15,7 @@ public class Module_WifiStock {
     private String situacaoEquipamento;
     private String obs;
 
-
+    // Construtor
     public void module_WifiStock(String codDep, String tipoEquipamento, String marca, String modelo, int quantidade, LocalDate dataEntrada, LocalDate ultimaVerificacao, String operador, String situacaoEquipamento, String obs) {
         this.codDep = codDep;
         this.tipoEquipamento = tipoEquipamento;
@@ -29,6 +29,7 @@ public class Module_WifiStock {
         this.obs = obs;
     }
 
+    // Getters e Setters
     public String getCodDep() {
         return codDep;
     }

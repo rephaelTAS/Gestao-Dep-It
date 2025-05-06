@@ -1,0 +1,154 @@
+/* Variáveis de cor - Mantendo consistência com o main.css */
+.root {
+    -fx-primary-color: #2C3E50;
+    -fx-secondary-color: #34495E;
+    -fx-accent-color: #3498DB;
+    -fx-light-color: #ECF0F1;
+    -fx-dark-color: #2C3E50;
+    -fx-warning-color: #E74C3C;
+    -fx-success-color: #2ECC71;
+}
+
+/* Estilo do título principal */
+.title-text {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-fill: -fx-primary-color;
+    -fx-padding: 0 0 10px 0;
+}
+
+.separator {
+    -fx-padding: 5px 0 15px 0;
+}
+
+.separator .line {
+    -fx-border-color: -fx-accent-color;
+    -fx-border-width: 1px;
+}
+
+/* Estilo dos cards */
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: -fx-light-color;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);
+    -fx-padding: 15px;
+    -fx-spacing: 10px;
+    -fx-min-height: 200px;
+}
+
+.card-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-color;
+}
+
+.card-separator .line {
+    -fx-border-color: -fx-accent-color;
+    -fx-border-width: 0.5px;
+}
+
+.card-content {
+    -fx-padding: 5px 0 0 0;
+}
+
+.card-content .label {
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-secondary-color;
+}
+
+/* Seção de toner - layout horizontal especial */
+.toner-section {
+    -fx-padding: 20px 0 0 0;
+}
+
+.toner-section .card {
+    -fx-pref-height: 150px;
+}
+
+/* Estilos condicionais para diferentes status */
+.warning-text {
+    -fx-text-fill: -fx-warning-color;
+    -fx-font-weight: bold;
+}
+
+.success-text {
+    -fx-text-fill: -fx-success-color;
+}
+
+.critical-stock {
+    -fx-text-fill: -fx-warning-color;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+}
+
+/* Efeitos de hover para interatividade */
+.card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 2);
+    -fx-cursor: hand;
+}
+
+/* Estilos para o ScrollPane */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: -fx-light-color;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: -fx-accent-color;
+    -fx-background-radius: 5px;
+}
+
+.scroll-pane .scroll-bar:vertical .increment-button,
+.scroll-pane .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+}
+
+/* Ajustes para o conteúdo com scroll */
+.toner-section {
+    -fx-padding: 20px 0 30px 0; /* Mais espaço na parte inferior */
+}
+
+/* Garante que os cards não ficarão muito largos */
+.card {
+    -fx-max-width: 350px;
+}
+
+/* Container principal */
+.dashboard-container {
+    -fx-padding: 20px;
+    -fx-background-color: transparent;
+}
+
+/* Ajuste para o ScrollPane */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-fit-to-width: true;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Responsividade para diferentes tamanhos de tela */
+@media (max-width: 1000px) {
+    .card {
+        -fx-pref-width: 300px;
+    }
+
+    .toner-section {
+        -fx-spacing: 10px;
+        -fx-padding: 10px 0 0 0;
+    }
+}

@@ -12,12 +12,11 @@ module packt.sample {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
-    requires java.desktop;
+    requires javafx.swing;
 
     // Abertura de pacotes para FXML
     opens packt.app.MainConfig.modules to javafx.base;
     opens packt.app.MainConfig.controlers.login to javafx.fxml;
-    opens packt.app.MainConfig.controlers.outher to javafx.fxml;
     opens packt.app.MainConfig.controlers.main to javafx.fxml;
     opens packt.app.MainConfig.controlers.outher.visualizar to javafx.fxml;
     opens packt.app.MainConfig.controlers.outher.relatorio to javafx.fxml;
@@ -31,7 +30,6 @@ module packt.sample {
 
 
     exports packt.app.MainConfig.controlers.main;
-    exports packt.app.MainConfig.controlers.outher;
     exports packt.app.MainConfig.controlers.login;
     exports packt.app; // Se necessário
 }

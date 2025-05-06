@@ -52,16 +52,18 @@ public class DB_WifiStock {
 
             while (rs.next()) {
                 Module_WifiStock wifiStock = new Module_WifiStock();
-                wifiStock.setCodDep(rs.getString("cod_dep"));
-                wifiStock.setTipoEquipamento(rs.getString("tipo_equipamento"));
-                wifiStock.setMarca(rs.getString("marca"));
-                wifiStock.setModelo(rs.getString("modelo"));
-                wifiStock.setQuantidade(rs.getInt("quantidade"));
-                wifiStock.setDataEntrada(rs.getDate("dataEntrada") != null ? rs.getDate("dataEntrada").toLocalDate() : null);
-                wifiStock.setUltimaVerificacao(rs.getDate("ultimaVerificacao") != null ? rs.getDate("ultimaVerificacao").toLocalDate() : null);
-                wifiStock.setOperador(rs.getString("operador"));
-                wifiStock.setSituacaoEquipamento(rs.getString("situacaoEquipamento"));
-                wifiStock.setObs(rs.getString("obs"));
+                wifiStock.module_WifiStock(
+                    rs.getString("cod_dep"),
+                    rs.getString("tipo_equipamento"),
+                    rs.getString("marca"),
+                    rs.getString("modelo"),
+                    rs.getInt("quantidade"),
+                    rs.getDate("dataEntrada") != null ? rs.getDate("dataEntrada").toLocalDate() : null,
+                    rs.getDate("ultimaVerificacao") != null ? rs.getDate("ultimaVerificacao").toLocalDate() : null,
+                    rs.getString("operador"),
+                    rs.getString("situacaoEquipamento"),
+                    rs.getString("obs")
+                );
 
                 dados.add(wifiStock);
             }

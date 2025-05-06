@@ -1,5 +1,8 @@
 package packt.app.MainConfig.controlers.outher.relatorio;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import packt.app.MainConfig.exportImport.ExportToExcel;
 import packt.database.DB_HistoUtilizacao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,6 +13,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import packt.app.MainConfig.modules.Module_Inventario;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class HistoricoUtilizacao {
@@ -60,11 +65,18 @@ public class HistoricoUtilizacao {
     private TableColumn<Module_Inventario, String> colObs;
 
     @FXML
-    private Button btn_exportar;
+    private Button Btn_GerarExcel;
 
     ObservableList<Module_Inventario> equipamentos = FXCollections.observableArrayList();
     @FXML
     public void initialize() {
+        Btn_GerarExcel.setOnAction(event -> {
+            try {
+                gerarExcel();
+            }catch (IOException e){
+                throw new RuntimeException();
+            }
+        });
 
         mostrarHistorico();
         // Configura as colunas da TableView
@@ -95,5 +107,20 @@ public class HistoricoUtilizacao {
         equipamentos.addAll(inventarios);
 
         tab_inventario.setItems(equipamentos);
+    }
+
+    private void gerarExcel() throws IOException{
+        Stage primaryStage = (Stage) Btn_GerarExcel.getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Salvar Arquivo Excel");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
+
+
+        File file = fileChooser.showSaveDialog(primaryStage);
+
+        if (file != null){
+            ExportToExcel export = new ExportToExcel();
+            export.exportarHistoricoUtilizacaotoParaExcel(equipamentos, file.getAbsolutePath());
+        }
     }
 }

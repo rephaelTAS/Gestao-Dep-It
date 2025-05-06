@@ -1,6 +1,15 @@
 package packt.app.MainConfig.controlers.login;
 
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import packt.app.MainConfig.controlers.main.MainControler;
+import packt.app.MainConfig.modules.Module_Funcionario;
+import packt.app.MainConfig.modules.Module_Usuario;
+import packt.app.image.ImageManager;
+import packt.app.image.ImageRegistry;
+import packt.app.image.config.ImageConfig;
 import packt.app.views.FXMLManager;
 import packt.app.views.config.ViewConfig;
 import packt.database.DatabaseConnection;
@@ -8,32 +17,30 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class Login {
+public class Login implements Initializable {
+    public ImageView logoView;
     @FXML
     private TextField usuario;
-
     @FXML
     private PasswordField senha;
-
     @FXML
     private Button btn_log;
-
     @FXML
     private Button btn_cancelar;
+
+    Module_Usuario moduleUsuario = new Module_Usuario();
 
     private DatabaseConnection dbConnection;
 
@@ -41,6 +48,7 @@ public class Login {
     public void LoginBtnAction(ActionEvent e) {
         if (!usuario.getText().isBlank() && !senha.getText().isBlank()) {
             validarLogin();
+
         } else {
             showAlert(AlertType.WARNING, "Campos obrigatórios", "Preencha todos os campos.");
         }
@@ -63,12 +71,15 @@ public class Login {
             String verifyLogin = "SELECT count(1) FROM usuarios WHERE nome = ? AND senha = ?";
             try (PreparedStatement preparedStatement = connectDB.prepareStatement(verifyLogin)) {
                 preparedStatement.setString(1, usuario.getText());
-                preparedStatement.setString(2, senha.getText()); // Sugiro adicionar criptografia aqui
+                preparedStatement.setString(2, senha.getText());
 
                 ResultSet queryResult = preparedStatement.executeQuery();
 
                 if (queryResult.next() && queryResult.getInt(1) == 1) {
+
+                    moduleUsuario.atualizarUsuario(usuario.getText());
                     Main(); // Chama o método para abrir a tela principal
+
                 } else {
                     showAlert(AlertType.ERROR, "Login inválido", "Nome de usuário ou senha incorretos.");
                 }
@@ -96,6 +107,7 @@ public class Login {
         alert.showAndWait();
     }
 
+
     // Método de abrir a tela principal
     public void Main() {
         try {
@@ -112,6 +124,16 @@ public class Login {
         } catch (IOException e) {
             e.printStackTrace();
             showAlert(AlertType.ERROR, "Erro", "Falha ao abrir a tela principal.");
+        }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        try {
+            logoView.setImage(ImageManager.loadImage(ImageConfig.Icons.LOGO));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

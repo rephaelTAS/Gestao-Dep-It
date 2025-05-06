@@ -1,8 +1,6 @@
-package packt.app.MainConfig.controlers.outher;
+package packt.app.MainConfig.controlers.main;
 
-import packt.app.MainConfig.controlers.main.MainControler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -11,11 +9,8 @@ import packt.app.MainConfig.notificacao.Notificacao;
 import packt.app.views.FXMLManager;
 import packt.app.views.config.ViewConfig;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Visualizar implements Initializable {
     @FXML

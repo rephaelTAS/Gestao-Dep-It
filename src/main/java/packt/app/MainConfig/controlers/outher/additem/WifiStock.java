@@ -76,7 +76,7 @@ public class WifiStock {
 
         // Conexão com o banco de dados
 
-        String sql = "INSERT INTO equipa_wifiStock (cod_dep, tipo_equipamento, marca, quantidade, data_entrada, operador, funcao, status, obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO equipa_wifiStock (cod_dep, tipo_equipamento, marca, quantidade, dataEntrada, operador, funcao, status, obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, codDep);
             statement.setString(2, tipoEquipamento);

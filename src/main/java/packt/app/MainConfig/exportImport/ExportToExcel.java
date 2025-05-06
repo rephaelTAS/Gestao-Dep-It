@@ -159,7 +159,7 @@ public class ExportToExcel {
             row.createCell(0).setCellValue(item.getCodDep());
             row.createCell(1).setCellValue(item.getNome());
             row.createCell(2).setCellValue(item.getFuncao());
-            row.createCell(3).setCellValue(item.getLocalizacao());
+            row.createCell(3).setCellValue(item.getLocal());
             row.createCell(4).setCellValue(item.getDepartamento());
         }
 
@@ -359,6 +359,73 @@ public class ExportToExcel {
 
     // Método para exportar Module_Inventario
     public void exportarInventarioParaExcel(ObservableList<Module_Inventario> dados, String filePath) throws IOException {
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Inventário");
+
+        // Cabeçalhos
+        Row headerRow = sheet.createRow(0);
+        String[] headers = {
+                "Código Dep.", "Tipo Equipamento", "Marca", "Modelo",
+                "Número Série", "Data Entrada Serviço", "Última Verificação",
+                "Operador", "Função", "Localização", "Departamento",
+                "Status", "Situação Equipamento", "Observações"
+        };
+
+        // Criar células de cabeçalho
+        for (int i = 0; i < headers.length; i++) {
+            headerRow.createCell(i).setCellValue(headers[i]);
+        }
+
+        // Estilo para datas
+        CellStyle dateStyle = createDateCellStyle(workbook);
+
+        // Preencher dados
+        int rowNum = 1;
+        for (Module_Inventario item : dados) {
+            Row row = sheet.createRow(rowNum++);
+
+            // Dados básicos
+            row.createCell(0).setCellValue(item.getCodDep());
+            row.createCell(1).setCellValue(item.getTipoEquipamento());
+            row.createCell(2).setCellValue(item.getMarca());
+            row.createCell(3).setCellValue(item.getModelo());
+            row.createCell(4).setCellValue(item.getNum_serie());
+
+            // Tratamento de datas
+            Cell dataEntradaCell = row.createCell(5);
+            if (item.getDataEntradaServico() != null) {
+                dataEntradaCell.setCellValue(item.getDataEntradaServico());
+                dataEntradaCell.setCellStyle(dateStyle);
+            }
+
+            Cell dataVerificacaoCell = row.createCell(6);
+            if (item.getUltimaVerificacao() != null) {
+                dataVerificacaoCell.setCellValue(item.getUltimaVerificacao());
+                dataVerificacaoCell.setCellStyle(dateStyle);
+            }
+
+            // Demais campos
+            row.createCell(7).setCellValue(item.getOperador());
+            row.createCell(8).setCellValue(item.getFuncao());
+            row.createCell(9).setCellValue(item.getLocalizacao());
+            row.createCell(10).setCellValue(item.getDepartamento());
+            row.createCell(11).setCellValue(item.getStatus());
+            row.createCell(12).setCellValue(item.getSituacaoEquipamento());
+            row.createCell(13).setCellValue(item.getObs());
+        }
+
+        // Auto-ajuste das colunas
+        for (int i = 0; i < headers.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        // Salvar arquivo
+        saveWorkbook(workbook, filePath);
+    }
+
+
+    // Método para exportar Module_Inventario
+    public void exportarHistoricoUtilizacaotoParaExcel(ObservableList<Module_Inventario> dados, String filePath) throws IOException {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Inventário");
 

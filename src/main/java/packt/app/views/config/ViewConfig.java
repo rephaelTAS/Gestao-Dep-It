@@ -1,5 +1,6 @@
 package packt.app.views.config;
 
+import kotlin.internal.ProgressionUtilKt;
 import packt.app.views.FXMLRegistry;
 
 /**
@@ -7,13 +8,16 @@ import packt.app.views.FXMLRegistry;
  */
 public final class ViewConfig {
 
+
     public static class Main {
-        public static final String DASHBOARD = "MAIN.dashboard";
-        public static final String ADD_ITEM = "MAIN.additem";
-        public static final String RELATORIO = "MAIN.relatorio";
-        public static final String VISUALIZAR = "MAIN.visualizar";
-        public static final String LOGIN = "MAIN.login";
-        public static final String MAIN = "MAIN.main";
+        public static final String DASHBOARD = "dashboard";
+        public static final String ADD_ITEM = "add_item";
+        public static final String RELATORIO = "relatorio";
+        public static final String VISUALIZAR = "visualizar";
+        public static final String LOGIN = "login_form";
+        public static final String MAIN = "main";
+        public static final String DEFINICOES = "definicoes";
+        public static final String SOBRE = "sobre";
     }
 
 
@@ -70,6 +74,8 @@ public final class ViewConfig {
         registry.registerView(Main.VISUALIZAR, "/packt/templates/main/visualizar.fxml");
         registry.registerView(Main.LOGIN, "/packt/templates/login/login.fxml");
         registry.registerView(Main.MAIN, "/packt/templates/main/main.fxml");
+        registry.registerView(Main.DEFINICOES, "/packt/templates/main/definicoes.fxml");
+        registry.registerView(Main.SOBRE, "/packt/templates/main/sobre.fxml");
 
         // Registro das views do módulo AddItem
         registry.registerView(AddItem.INVENTARIO, "/packt/templates/outher/addItem/inventario.fxml");

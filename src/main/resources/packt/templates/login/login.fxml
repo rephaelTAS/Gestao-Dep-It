@@ -1,30 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packt.app.MainConfig.controlers.login.Login">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packt.app.MainConfig.controlers.login.Login">
    <children>
-      <BorderPane styleClass="form-container" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane styleClass="login-container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <AnchorPane styleClass="left-pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label styleClass="welcome-label" layoutX="14.0" layoutY="69.0" text="Bem Vindo"/>
-               </children>
-            </AnchorPane>
+            <StackPane styleClass="brand-pane" BorderPane.alignment="CENTER">
+               <VBox alignment="CENTER" spacing="30">
+                  <ImageView fx:id="logoView" fitHeight="150" fitWidth="150" preserveRatio="true" />
+                  <Label styleClass="welcome-title" text="Bem-Vindo" />
+                  <Label styleClass="welcome-subtitle" text="Gestão de Inventário" />
+               </VBox>
+            </StackPane>
          </left>
          <center>
-            <AnchorPane styleClass="form-pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label styleClass="form-label" layoutX="41.0" layoutY="59.0" text="Usuario" />
-                  <TextField styleClass="form-field" fx:id="usuario" layoutX="41.0" layoutY="91.0" promptText="Usuario" />
-                  <Label styleClass="form-label" layoutX="41.0" layoutY="165.0" text="Senha" />
-                  <PasswordField styleClass="form-field" fx:id="senha" layoutX="42.0" layoutY="200.0" promptText="Senha" />
-                  <Button styleClass="login-btn" fx:id="btn_log" layoutX="69.0" layoutY="259.0" mnemonicParsing="false" onAction="#LoginBtnAction" text="Login" />
-                  <Button styleClass="cancel-btn" fx:id="btn_cancelar" layoutX="174.0" layoutY="259.0" mnemonicParsing="false" onAction="#closetBtn" text="Cancelar" />
-               </children>
-            </AnchorPane>
+            <StackPane styleClass="form-container">
+               <VBox alignment="CENTER" spacing="25" styleClass="form-box">
+                  <Label styleClass="login-title" text="Login" />
+
+                  <VBox alignment="CENTER_LEFT" spacing="8" styleClass="input-group">
+                     <Label styleClass="input-label" text="Usuário" />
+                     <TextField fx:id="usuario" promptText="Digite seu usuário" styleClass="form-input" />
+                  </VBox>
+
+                  <VBox alignment="CENTER_LEFT" spacing="8" styleClass="input-group">
+                     <Label styleClass="input-label" text="Senha" />
+                     <PasswordField fx:id="senha" promptText="Digite sua senha" styleClass="form-input" />
+                  </VBox>
+
+                  <HBox alignment="CENTER" spacing="15" styleClass="button-group">
+                     <Button fx:id="btn_log" onAction="#LoginBtnAction" styleClass="primary-btn" text="Entrar" />
+                     <Button fx:id="btn_cancelar" onAction="#closetBtn" styleClass="secondary-btn" text="Cancelar" />
+                  </HBox>
+
+                  <Hyperlink styleClass="forgot-link" text="Esqueceu sua senha?" />
+               </VBox>
+            </StackPane>
          </center>
       </BorderPane>
    </children>

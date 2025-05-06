@@ -1,102 +1,164 @@
-/* ===== VARIÁVEIS DE CORES ===== */
+/* Variáveis de cores */
 .root {
-    -fx-primary: #4361ee;
-    -fx-secondary: #3f37c9;
-    -fx-accent: #4895ef;
-    -fx-light: #f8f9fa;
-    -fx-dark: #212529;
-    -fx-danger: #e63946;
-    -fx-success: #4cc9f0;
+    -fx-primary-color: #4361ee;
+    -fx-secondary-color: #3f37c9;
+    -fx-accent-color: #4895ef;
+    -fx-light-color: #f8f9fa;
+    -fx-dark-color: #212529;
+    -fx-danger-color: #ef233c;
+    -fx-success-color: #4cc9f0;
 }
 
-/* ===== ESTILO BASE ===== */
-.anchor-pane {
-    -fx-background-color: -fx-light;
+/* Estilo do container principal */
+.login-container {
+    -fx-background-color: -fx-light-color;
 }
 
-/* ===== PAINEL ESQUERDO (BANNER) ===== */
-.left-pane {
-    -fx-background-color: linear-gradient(to bottom right, -fx-primary, -fx-secondary);
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+/* Painel da marca (esquerdo) */
+.brand-pane {
+    -fx-background-color: linear-gradient(to bottom, -fx-primary-color, -fx-secondary-color);
+    -fx-padding: 40px;
+    -fx-alignment: center;
 }
 
-.welcome-label {
+
+
+.welcome-title {
     -fx-text-fill: white;
     -fx-font-size: 32px;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 0, 0, 2, 2);
 }
 
-/* ===== PAINEL CENTRAL (FORMULÁRIO) ===== */
-.form-pane {
+.welcome-subtitle {
+    -fx-text-fill: rgba(255,255,255,0.9);
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+}
+
+/* Container do formulário */
+.form-container {
+    -fx-alignment: center;
     -fx-padding: 40px;
-    -fx-spacing: 15px;
 }
 
-.form-label {
-    -fx-text-fill: -fx-dark;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-}
-
-.form-field {
-    -fx-pref-height: 40px;
+.form-box {
+    -fx-min-width: 300px;
+    -fx-max-width: 350px;
+    -fx-padding: 40px 30px;
     -fx-background-color: white;
-    -fx-border-color: #ced4da;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
-    -fx-padding: 0 10px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.login-title {
+    -fx-text-fill: -fx-dark-color;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 10px 0;
+}
+
+/* Grupos de entrada */
+.input-group {
+    -fx-padding: 0 0 10px 0;
+}
+
+.input-label {
+    -fx-text-fill: -fx-dark-color;
     -fx-font-size: 14px;
+    -fx-font-weight: 600;
 }
 
-.form-field:focused {
-    -fx-border-color: -fx-accent;
-    -fx-effect: innershadow(gaussian, rgba(67, 97, 238, 0.3), 10, 0, 0, 0);
+.form-input {
+    -fx-background-color: -fx-light-color;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #e9ecef;
+    -fx-border-width: 1px;
+    -fx-padding: 12px 15px;
+    -fx-font-size: 14px;
+    -fx-pref-height: 40px;
+    -fx-min-width: 250px;
 }
 
-/* ===== BOTÕES ===== */
-.login-btn {
-    -fx-background-color: -fx-primary;
+.form-input:focused {
+    -fx-border-color: -fx-primary-color;
+}
+
+/* Grupos de botões */
+.button-group {
+    -fx-padding: 15px 0 0 0;
+}
+
+.primary-btn {
+    -fx-background-color: -fx-primary-color;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-pref-width: 100px;
-    -fx-pref-height: 40px;
-    -fx-background-radius: 4px;
+    -fx-background-radius: 5px;
+    -fx-padding: 12px 30px;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 0, 2, 0, 1);
 }
 
-.login-btn:hover {
-    -fx-background-color: -fx-secondary;
+.primary-btn:hover {
+    -fx-background-color: -fx-secondary-color;
 }
 
-.cancel-btn {
+.primary-btn:pressed {
+    -fx-background-color: #3a0ca3;
+}
+
+.secondary-btn {
     -fx-background-color: transparent;
-    -fx-text-fill: -fx-dark;
-    -fx-border-color: -fx-dark;
-    -fx-border-radius: 4px;
+    -fx-text-fill: -fx-dark-color;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 5px;
     -fx-border-width: 1px;
+    -fx-padding: 12px 25px;
+    -fx-cursor: hand;
 }
 
-.cancel-btn:hover {
-    -fx-background-color: rgba(33, 37, 41, 0.1);
+.secondary-btn:hover {
+    -fx-background-color: #f8f9fa;
 }
 
-/* ===== EFEITOS MODERNOS ===== */
-@keyframes fadeIn {
-    from { -fx-opacity: 0; }
-    to { -fx-opacity: 1; }
+.secondary-btn:pressed {
+    -fx-background-color: #e9ecef;
 }
 
-.form-container {
-    -fx-opacity: 0;
-    -fx-animation: fadeIn 0.8s ease-out forwards;
+/* Link de esqueci senha */
+.forgot-link {
+    -fx-text-fill: #6c757d;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
 }
 
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 600px) {
-    .left-pane {
-        -fx-pref-width: 0;
-        -fx-visible: false;
+.forgot-link:hover {
+    -fx-text-fill: -fx-primary-color;
+    -fx-underline: true;
+}
+
+/* Efeitos de transição */
+.button, .form-input, .forgot-link {
+    -fx-transition: all 0.2s ease;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .brand-pane {
+        -fx-padding: 20px;
+    }
+
+    .welcome-title {
+        -fx-font-size: 24px;
+    }
+
+    .form-box {
+        -fx-min-width: 250px;
+        -fx-padding: 30px 20px;
+    }
+
+    .form-input {
+        -fx-min-width: 200px;
     }
 }

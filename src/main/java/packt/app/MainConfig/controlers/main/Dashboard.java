@@ -1,4 +1,4 @@
-package packt.app.MainConfig.controlers.outher;
+package packt.app.MainConfig.controlers.main;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
