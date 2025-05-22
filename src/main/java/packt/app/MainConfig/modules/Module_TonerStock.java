@@ -2,195 +2,160 @@ package packt.app.MainConfig.modules;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import packt.database.DB_TonerStock;
+
+import java.time.LocalDate;
 
 public class Module_TonerStock {
 
-    private final SimpleStringProperty codDep;
-    private final SimpleStringProperty idProdut; // Adicionando o campo idProdut
-    private final SimpleStringProperty toner;
-    private final SimpleStringProperty marca;
-    private final SimpleStringProperty cor;
-    private final SimpleStringProperty impressora;
-    private final SimpleIntegerProperty unidade;
-    private final SimpleStringProperty status;
-    private final SimpleStringProperty operador;
-    private final SimpleStringProperty funcao;
-    private final SimpleStringProperty localizacao;
-    private final SimpleStringProperty departamento;
-    private final SimpleStringProperty obs;
+    private String codDep;
+    private String idProdut; // Adicionando o campo idProdut
+    private String toner;
+    private String marca;
+    private String modelo;
+    private String cor;
+    private String impressora;
+    private LocalDate dataUsu;
+    private String status;
+    private String operador;
+    private String funcao;
+    private String localizacao;
+    private String departamento;
+    private String obs;
 
-    // Construtor
-    public Module_TonerStock(String codDep, String idProdut, String toner, String marca, String cor, String impressora, int unidade, String status, String operador, String funcao, String localizacao, String departamento, String obs) {
-        this.codDep = new SimpleStringProperty(codDep);
-        this.idProdut = new SimpleStringProperty(idProdut); // Inicializando idProdut
-        this.toner = new SimpleStringProperty(toner);
-        this.marca = new SimpleStringProperty(marca);
-        this.cor = new SimpleStringProperty(cor);
-        this.impressora = new SimpleStringProperty(impressora);
-        this.unidade = new SimpleIntegerProperty(unidade);
-        this.status = new SimpleStringProperty(status);
-        this.operador = new SimpleStringProperty(operador);
-        this.funcao = new SimpleStringProperty(funcao);
-        this.localizacao = new SimpleStringProperty(localizacao);
-        this.departamento = new SimpleStringProperty(departamento);
-        this.obs = new SimpleStringProperty(obs);
+    DB_TonerStock tonerStock = new DB_TonerStock();
+
+
+    public void module_TonerStock(String codDep, String idProdut, String toner, String marca, String modelo, String cor, String impressora, LocalDate dataUsu, String status, String operador, String funcao, String localizacao, String departamento, String obs) {
+        this.codDep = codDep;
+        this.idProdut = idProdut;
+        this.toner = toner;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.cor = cor;
+        this.impressora = impressora;
+        this.dataUsu = dataUsu;
+        this.status = status;
+        this.operador = operador;
+        this.funcao = funcao;
+        this.localizacao = localizacao;
+        this.departamento = departamento;
+        this.obs = obs;
     }
-
-    // Getters e Setters para cada propriedade
 
     public String getCodDep() {
-        return codDep.get();
-    }
-
-    public void setCodDep(String codDep) {
-        this.codDep.set(codDep);
-    }
-
-    public SimpleStringProperty codDepProperty() {
         return codDep;
     }
 
+    public void setCodDep(String codDep) {
+        this.codDep = codDep;
+    }
+
     public String getIdProdut() {
-        return idProdut.get(); // Getter para idProdut
+        return idProdut;
     }
 
     public void setIdProdut(String idProdut) {
-        this.idProdut.set(idProdut); // Setter para idProdut
-    }
-
-    public SimpleStringProperty idProdutProperty() {
-        return idProdut; // Property para idProdut
+        this.idProdut = idProdut;
     }
 
     public String getToner() {
-        return toner.get();
-    }
-
-    public void setToner(String toner) {
-        this.toner.set(toner);
-    }
-
-    public SimpleStringProperty tonerProperty() {
         return toner;
     }
 
+    public void setToner(String toner) {
+        this.toner = toner;
+    }
+
     public String getMarca() {
-        return marca.get();
-    }
-
-    public void setMarca(String marca) {
-        this.marca.set(marca);
-    }
-
-    public SimpleStringProperty marcaProperty() {
         return marca;
     }
 
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
     public String getCor() {
-        return cor.get();
-    }
-
-    public void setCor(String cor) {
-        this.cor.set(cor);
-    }
-
-    public SimpleStringProperty corProperty() {
         return cor;
     }
 
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
     public String getImpressora() {
-        return impressora.get();
-    }
-
-    public void setImpressora(String impressora) {
-        this.impressora.set(impressora);
-    }
-
-    public SimpleStringProperty impressoraProperty() {
         return impressora;
     }
 
-    public int getUnidade() {
-        return unidade.get();
+    public void setImpressora(String impressora) {
+        this.impressora = impressora;
     }
 
-    public void setUnidade(int unidade) {
-        this.unidade.set(unidade);
+    public LocalDate getDataUsu() {
+        return dataUsu;
     }
 
-    public SimpleIntegerProperty unidadeProperty() {
-        return unidade;
+    public void setDataUsu(LocalDate dataUsu) {
+        this.dataUsu = dataUsu;
     }
 
     public String getStatus() {
-        return status.get();
-    }
-
-    public void setStatus(String status) {
-        this.status.set(status);
-    }
-
-    public SimpleStringProperty statusProperty() {
         return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getOperador() {
-        return operador.get();
-    }
-
-    public void setOperador(String operador) {
-        this.operador.set(operador);
-    }
-
-    public SimpleStringProperty operadorProperty() {
         return operador;
     }
 
+    public void setOperador(String operador) {
+        this.operador = operador;
+    }
+
     public String getFuncao() {
-        return funcao.get();
-    }
-
-    public void setFuncao(String funcao) {
-        this.funcao.set(funcao);
-    }
-
-    public SimpleStringProperty funcaoProperty() {
         return funcao;
     }
 
+    public void setFuncao(String funcao) {
+        this.funcao = funcao;
+    }
+
     public String getLocalizacao() {
-        return localizacao.get();
-    }
-
-    public void setLocalizacao(String localizacao) {
-        this.localizacao.set(localizacao);
-    }
-
-    public SimpleStringProperty localizacaoProperty() {
         return localizacao;
     }
 
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
+    }
+
     public String getDepartamento() {
-        return departamento.get();
-    }
-
-    public void setDepartamento(String departamento) {
-        this.departamento.set(departamento);
-    }
-
-    public SimpleStringProperty departamentoProperty() {
         return departamento;
     }
 
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
     public String getObs() {
-        return obs.get();
+        return obs;
     }
 
     public void setObs(String obs) {
-        this.obs.set(obs);
+        this.obs = obs;
     }
 
-    public SimpleStringProperty obsProperty() {
-        return obs;
+    public void criarDados(){
+        tonerStock.createTonerStock(this);
     }
 }

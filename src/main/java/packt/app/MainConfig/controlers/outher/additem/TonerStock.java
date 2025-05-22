@@ -6,8 +6,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import packt.app.MainConfig.filtragem.Filtro_IdProdut;
 import packt.app.MainConfig.filtragem.Filtro_codDep;
+import packt.app.MainConfig.modules.Module_TonerStock;
 import packt.app.MainConfig.modules.New_Produt;
 import packt.app.MainConfig.notificacao.Notificacao;
+import packt.database.DB_TonerStock;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,22 +34,25 @@ public class TonerStock {
     Notificacao notificacao = new Notificacao();
 
     Filtro_IdProdut filtroIdProdut = new Filtro_IdProdut();
+    Module_TonerStock tonerStock;
 
 
     public void salvarDados(){
-        String codDepValue = codDep.getText();
-        String idProdutValue = combo_id_produt.getValue();
-        String tonerValue = texFil_toner.getText();
-        String marcaValue = marca.getText();
-        String modeloValue = modeloToner.getText();
-        String corValue = texFil_cor.getText();
-        String impressoraValue = texFil_impressora.getText();
-        String unidadeValue = texFil_unidade.getText();
-        String operadorValue = operador.getText();
-        String funcaoValue = funcao.getText();
-        String localSalaValue = localSala.getText();
-        String departamentoValue = departamento.getText();
-        String obsValue = obs.getText();
+        tonerStock = new Module_TonerStock();
+        tonerStock.setCodDep(codDep.getText());
+        tonerStock.setIdProdut(combo_id_produt.getValue());
+        tonerStock.setToner(texFil_toner.getText());
+        tonerStock.setMarca(marca.getText());
+        tonerStock.setModelo(modeloToner.getText());
+        tonerStock.setCor(texFil_cor.getText());
+        tonerStock.setImpressora(texFil_impressora.getText());
+        tonerStock.setOperador(operador.getText());
+        tonerStock.setFuncao(funcao.getText());
+        tonerStock.setLocalizacao(localSala.getText());
+        tonerStock.setDepartamento(departamento.getText());
+        tonerStock.setObs(obs.getText());
+        tonerStock.criarDados();
+
     }
     @FXML
     private void buscarDadosFuncionario() {
@@ -149,6 +154,6 @@ public class TonerStock {
         });
 
         btnLimpar.setOnAction(event -> LimparCampos());
-
+        btnEnviar.setOnAction(event -> salvarDados());
     }
 }

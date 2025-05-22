@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ExportToExcel {
     Notificacao notificacao = new Notificacao();
@@ -166,38 +167,136 @@ public class ExportToExcel {
         saveWorkbook(workbook, filePath);
     }
 
-    // Exportar Module_TonerStock
+
     public void exportarTonerStockParaExcel(ObservableList<Module_TonerStock> dados, String filePath) throws IOException {
+        // Cria um novo workbook e sheet
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Estoque de Toner");
 
+        // Formato de data para exibição
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // Cria o cabeçalho com todas as colunas
         Row headerRow = sheet.createRow(0);
         String[] headers = {
-                "Código Dep.", "Toner", "Marca", "Cor", "Impressora",
-                "Unidades", "Status", "Operador", "Função", "Localização", "Departamento"
+                "Código Dep.",
+                "ID Produto",
+                "Toner",
+                "Marca",
+                "Modelo",
+                "Cor",
+                "Impressora",
+                "Data",
+                "Status",
+                "Operador",
+                "Função",
+                "Localização",
+                "Departamento",
+                "Observações"
         };
 
+        // Formatação para o cabeçalho
+        CellStyle headerStyle = workbook.createCellStyle();
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerStyle.setFont(headerFont);
+        headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        // Preenche o cabeçalho
         for (int i = 0; i < headers.length; i++) {
-            headerRow.createCell(i).setCellValue(headers[i]);
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headers[i]);
+            cell.setCellStyle(headerStyle);
         }
 
+        // Preenche os dados
         int rowNum = 1;
         for (Module_TonerStock item : dados) {
             Row row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue(item.getCodDep());
-            row.createCell(1).setCellValue(item.getToner());
-            row.createCell(2).setCellValue(item.getMarca());
-            row.createCell(3).setCellValue(item.getCor());
-            row.createCell(4).setCellValue(item.getImpressora());
-            row.createCell(5).setCellValue(item.getUnidade());
-            row.createCell(6).setCellValue(item.getStatus());
-            row.createCell(7).setCellValue(item.getOperador());
-            row.createCell(8).setCellValue(item.getFuncao());
-            row.createCell(9).setCellValue(item.getLocalizacao());
-            row.createCell(10).setCellValue(item.getDepartamento());
+
+            // Código do Departamento
+            if (item.getCodDep() != null) {
+                row.createCell(0).setCellValue(item.getCodDep());
+            }
+
+            // ID do Produto
+            if (item.getIdProdut() != null) {
+                row.createCell(1).setCellValue(item.getIdProdut());
+            }
+
+            // Toner
+            if (item.getToner() != null) {
+                row.createCell(2).setCellValue(item.getToner());
+            }
+
+            // Marca
+            if (item.getMarca() != null) {
+                row.createCell(3).setCellValue(item.getMarca());
+            }
+
+            // Modelo
+            if (item.getModelo() != null) {
+                row.createCell(4).setCellValue(item.getModelo());
+            }
+
+            // Cor
+            if (item.getCor() != null) {
+                row.createCell(5).setCellValue(item.getCor());
+            }
+
+            // Impressora
+            if (item.getImpressora() != null) {
+                row.createCell(6).setCellValue(item.getImpressora());
+            }
+
+            // Data (formatada)
+            if (item.getDataUsu() != null) {
+                row.createCell(7).setCellValue(item.getDataUsu().format(dateFormatter));
+            }
+
+            // Status
+            if (item.getStatus() != null) {
+                row.createCell(8).setCellValue(item.getStatus());
+            }
+
+            // Operador
+            if (item.getOperador() != null) {
+                row.createCell(9).setCellValue(item.getOperador());
+            }
+
+            // Função
+            if (item.getFuncao() != null) {
+                row.createCell(10).setCellValue(item.getFuncao());
+            }
+
+            // Localização
+            if (item.getLocalizacao() != null) {
+                row.createCell(11).setCellValue(item.getLocalizacao());
+            }
+
+            // Departamento
+            if (item.getDepartamento() != null) {
+                row.createCell(12).setCellValue(item.getDepartamento());
+            }
+
+            // Observações
+            if (item.getObs() != null) {
+                row.createCell(13).setCellValue(item.getObs());
+            }
         }
 
-        saveWorkbook(workbook, filePath);
+        // Ajusta o tamanho das colunas automaticamente
+        for (int i = 0; i < headers.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        // Salva o arquivo
+        try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
+            workbook.write(outputStream);
+        } finally {
+            workbook.close();
+        }
     }
 
     // Exportar Module_UsuToner
