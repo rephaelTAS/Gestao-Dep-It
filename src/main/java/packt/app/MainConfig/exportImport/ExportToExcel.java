@@ -297,7 +297,7 @@ public class ExportToExcel {
     }
 
     // Método para exportar Module_WifiStock
-    public void exportarWifiStockParaExcel(ObservableList<Module_WifiStock> dados, String filePath) throws IOException {
+    public void exportarWifiStockParaExcel(ObservableList<Module_Wifi> dados, String filePath) throws IOException {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Estoque Wi-Fi");
 
@@ -319,7 +319,7 @@ public class ExportToExcel {
 
         // Preencher dados
         int rowNum = 1;
-        for (Module_WifiStock item : dados) {
+        for (Module_Wifi item : dados) {
             Row row = sheet.createRow(rowNum++);
 
             // Dados básicos
@@ -337,8 +337,8 @@ public class ExportToExcel {
             }
 
             Cell dataVerificacaoCell = row.createCell(6);
-            if (item.getUltimaVerificacao() != null) {
-                dataVerificacaoCell.setCellValue(item.getUltimaVerificacao());
+            if (item.getDataVerificacao() != null) {
+                dataVerificacaoCell.setCellValue(item.getDataVerificacao());
                 dataVerificacaoCell.setCellStyle(dateStyle);
             }
 

@@ -1,68 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packt.app.MainConfig.controlers.main.MainControler">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packt.app.MainConfig.controlers.main.MainControler">
 
-   <BorderPane fx:id="borderpanel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+   <BorderPane fx:id="borderpanel" style="-fx-background-color: #f5f7fa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
       <top>
-         <AnchorPane>
-            <children>
-               <AnchorPane prefHeight="54.0" styleClass="top-bar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                  <Label layoutX="78.0" layoutY="78.0" styleClass="welcome-text" text="Bem vindo" />
-                  <Button fx:id="toggleMenuBtn" layoutX="26.0" layoutY="64.0" onAction="#toggleMenu" styleClass="toggle-menu-btn" AnchorPane.bottomAnchor="8.799999999999997" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="64.0">
-                     <graphic>
-                        <ImageView fx:id="menuIcon" fitHeight="20" fitWidth="20" />
-                     </graphic>
-                  </Button>
-                  <Pane fx:id="panelUser" layoutX="885.0" layoutY="9.0" prefHeight="91.0" prefWidth="101.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                     <children>
-                        <ImageView fx:id="imageUser" fitHeight="74.0" fitWidth="104.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="nameUser" layoutX="30.0" layoutY="69.0" styleClass="user-text" text="Usuario" />
-                     </children>
-                  </Pane>
-               </AnchorPane>
-            </children>
-         </AnchorPane>
+         <VBox prefHeight="150.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);">
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15 25 10 25;">
+               <Button fx:id="toggleMenuBtn" styleClass="menu-button" onAction="#toggleMenu" style="-fx-background-color: transparent; -fx-text-fill: white;">
+                  <graphic>
+                     <ImageView fx:id="menuIcon" styleClass="menu-icon" fitHeight="30" fitWidth="30" pickOnBounds="true" preserveRatio="true" />
+                  </graphic>
+               </Button>
+               <Label text="Gestão de Equipamentos de TI" style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;" />
+               <Region HBox.hgrow="ALWAYS" />
+               <HBox alignment="CENTER_RIGHT" spacing="10">
+                  <VBox alignment="CENTER_RIGHT" spacing="2">
+                     <Label fx:id="timeLabel" style="-fx-text-fill: white; -fx-font-size: 14px;" />
+                     <Label fx:id="dateLabel" style="-fx-text-fill: white; -fx-font-size: 12px;" />
+                  </VBox>
+                  <Label fx:id="nameUser" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" />
+                  <ImageView fx:id="imageUser" fitHeight="40" fitWidth="40" style="-fx-border-radius: 20; -fx-border-color: white; -fx-border-width: 2;" />
+               </HBox>
+            </HBox>
+
+            <!-- Barra de status/indicadores -->
+            <HBox style="-fx-background-color: rgba(0,0,0,0.1); -fx-padding: 10 25;">
+               <HBox spacing="20">
+                  <HBox spacing="5" alignment="CENTER_LEFT">
+                     <Circle radius="8" fill="#2ecc71" />
+                     <Label text="Disponíveis:" style="-fx-text-fill: white;" />
+                     <Label fx:id="lblAvailable" text="0" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+                  </HBox>
+                  <HBox spacing="5" alignment="CENTER_LEFT">
+                     <Circle radius="8" fill="#e74c3c" />
+                     <Label text="Em Uso:" style="-fx-text-fill: white;" />
+                     <Label fx:id="lblInUse" text="0" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+                  </HBox>
+                  <HBox spacing="5" alignment="CENTER_LEFT">
+                     <Circle radius="8" fill="#f39c12" />
+                     <Label text="Manutenção:" style="-fx-text-fill: white;" />
+                     <Label fx:id="lblMaintenance" text="0" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+                  </HBox>
+               </HBox>
+               <Region HBox.hgrow="ALWAYS" />
+               <Button text="Atualizar Dados" style="-fx-background-color: rgba(255,255,255,0.2); -fx-text-fill: white;" />
+            </HBox>
+         </VBox>
       </top>
 
       <left>
-         <VBox fx:id="sidebar" minWidth="60" prefWidth="200" styleClass="sidebar">
-            <VBox fx:id="menuContainer" styleClass="menu-container">
-               <Button fx:id="btn_dashboard" onAction="#home" prefHeight="50.0" styleClass="menu-btn" text="Dashboard">
-                  <graphic>
-                     <ImageView fx:id="dashboardIcon" fitHeight="16" fitWidth="16" styleClass="menu-icon" />
-                  </graphic>
+         <VBox fx:id="sidebar" minWidth="70" prefWidth="220" styleClass="sidebar" style="-fx-background-color: #34495e;">
+            <VBox fx:id="menuContainer" spacing="5" style="-fx-padding: 20 0;">
+               <!-- Menu Item 1 -->
+               <Button fx:id="btn_dashboard" onAction="#home" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT; -fx-padding: 15 20;">
+                  <HBox spacing="15" alignment="CENTER_LEFT">
+                     <ImageView fx:id="dashboardIcon" fitHeight="32" fitWidth="32" />
+                     <Label fx:id="lblDashboard" text="Dashboard" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+                  </HBox>
                </Button>
-               <Button fx:id="btn_additem" onAction="#add_item" prefHeight="50.0" styleClass="menu-btn" text="Adicionar Itens">
-                  <graphic>
-                     <ImageView fx:id="addItemIcon" fitHeight="16" fitWidth="16" styleClass="menu-icon" />
-                  </graphic>
+
+               <!-- Menu Item 2 -->
+               <Button fx:id="btn_additem" onAction="#add_item" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT; -fx-padding: 15 20;">
+                  <HBox spacing="15" alignment="CENTER_LEFT">
+                     <ImageView fx:id="addItemIcon" fitHeight="32" fitWidth="32" />
+                     <Label fx:id="lblAddItem" text="Adicionar Item" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+                  </HBox>
                </Button>
-               <Button fx:id="btn_relatorio" onAction="#realotrios" prefHeight="50.0" styleClass="menu-btn" text="Relatorios">
-                  <graphic>
-                     <ImageView fx:id="reportIcon" fitHeight="16" fitWidth="16" styleClass="menu-icon" />
-                  </graphic>
+
+               <!-- Menu Item 3 -->
+               <Button fx:id="btn_relatorio" onAction="#realotrios" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT; -fx-padding: 15 20;">
+                  <HBox spacing="15" alignment="CENTER_LEFT">
+                     <ImageView fx:id="reportIcon" fitHeight="32" fitWidth="32" />
+                     <Label fx:id="lblRelatorio" text="Relatórios" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+                  </HBox>
                </Button>
-               <Button fx:id="btn_visualizar" onAction="#visualizar" prefHeight="50.0" styleClass="menu-btn" text="Visualizar">
-                  <graphic>
-                     <ImageView fx:id="viewIcon" fitHeight="16" fitWidth="16" styleClass="menu-icon" />
-                  </graphic>
+
+               <!-- Menu Item 4 -->
+               <Button fx:id="btn_visualizar" onAction="#visualizar" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT; -fx-padding: 15 20;">
+                  <HBox spacing="15" alignment="CENTER_LEFT">
+                     <ImageView fx:id="viewIcon" fitHeight="32" fitWidth="32" />
+                     <Label fx:id="lblVisualizar" text="Visualizar" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+                  </HBox>
                </Button>
+
+               <!-- Menu Item 5 -->
+               <Button fx:id="btn_timeReport" onAction="#timeReport" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 16px; -fx-alignment: CENTER_LEFT; -fx-padding: 15 20;">
+                  <HBox spacing="15" alignment="CENTER_LEFT">
+                     <ImageView fx:id="timeReportIcon" fitHeight="32" fitWidth="32" />
+                     <Label fx:id="lblTimeReport" text="Relatório Temporal" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+                  </HBox>
+               </Button>
+            </VBox>
+
+            <!-- Área de status/versão -->
+            <VBox style="-fx-padding: 20; -fx-border-color: rgba(255,255,255,0.1); -fx-border-width: 1 0 0 0;">
+               <Label text="Status do Sistema" style="-fx-text-fill: rgba(255,255,255,0.7); -fx-font-size: 12px;" />
+               <Label fx:id="lblSystemStatus" text="Operacional" style="-fx-text-fill: #2ecc71; -fx-font-weight: bold;" />
+               <Label text="Versão 1.0.0" style="-fx-text-fill: rgba(255,255,255,0.5); -fx-font-size: 11px; -fx-padding: 10 0 0 0;" />
             </VBox>
          </VBox>
       </left>
 
       <center>
-         <StackPane fx:id="multiploPanel" styleClass="content-pane" />
+         <StackPane fx:id="multiploPanel" style="-fx-background-color: #f5f7fa; -fx-padding: 20;" />
       </center>
+
+      <bottom>
+         <HBox alignment="CENTER" style="-fx-background-color: #ecf0f1; -fx-padding: 10;">
+            <Label fx:id="lblFooter" text="© 2023 Gestão de Equipamentos de TI - Todos os direitos reservados" style="-fx-text-fill: #7f8c8d;" />
+         </HBox>
+      </bottom>
    </BorderPane>
 </AnchorPane>

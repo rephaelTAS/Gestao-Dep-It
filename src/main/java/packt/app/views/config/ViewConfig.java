@@ -18,6 +18,7 @@ public final class ViewConfig {
         public static final String MAIN = "main";
         public static final String DEFINICOES = "definicoes";
         public static final String SOBRE = "sobre";
+        public static final String TIME_REPORT = "time" ;
     }
 
 
@@ -30,6 +31,7 @@ public final class ViewConfig {
         public static final String WIFI = "additem_wifi";
         public static final String WIFI_STOCK = "additem_wifi_stock";
         public static final String FUNCIONARIO = "additem_funcionario";
+        public static final String NEW_PRODUCT = "novo_produto";
     }
 
 
@@ -76,6 +78,7 @@ public final class ViewConfig {
         registry.registerView(Main.MAIN, "/packt/templates/main/main.fxml");
         registry.registerView(Main.DEFINICOES, "/packt/templates/main/definicoes.fxml");
         registry.registerView(Main.SOBRE, "/packt/templates/main/sobre.fxml");
+        registry.registerView(Main.TIME_REPORT, "/packt/templates/main/TimeReport.fxml");
 
         // Registro das views do módulo AddItem
         registry.registerView(AddItem.INVENTARIO, "/packt/templates/outher/addItem/inventario.fxml");
@@ -85,6 +88,7 @@ public final class ViewConfig {
         registry.registerView(AddItem.WIFI, "/packt/templates/outher/addItem/wifi.fxml");
         registry.registerView(AddItem.WIFI_STOCK, "/packt/templates/outher/addItem/wifi_stock.fxml");
         registry.registerView(AddItem.FUNCIONARIO, "/packt/templates/outher/addItem/add_funcionario.fxml");
+        registry.registerView(AddItem.NEW_PRODUCT, "/packt/templates/outher/addItem/criar_produtos.fxml");
 
         // Visualizar
         registry.registerView(Visualizar.INVENTARIO, "/packt/templates/outher/visualizar/vis_inventario.fxml");

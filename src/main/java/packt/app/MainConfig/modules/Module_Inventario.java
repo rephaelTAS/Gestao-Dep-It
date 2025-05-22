@@ -7,6 +7,7 @@ import packt.database.DB_Inventario;
 
 public class Module_Inventario {
     private String codDep;
+    private String idProdut;
     private String tipoEquipamento;
     private String marca;
     private String modelo;
@@ -21,8 +22,9 @@ public class Module_Inventario {
     private String situacaoEquipamento;
     private String obs;
 
-    public void module_Inventario(String codDep, String tipoEquipamento, String marca, String modelo, String num_serie, LocalDate dataEntradaServico, LocalDate ultimaVerificacao, String operador, String funcao, String localizacao, String departamento, String status, String situacaoEquipamento, String obs) {
+    public void module_Inventario(String codDep, String idProdut, String tipoEquipamento, String marca, String modelo, String num_serie, LocalDate dataEntradaServico, LocalDate ultimaVerificacao, String operador, String funcao, String localizacao, String departamento, String status, String situacaoEquipamento, String obs) {
         this.codDep = codDep;
+        this.idProdut = idProdut;
         this.tipoEquipamento = tipoEquipamento;
         this.marca = marca;
         this.modelo = modelo;
@@ -44,6 +46,14 @@ public class Module_Inventario {
 
     public void setCodDep(String codDep) {
         this.codDep = codDep;
+    }
+
+    public String getIdProdut() {
+        return idProdut;
+    }
+
+    public void setIdProdut(String idProdut) {
+        this.idProdut = idProdut;
     }
 
     public String getTipoEquipamento() {

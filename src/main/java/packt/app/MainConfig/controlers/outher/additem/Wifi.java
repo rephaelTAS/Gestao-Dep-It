@@ -1,5 +1,8 @@
 package packt.app.MainConfig.controlers.outher.additem;
 
+import packt.app.MainConfig.filtragem.Filtro_IdProdut;
+import packt.app.MainConfig.filtragem.Filtro_codDep;
+import packt.app.MainConfig.notificacao.Notificacao;
 import packt.database.DatabaseConnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,6 +19,8 @@ import java.sql.SQLException;
 
 public class Wifi {
 
+    @FXML
+    private TextField Id_Produt;
     @FXML
     private TextField codDepField;
     @FXML
@@ -45,7 +50,7 @@ public class Wifi {
     @FXML
     private Button limparButton;
 
-
+    Notificacao notificacao = new Notificacao();
 
     private void handleEnviar() {
         // Captura os dados dos campos
@@ -118,29 +123,36 @@ public class Wifi {
         // Executa ao pressionar Enter
         String codigoDep = codDepField.getText();
 
+        Filtro_codDep filtro = new Filtro_codDep();
+        Filtro_IdProdut filtroIdProdut = new Filtro_IdProdut();
+
+
         if (codigoDep.isEmpty()) {
-            showAlert("Erro", "O campo Código do Departamento está vazio.");
-            return;
+            notificacao.showError("Erro O campo Código do Departamento está vazio.");
+
+        }else {
+            filtro.filtrar_codDep(codigoDep);
+            operadorField.setText(filtro.getOperador());
+            funcaoField.setText(filtro.getFuncao());
         }
 
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        Connection connection = dbConnection.connect();
+    }
 
-        String sql = "SELECT nome, funcao, local, departamento FROM funcionarios WHERE cod_dep = ?";
+    @FXML
+    private void filtrarID_Produt() {
+        // Executa ao pressionar Enter
+        String idProdutText = Id_Produt.getText();
+        Filtro_IdProdut filtroIdProdut = new Filtro_IdProdut();
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, codigoDep);
-            ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                operadorField.setText(rs.getString("nome"));
-                funcaoField.setText(rs.getString("funcao"));
-            } else {
-                showAlert("Aviso", "Nenhum funcionário encontrado com o código informado.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            showAlert("Erro", "Erro ao consultar o banco de dados.");
+        if (idProdutText.isEmpty()) {
+            notificacao.showError("Erro O campo Código do Departamento está vazio.");
+
+        }else {
+            filtroIdProdut.filtrarPorIdProdut(idProdutText);
+            tipoEquipamentoField.setText(filtroIdProdut.getTipoEquipamento());
+            marcaField.setText(filtroIdProdut.getMarca());
+            modeloField.setText(filtroIdProdut.getModelo());
         }
 
     }
@@ -181,6 +193,12 @@ public class Wifi {
         codDepField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue){
                 buscarDadosFuncionario();
+            }
+        });
+
+        Id_Produt.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue){
+                filtrarID_Produt();
             }
         });
 

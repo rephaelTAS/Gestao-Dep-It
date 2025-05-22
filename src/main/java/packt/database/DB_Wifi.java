@@ -29,6 +29,7 @@ public class DB_Wifi {
             while (rs.next()) {
                 Module_Wifi wifi = new Module_Wifi();
                 wifi.setCodDep(rs.getString("cod_dep"));
+                wifi.setIdProduct(rs.getString("idProdut")); // Adicionando idProdut
                 wifi.setTipoEquipamento(rs.getString("tipo_equipamento"));
                 wifi.setMarca(rs.getString("marca"));
                 wifi.setModelo(rs.getString("modelo"));
@@ -57,7 +58,7 @@ public class DB_Wifi {
      * @param wifi O objeto Module_Wifi contendo os dados a serem inseridos.
      */
     public void inserirDadosWifi(Module_Wifi wifi) {
-        String sql = "INSERT INTO equipa_wifi (cod_dep, tipo_equipamento, marca, modelo, quantidade, data_entrada, ultima_verificacao, operador, funcao, status, situacao, obs) " +
+        String sql = "INSERT INTO equipa_wifi (cod_dep, idProdut, tipo_equipamento, marca, modelo, quantidade, data_entrada, ultima_verificacao, operador, funcao, status, situacao, obs) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = dbConnection.connect();
@@ -65,17 +66,18 @@ public class DB_Wifi {
 
             // Define os valores dos parâmetros
             stmt.setString(1, wifi.getCodDep());
-            stmt.setString(2, wifi.getTipoEquipamento());
-            stmt.setString(3, wifi.getMarca());
-            stmt.setString(4, wifi.getModelo());
-            stmt.setInt(5, wifi.getQuantidade());
-            stmt.setDate(6, wifi.getDataEntrada() != null ? java.sql.Date.valueOf(wifi.getDataEntrada()) : null);
-            stmt.setDate(7, wifi.getDataVerificacao() != null ? java.sql.Date.valueOf(wifi.getDataVerificacao()) : null);
-            stmt.setString(8, wifi.getOperador());
-            stmt.setString(9, wifi.getFuncao());
-            stmt.setString(10, wifi.getStatus());
-            stmt.setString(11, wifi.getSituacaoEquipamento());
-            stmt.setString(12, wifi.getObs());
+            stmt.setString(2, wifi.getIdProduct()); // Adicionando idProdut
+            stmt.setString(3, wifi.getTipoEquipamento());
+            stmt.setString(4, wifi.getMarca());
+            stmt.setString(5, wifi.getModelo());
+            stmt.setInt(6, wifi.getQuantidade());
+            stmt.setDate(7, wifi.getDataEntrada() != null ? java.sql.Date.valueOf(wifi.getDataEntrada()) : null);
+            stmt.setDate(8, wifi.getDataVerificacao() != null ? java.sql.Date.valueOf(wifi.getDataVerificacao()) : null);
+            stmt.setString(9, wifi.getOperador());
+            stmt.setString(10, wifi.getFuncao());
+            stmt.setString(11, wifi.getStatus());
+            stmt.setString(12, wifi.getSituacaoEquipamento());
+            stmt.setString(13, wifi.getObs());
 
             // Executa a inserção
             int rowsAffected = stmt.executeUpdate();
@@ -98,7 +100,7 @@ public class DB_Wifi {
         String sql = "UPDATE equipa_wifi SET tipo_equipamento = ?, marca = ?, modelo = ?, quantidade = ?, data_entrada = ?, ultima_verificacao = ?, operador = ?, funcao = ?, status = ?, situacao = ?, obs = ? WHERE cod_dep = ?";
 
         try (Connection connection = dbConnection.connect();
-        PreparedStatement stmt = connection.prepareStatement(sql)) {
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, wifi.getTipoEquipamento());
             stmt.setString(2, wifi.getMarca());

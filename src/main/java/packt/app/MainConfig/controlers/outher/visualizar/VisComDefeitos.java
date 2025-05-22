@@ -88,6 +88,7 @@ public class VisComDefeitos {
                 Module_ComDefeitos defeito = new Module_ComDefeitos();
                         defeito.module_ComDefeitos(
                         item.getCodDep(),
+                        item.getIdProdut(),
                         item.getTipoEquipamento(),
                         item.getMarca(),
                         item.getNum_serie(),

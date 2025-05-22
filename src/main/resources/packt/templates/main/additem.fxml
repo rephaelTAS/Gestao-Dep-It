@@ -1,41 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
 <AnchorPane prefHeight="431.0" prefWidth="817.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packt.app.MainConfig.controlers.main.Additem">
    <children>
       <BorderPane layoutX="124.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-
-            <StackPane prefHeight="70.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <AnchorPane BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" style="-fx-background-color: ccc;" StackPane.alignment="CENTER">
-                     <children>
-                        <Button fx:id="btn_inventario" mnemonicParsing="false" text="Inventario" />
-                        <Button fx:id="btn_invent_stock" mnemonicParsing="false" text="Inventario Stock" />
-                        <Button fx:id="btn_wifi" mnemonicParsing="false" text="Wifi" />
-                        <Button fx:id="btn_wifistock" mnemonicParsing="false" text="Wifi Stock" />
-                        <Button fx:id="btn_dbFuncionarios" mnemonicParsing="false" text="DB_Funcionarios" />
-                        <Button fx:id="btn_toner" mnemonicParsing="false" text="Toner" />
-                        <Button fx:id="btn_tonerStock" mnemonicParsing="false" text="Toner Stock" />
-                     </children>
-                     <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin>
-                     <padding>
-                        <Insets left="70.0" top="20.0" />
-                     </padding>
-                  </HBox>
+                  <Button fx:id="btn_inventario" layoutX="52.0" mnemonicParsing="false" text="Inventario" AnchorPane.leftAnchor="20.0" />
+                  <Button fx:id="btn_tonerStock" layoutX="122.0" mnemonicParsing="false" text="Toner Stock" AnchorPane.leftAnchor="120.0" />
+                  <Button fx:id="btn_toner" layoutX="215.0" mnemonicParsing="false" text="Toner" AnchorPane.leftAnchor="250.0" />
+                  <Button fx:id="btn_wifi" layoutX="338.0" mnemonicParsing="false" text="Wifi" AnchorPane.leftAnchor="338.0" />
+                  <Button fx:id="btn_novoProduto" layoutX="437.0" mnemonicParsing="false" text="New Product" AnchorPane.leftAnchor="437.0" />
+                  <Button fx:id="btn_dbFuncionarios" layoutX="543.0" mnemonicParsing="false" text="DB_Funcionarios" AnchorPane.leftAnchor="543.0" />
                </children>
-            </StackPane>
+            </AnchorPane>
          </top>
          <center>
-            <StackPane fx:id="add_multPage" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="150.0" prefWidth="200.0" vbarPolicy="AS_NEEDED" BorderPane.alignment="CENTER">
+               <content>
+                  <StackPane fx:id="add_multPage" prefHeight="380.0" prefWidth="815.0" />
+               </content>
+            </ScrollPane>
          </center>
       </BorderPane>
    </children>

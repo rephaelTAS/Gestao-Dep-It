@@ -1,21 +1,25 @@
 package packt.app.MainConfig.controlers.outher.additem;
 
 
-
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import packt.app.MainConfig.filtragem.Filtro_IdProdut;
 import packt.app.MainConfig.filtragem.Filtro_codDep;
 import packt.app.MainConfig.modules.Module_Inventario;
+import packt.app.MainConfig.modules.New_Produt;
 import packt.app.MainConfig.notificacao.Notificacao;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Inventario {
 
+    @FXML
+    private ComboBox<String> combo_id_produt;
     @FXML
     private TextField codDep;
 
@@ -66,6 +70,7 @@ public class Inventario {
 
     Notificacao notificacao = new Notificacao();
     Module_Inventario inventario = new Module_Inventario();
+    Filtro_IdProdut filtroIdProdut = new Filtro_IdProdut();
 
 
 
@@ -75,6 +80,7 @@ public class Inventario {
     public void handleEnviar() {
         // Coleta os dados dos campos
         String codigoDep = codDep.getText();
+        String Id_Produt = combo_id_produt.getValue();
         String tipoEquipamento = tipoEqui.getText();
         String marcaEquipamento = marca.getText();
         String modeloEquipamento = modelo.getText();
@@ -126,9 +132,28 @@ public class Inventario {
 
     }
 
+    @FXML
+    private void filtrarID_Produt() {
+        // Executa ao pressionar Enter
+        String idProdutText = combo_id_produt.getValue();
+
+
+        if (idProdutText.isEmpty()) {
+            notificacao.showError("Erro O campo Código do Departamento está vazio.");
+
+        }else {
+            filtroIdProdut.filtrarPorIdProdut(idProdutText);
+            tipoEqui.setText(filtroIdProdut.getTipoEquipamento());
+            marca.setText(filtroIdProdut.getMarca());
+            modelo.setText(filtroIdProdut.getModelo());
+        }
+
+    }
+
     public void definirDados() {
         // Coleta os dados dos campos
         inventario.setCodDep(codDep.getText());
+        inventario.setIdProdut(combo_id_produt.getValue());
         inventario.setTipoEquipamento(tipoEqui.getText());
         inventario.setMarca(marca.getText());
         inventario.setModelo(modelo.getText());
@@ -166,21 +191,54 @@ public class Inventario {
         statusCombo.getSelectionModel().clearSelection();
         situacaoCombo.getSelectionModel().clearSelection();
         obs.clear();
+        setCombo_id_produt();
     }
 
+
+    public void setCombo_id_produt() {
+        List<New_Produt> listaProdutos = filtroIdProdut.buscarProduto();
+
+        if (listaProdutos != null && !listaProdutos.isEmpty()) {
+            // Extrai apenas os valores da coluna que você quer (ex: idProdut, nome, etc)
+            List<String> valoresColuna = listaProdutos.stream()
+                    .map(produto -> produto.getIdProdut()) // ou .getNome(), .getCodigo(), etc
+                    .collect(Collectors.toList());
+
+            // Carrega todos os valores no ComboBox
+            combo_id_produt.getItems().setAll(valoresColuna);
+
+            // Opcional: Seleciona o primeiro item automaticamente
+            combo_id_produt.getSelectionModel().selectFirst();
+        } else {
+            combo_id_produt.getItems().clear(); // Limpa se não houver dados
+        }
+    }
 
 
     // Método para inicializar o controlador (opcional)
     @FXML
     private void initialize() {
         // Preenche as opções dos ComboBox
-        statusCombo.getItems().addAll("Em Funcionamento", "Ligado", "Desligado");
+        statusCombo.getItems().addAll("Em Funcionamento", "Ligado", "Desligado", "No Stock");
         situacaoCombo.getItems().addAll("Novo Equipamento", "Bom Estado", "Com Defeitos", "Avariado");
 
         // Adiciona um listener para o campo codDep
         codDep.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) { // Verifica se o campo perdeu o foco
                 buscarDadosFuncionario(); // Chama o método para buscar os dados do funcionário
+            }
+        });
+
+        setCombo_id_produt();
+        combo_id_produt.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && !newValue.isEmpty()) {
+                filtrarID_Produt(); // Executa quando o valor muda
+            }
+        });
+
+        combo_id_produt.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) { // Ganhou foco
+                setCombo_id_produt();
             }
         });
 

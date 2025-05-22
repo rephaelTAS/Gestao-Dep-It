@@ -3,17 +3,16 @@ package packt.app.MainConfig.controlers.outher.visualizar;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import packt.app.MainConfig.controlers.outher.editar.EditarInventario;
-import packt.app.MainConfig.controlers.outher.editar.EditarInventarioStock;
+import packt.app.MainConfig.modules.Module_Inventario;
 import packt.app.MainConfig.notificacao.Notificacao;
-import packt.database.DB_Inventario_Stock;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import packt.app.MainConfig.modules.Module_InventarioStock;
 import packt.app.views.ModalDialog;
+import packt.database.DB_Inventario;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -25,48 +24,48 @@ import java.util.ResourceBundle;
 public class VisInventarioStock implements Initializable {
 
     @FXML
-    private TableView<Module_InventarioStock> tab_inventario;
+    private TableView<Module_Inventario> tab_inventario;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colCodDep;
+    private TableColumn<Module_Inventario, String> colCodDep;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colTipoEquipamento;
+    private TableColumn<Module_Inventario, String> colTipoEquipamento;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colMarca;
+    private TableColumn<Module_Inventario, String> colMarca;
 
     @FXML
-    private TableColumn<Module_InventarioStock, Integer> colQuantidade;
+    private TableColumn<Module_Inventario, Integer> colQuantidade;
 
     @FXML
-    private TableColumn<Module_InventarioStock, LocalDate> colDataEntrada;
+    private TableColumn<Module_Inventario, LocalDate> colDataEntrada;
 
     @FXML
-    private TableColumn<Module_InventarioStock, LocalDate> colUltimaVerificacao;
+    private TableColumn<Module_Inventario, LocalDate> colUltimaVerificacao;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colOperador;
+    private TableColumn<Module_Inventario, String> colOperador;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colFuncao;
+    private TableColumn<Module_Inventario, String> colFuncao;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colLocalSala;
+    private TableColumn<Module_Inventario, String> colLocalSala;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colDepartamento;
+    private TableColumn<Module_Inventario, String> colDepartamento;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colSituacaoEquipamento;
+    private TableColumn<Module_Inventario, String> colSituacaoEquipamento;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colObs;
+    private TableColumn<Module_Inventario, String> colObs;
 
     @FXML
     private Button btn_editarDados;
 
-    private DB_Inventario_Stock dbInventarioStock = new DB_Inventario_Stock();
+    private DB_Inventario dbInventarioStock = new DB_Inventario();
 
     Notificacao notificacao = new Notificacao();
 
@@ -88,56 +87,23 @@ public class VisInventarioStock implements Initializable {
 
         // Carrega os dados do banco de dados
 
-        btn_editarDados.setOnAction(event -> editarItemSelecionado());
         carregarDados();
     }
 
     private void carregarDados() {
         // Obtém os dados do banco de dados
-        List<Module_InventarioStock> dados = dbInventarioStock.mostrarDadosInventarioStock();
+        List<Module_Inventario> dados = dbInventarioStock.mostrarInventario();
 
         // Converte a lista para um ObservableList
-        ObservableList<Module_InventarioStock> listaObservavel = FXCollections.observableArrayList(dados);
+        ObservableList<Module_Inventario> listaObservavel = FXCollections.observableArrayList(dados);
 
         // Define os dados na TableView
         tab_inventario.setItems(listaObservavel);
     }
-    private void editarItemSelecionado() {
-        Module_InventarioStock itemSelecionado = tab_inventario.getSelectionModel().getSelectedItem();
-        Window owner = btn_editarDados.getScene().getWindow();
-
-        if (itemSelecionado != null) {
-            Optional<Boolean> resultado = ModalDialog.<EditarInventarioStock, Boolean>showModalWithResult(
-                    "editar_inventarioStock",
-                    owner,
-                    "Editar Item",
-                    StageStyle.DECORATED,
-                    controller -> {
-                        if (controller instanceof EditarInventarioStock) {
-                            ((EditarInventarioStock) controller).setItem(itemSelecionado);
-                        }
-                    },
-                    controller -> {
-                        // Aqui você deve retornar um valor do tipo Boolean
-                        return controller.isItemEdited(); // Supondo que você tenha um método que retorna um booleano
-                    }
-            );
-
-            if (resultado.isPresent() && resultado.get()) {
-                int index = tab_inventario.getItems().indexOf(itemSelecionado);
-                if (index >= 0) {
-                    tab_inventario.getItems().set(index, itemSelecionado);
-                }
-            }
-        } else {
-            notificacao.showWarning("Seleção necessária" + "Por favor, selecione um item para editar");
-        }
-    }
-
 
     @FXML
     private void excluirItem() {
-        Module_InventarioStock itemSelecionado = tab_inventario.getSelectionModel().getSelectedItem();
+        Module_Inventario itemSelecionado = tab_inventario.getSelectionModel().getSelectedItem();
         if (itemSelecionado != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Tem certeza que deseja excluir este item?");
             alert.setHeaderText("Confirmação de Exclusão");

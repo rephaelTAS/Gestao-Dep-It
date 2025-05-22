@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class Module_Wifi {
     private String codDep;
+    private String IdProduct;
     private String tipoEquipamento;
     private String marca;
     private String modelo;
@@ -16,8 +17,9 @@ public class Module_Wifi {
     private String situacaoEquipamento;
     private String obs;
 
-    public void module_Wifi(String codDep, String tipoEquipamento, String marca, String modelo, int quantidade, LocalDate dataEntrada, LocalDate dataVerificacao, String operador, String funcao, String status, String situacaoEquipamento, String obs) {
+    public void module_Wifi(String codDep, String IdProduct, String tipoEquipamento, String marca, String modelo, int quantidade, LocalDate dataEntrada, LocalDate dataVerificacao, String operador, String funcao, String status, String situacaoEquipamento, String obs) {
         this.codDep = codDep;
+        this.IdProduct = IdProduct;
         this.tipoEquipamento = tipoEquipamento;
         this.marca = marca;
         this.modelo = modelo;
@@ -37,6 +39,14 @@ public class Module_Wifi {
 
     public void setCodDep(String codDep) {
         this.codDep = codDep;
+    }
+
+    public String getIdProduct() {
+        return IdProduct;
+    }
+
+    public void setIdProduct(String idProduct) {
+        IdProduct = idProduct;
     }
 
     public String getTipoEquipamento() {

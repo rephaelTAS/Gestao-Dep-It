@@ -1,6 +1,8 @@
 package packt.app.MainConfig.controlers.outher.additem;
 
+import packt.app.MainConfig.filtragem.Filtro_IdProdut;
 import packt.app.MainConfig.filtragem.Filtro_codDep;
+import packt.app.MainConfig.notificacao.Notificacao;
 import packt.database.DatabaseConnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -15,6 +17,8 @@ import java.sql.SQLException;
 
 public class WifiStock {
 
+    @FXML
+    private  TextField Id_Produt;
     @FXML
     private TextField codDepField;
     @FXML
@@ -37,7 +41,7 @@ public class WifiStock {
     private Button enviarButton;
     @FXML
     private Button limparButton;
-
+    Notificacao notificacao = new Notificacao();
 
     private void handleEnviar() {
         // Captura os dados dos campos
@@ -108,6 +112,26 @@ public class WifiStock {
         }
     }
 
+
+
+    @FXML
+    private void filtrarID_Produt() {
+        // Executa ao pressionar Enter
+        String idProdutText = Id_Produt.getText();
+        Filtro_IdProdut filtroIdProdut = new Filtro_IdProdut();
+
+
+        if (idProdutText.isEmpty()) {
+            notificacao.showError("Erro O campo Código do Departamento está vazio.");
+
+        }else {
+            filtroIdProdut.filtrarPorIdProdut(idProdutText);
+            tipoEquipamentoField.setText(filtroIdProdut.getTipoEquipamento());
+            marcaField.setText(filtroIdProdut.getMarca());
+        }
+
+    }
+
     private void handleLimpar() {
         // Limpa todos os campos
         codDepField.clear();
@@ -142,6 +166,12 @@ public class WifiStock {
         codDepField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) { // Verifica se o campo perdeu o foco
                 buscarDadosFuncionario(); // Chama o método para buscar os dados do funcionário
+            }
+        });
+
+        Id_Produt.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) { // Verifica se o campo perdeu o foco
+                filtrarID_Produt(); // Chama o método para buscar os dados do funcionário
             }
         });
     }

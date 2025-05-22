@@ -1,10 +1,12 @@
 package packt.app.MainConfig.modules;
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Module_TonerStock {
 
     private final SimpleStringProperty codDep;
+    private final SimpleStringProperty idProdut; // Adicionando o campo idProdut
     private final SimpleStringProperty toner;
     private final SimpleStringProperty marca;
     private final SimpleStringProperty cor;
@@ -18,8 +20,9 @@ public class Module_TonerStock {
     private final SimpleStringProperty obs;
 
     // Construtor
-    public Module_TonerStock(String codDep, String toner, String marca, String cor, String impressora, int unidade, String status, String operador, String funcao, String localizacao, String departamento, String obs) {
+    public Module_TonerStock(String codDep, String idProdut, String toner, String marca, String cor, String impressora, int unidade, String status, String operador, String funcao, String localizacao, String departamento, String obs) {
         this.codDep = new SimpleStringProperty(codDep);
+        this.idProdut = new SimpleStringProperty(idProdut); // Inicializando idProdut
         this.toner = new SimpleStringProperty(toner);
         this.marca = new SimpleStringProperty(marca);
         this.cor = new SimpleStringProperty(cor);
@@ -45,6 +48,18 @@ public class Module_TonerStock {
 
     public SimpleStringProperty codDepProperty() {
         return codDep;
+    }
+
+    public String getIdProdut() {
+        return idProdut.get(); // Getter para idProdut
+    }
+
+    public void setIdProdut(String idProdut) {
+        this.idProdut.set(idProdut); // Setter para idProdut
+    }
+
+    public SimpleStringProperty idProdutProperty() {
+        return idProdut; // Property para idProdut
     }
 
     public String getToner() {
@@ -171,7 +186,9 @@ public class Module_TonerStock {
         return obs.get();
     }
 
-    public void setObs(String obs){this.obs.set(obs);}
+    public void setObs(String obs) {
+        this.obs.set(obs);
+    }
 
     public SimpleStringProperty obsProperty() {
         return obs;

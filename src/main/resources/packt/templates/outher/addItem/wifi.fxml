@@ -8,11 +8,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="603.0" maxWidth="600.0" minHeight="510.0" minWidth="600.0" prefHeight="603.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packt.app.MainConfig.controlers.outher.additem.Wifi">
+<AnchorPane maxHeight="603.0" maxWidth="600.0" minHeight="510.0" minWidth="485.0" prefHeight="569.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="packt.app.MainConfig.controlers.outher.additem.Wifi">
    <children>
       <BorderPane layoutX="-14.0" prefHeight="290.0" prefWidth="328.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -25,6 +23,14 @@
                      <padding>
                         <Insets left="10.0" />
                      </padding>
+                  </Label>
+                  <Label maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" text="Id_produt">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
                   </Label>
                   <Label maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" text="Tipo de Equipamento">
                      <VBox.margin>
@@ -50,7 +56,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" text="Quantidade">
+                  <Label maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" text="Num_Serie">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -118,9 +124,14 @@
             </VBox>
          </left>
          <right>
-            <VBox prefHeight="459.0" prefWidth="414.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="482.0" prefWidth="282.0" BorderPane.alignment="CENTER">
                <children>
                   <TextField fx:id="codDepField" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="Id_Produt" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -140,7 +151,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="quantidadeField" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0">
+                  <TextField fx:id="numserieFail" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" prefHeight="25.0" prefWidth="250.0">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -184,20 +195,14 @@
             </VBox>
          </right>
          <bottom>
-            <Pane prefHeight="76.0" prefWidth="608.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="88.0" prefWidth="450.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="enviarButton" layoutX="156.0" layoutY="26.0" mnemonicParsing="false" text="Enviar" />
-                  <Button fx:id="limparButton" layoutX="387.0" layoutY="26.0" mnemonicParsing="false" text="Limpar" />
+                  <Button fx:id="enviarButton" mnemonicParsing="false" text="Enviar" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="40.0" />
+                  <Button fx:id="limparButton" layoutX="416.0" layoutY="13.0" mnemonicParsing="false" text="Limpar" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="40.0" />
+                  <Button fx:id="enviarStok" layoutX="219.0" layoutY="37.0" mnemonicParsing="false" text="Enviar" AnchorPane.bottomAnchor="25.0" />
                </children>
-            </Pane>
+            </AnchorPane>
          </bottom>
-         <top>
-            <Pane prefHeight="66.0" prefWidth="601.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Text layoutX="254.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wifi" />
-               </children>
-            </Pane>
-         </top>
       </BorderPane>
    </children>
 </AnchorPane>

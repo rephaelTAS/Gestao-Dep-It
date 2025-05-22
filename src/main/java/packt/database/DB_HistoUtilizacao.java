@@ -18,27 +18,29 @@ public class DB_HistoUtilizacao {
      * @param inventario O objeto Module_Inventario contendo os dados a serem inseridos.
      */
     public void inserirHistorico(Module_Inventario inventario) {
-        String sql = "INSERT INTO historico_utilizacao (cod_dep, tipo_equipamento, marca, modelo, num_serie, data_entrada, data_verificacao, operador, funcao, local_sala, departamento, status, situacao, obs) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO historico_utilizacao (cod_dep, idProdut, tipo_equipamento, marca, modelo, num_serie, data_entrada, data_verificacao, operador, funcao, local_sala, departamento, status, situacao, obs) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
 
         try (Connection connection = dbConnection.connect();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             // Define os valores dos parâmetros
             stmt.setString(1, inventario.getCodDep());
-            stmt.setString(2, inventario.getTipoEquipamento());
-            stmt.setString(3, inventario.getMarca());
-            stmt.setString(4, inventario.getModelo());
-            stmt.setString(5, inventario.getNum_serie());
-            stmt.setDate(6, java.sql.Date.valueOf(inventario.getDataEntradaServico()));
-            stmt.setDate(7, inventario.getUltimaVerificacao() != null ? java.sql.Date.valueOf(inventario.getUltimaVerificacao()) : null);
-            stmt.setString(8, inventario.getOperador());
-            stmt.setString(9, inventario.getFuncao());
-            stmt.setString(10, inventario.getLocalizacao());
-            stmt.setString(11, inventario.getDepartamento());
-            stmt.setString(12, inventario.getStatus());
-            stmt.setString(13, inventario.getSituacaoEquipamento());
-            stmt.setString(14, inventario.getObs());
+            stmt.setString(2, inventario.getIdProdut()); // Adicionando idProdut
+            stmt.setString(3, inventario.getTipoEquipamento());
+            stmt.setString(4, inventario.getMarca());
+            stmt.setString(5, inventario.getModelo());
+            stmt.setString(6, inventario.getNum_serie());
+            stmt.setDate(7, java.sql.Date.valueOf(inventario.getDataEntradaServico()));
+            stmt.setDate(8, inventario.getUltimaVerificacao() != null ? java.sql.Date.valueOf(inventario.getUltimaVerificacao()) : null);
+            stmt.setString(9, inventario.getOperador());
+            stmt.setString(10, inventario.getFuncao());
+            stmt.setString(11, inventario.getLocalizacao());
+            stmt.setString(12, inventario.getDepartamento());
+            stmt.setString(13, inventario.getStatus());
+            stmt.setString(14, inventario.getSituacaoEquipamento());
+            stmt.setString(15, inventario.getObs());
 
             // Executa a inserção
             int rowsAffected = stmt.executeUpdate();
@@ -67,6 +69,7 @@ public class DB_HistoUtilizacao {
 
                 // Preenche o objeto Module_Inventario usando os métodos set
                 inventario.setCodDep(rs.getString("cod_dep"));
+                inventario.setIdProdut(rs.getString("idProdut")); // Adicionando idProdut
                 inventario.setTipoEquipamento(rs.getString("tipo_equipamento"));
                 inventario.setMarca(rs.getString("marca"));
                 inventario.setModelo(rs.getString("modelo"));
@@ -96,28 +99,29 @@ public class DB_HistoUtilizacao {
      *
      * @param inventario O objeto Module_Inventario contendo os dados a serem atualizados.
      */
-    public void atualizarHistorico(Module_Inventario inventario, String codDep) {
-        String sql = "UPDATE historico_utilizacao SET cod_dep = ?, tipo_equipamento = ?, marca = ?, modelo = ?, num_serie = ?, data_entrada = ?, data_verificacao = ?, operador = ?, funcao = ?, local_sala = ?, departamento = ?, status = ?, situacao = ?, obs = ? WHERE cod_dep = ?";
+    public void atualizarHistorico(Module_Inventario inventario, String numSerie) {
+        String sql = "UPDATE historico_utilizacao SET cod_dep = ?, idProdut = ?, tipo_equipamento = ?, marca = ?, modelo = ?, num_serie = ?, data_entrada = ?, data_verificacao = ?, operador = ?, funcao = ?, local_sala = ?, departamento = ?, status = ?, situacao = ?, obs = ? WHERE num_serie = ?";
 
         try (Connection connection = dbConnection.connect();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             // Define os valores dos parâmetros
             stmt.setString(1, inventario.getCodDep());
-            stmt.setString(2, inventario.getTipoEquipamento());
-            stmt.setString(3, inventario.getMarca());
-            stmt.setString(4, inventario.getModelo());
-            stmt.setString(5, inventario.getNum_serie());
-            stmt.setDate(6, java.sql.Date.valueOf(inventario.getDataEntradaServico()));
-            stmt.setDate(7, inventario.getUltimaVerificacao() != null ? java.sql.Date.valueOf(inventario.getUltimaVerificacao()) : null);
-            stmt.setString(8, inventario.getOperador());
-            stmt.setString(9, inventario.getFuncao());
-            stmt.setString(10, inventario.getLocalizacao());
-            stmt.setString(11, inventario.getDepartamento());
-            stmt.setString(12, inventario.getStatus());
-            stmt.setString(13, inventario.getSituacaoEquipamento());
-            stmt.setString(14, inventario.getObs());
-            stmt.setString(15, codDep); // Usando num_serie como identificador
+            stmt.setString(2, inventario.getIdProdut()); // Adicionando idProdut
+            stmt.setString(3, inventario.getTipoEquipamento());
+            stmt.setString(4, inventario.getMarca());
+            stmt.setString(5, inventario.getModelo());
+            stmt.setString(6, inventario.getNum_serie());
+            stmt.setDate(7, java.sql.Date.valueOf(inventario.getDataEntradaServico()));
+            stmt.setDate(8, inventario.getUltimaVerificacao() != null ? java.sql.Date.valueOf(inventario.getUltimaVerificacao()) : null);
+            stmt.setString(9, inventario.getOperador());
+            stmt.setString(10, inventario.getFuncao());
+            stmt.setString(11, inventario.getLocalizacao());
+            stmt.setString(12, inventario.getDepartamento());
+            stmt.setString(13, inventario.getStatus());
+            stmt.setString(14, inventario.getSituacaoEquipamento());
+            stmt.setString(15, inventario.getObs());
+            stmt.setString(16, numSerie); // Usando num_serie como identificador
 
             // Executa a atualização
             int rowsAffected = stmt.executeUpdate();
@@ -131,14 +135,14 @@ public class DB_HistoUtilizacao {
     /**
      * Método para deletar um registro da tabela historico_utilizacao.
      *
-     * @param codDep O número de série do equipamento a ser deletado.
+     * @param numSerie O número de série do equipamento a ser deletado.
      */
-    public void deletarHistorico(String codDep) {
+    public void deletarHistorico(String numSerie) {
         String sql = "DELETE FROM historico_utilizacao WHERE num_serie = ?";
 
         try (Connection connection = dbConnection.connect();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, codDep);
+            stmt.setString(1, numSerie);
 
             // Executa a deleção
             int rowsAffected = stmt.executeUpdate();

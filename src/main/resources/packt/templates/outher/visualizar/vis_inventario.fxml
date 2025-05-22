@@ -20,6 +20,7 @@
                         <TableView fx:id="tab_inventario">
                             <columns>
                                 <TableColumn fx:id="colCodDep" prefWidth="75.0" text="Cod_Dep" />
+                                <TableColumn fx:id="idProdut" prefWidth="75.0" text="Id_Produt" />
                                 <TableColumn fx:id="colTipoEquipamento" prefWidth="75.0" text="Tipo Equipamento" />
                                 <TableColumn fx:id="colMarca" prefWidth="75.0" text="Marca" />
                                 <TableColumn fx:id="colModelo" prefWidth="75.0" text="Modelo" />

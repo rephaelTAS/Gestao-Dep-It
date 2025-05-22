@@ -21,6 +21,7 @@ public final class ImageConfig {
         public static final String ADD_ITEM_ICON = "/packt/images/image/main/add-item.png";
         public static final String REPORT_ICON = "/packt/images/image/main/report.png";
         public static final String VIEW_ICON = "/packt/images/image/main/view.png";
+        public static final String TIME_REPORT_ICON = "/packt/images/image/main/clock.png";
     }
 
     public static class Thumbnails {
@@ -38,6 +39,7 @@ public final class ImageConfig {
 
         registerThemeImages(registry);
         registerCoreImages(registry);
+        registreImages(registry);
     }
 
     private static void registerCoreImages(ImageRegistry registry) {
@@ -51,6 +53,7 @@ public final class ImageConfig {
         safeRegister(registry, "menu-Add", Images.ADD_ITEM_ICON);
         safeRegister(registry, "menu-Report", Images.REPORT_ICON);
         safeRegister(registry, "menu-Visu", Images.VIEW_ICON);
+        safeRegister(registry, "relogio", Images.TIME_REPORT_ICON);
     }
 
     private static void registerThemeImages(ImageRegistry registry) {

@@ -1,97 +1,187 @@
-/* Cores principais */
+/* ============= VARIÁVEIS ============= */
 .root {
-    -fx-primary-color: #2C3E50;
-    -fx-secondary-color: #34495E;
-    -fx-accent-color: #3498DB;
-    -fx-light-color: #ECF0F1;
-    -fx-dark-color: #2C3E50;
+    /* Cores base */
+    -color-primary: #2C3E50;
+    -color-secondary: #34495E;
+    -color-accent: #3498DB;
+    -color-light: #ECF0F1;
+    -color-dark: #2C3E50;
+    -color-white: #FFFFFF;
+    -color-success: #2ECC71;
+    -color-danger: #E74C3C;
+    -color-warning: #F39C12;
+
+    /* Mapear para variáveis do JavaFX */
+    -fx-primary-color: -color-primary;
+    -fx-secondary-color: -color-secondary;
+    -fx-accent-color: -color-accent;
+    -fx-light-color: -color-light;
+    -fx-dark-color: -color-dark;
+    -fx-white-color: -color-white;
+    -fx-success-color: -color-success;
+    -fx-danger-color: -color-danger;
+    -fx-warning-color: -color-warning;
 }
 
-/* Barra superior */
+/* ============= ESTILOS GERAIS ============= */
+* {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ============= BARRA SUPERIOR ============= */
 .top-bar {
-    -fx-background-color: -fx-primary-color;
-    -fx-padding: 10px;
+    -fx-background-color: linear-gradient(to right, -fx-primary-color, -fx-accent-color);
+    -fx-padding: 15 25 10 25;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 3);
 }
 
-.welcome-text, .user-text {
-    -fx-text-fill: -fx-light-color;
+.top-bar-title {
+    -fx-text-fill: -fx-white-color;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.user-info {
+    -fx-text-fill: -fx-white-color;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
 
-/* Menu lateral */
+.status-indicator {
+    -fx-text-fill: -fx-white-color;
+    -fx-font-size: 12px;
+}
+
+/* ============= MENU LATERAL ============= */
 .sidebar {
     -fx-background-color: -fx-secondary-color;
-    -fx-spacing: 10px;
-    -fx-padding: 10px;
+    -fx-padding: 20 0;
+    -fx-spacing: 5;
     -fx-transition: all 0.3s ease;
 }
 
-.menu-container {
-    -fx-spacing: 5px;
-}
-
-.menu-btn {
+.menu-button {
     -fx-background-color: transparent;
-    -fx-text-fill: -fx-light-color;
-    -fx-font-size: 14px;
+    -fx-text-fill: -fx-white-color;
+    -fx-font-size: 16px;
     -fx-alignment: center-left;
-    -fx-padding: 10px 15px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
+    -fx-padding: 15 20;
     -fx-cursor: hand;
+    -fx-content-display: left;
 }
 
-.menu-btn:hover {
+.menu-button:hover {
     -fx-background-color: rgba(255, 255, 255, 0.1);
 }
 
-.menu-btn .graphic {
-    -fx-padding: 0 10px 0 0;
+.menu-button:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
 }
 
 .menu-icon {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 2, 0, 0, 1);
+    -fx-fit-height: 32;
+    -fx-fit-width: 32;
 }
 
-/* Botão de toggle */
-.toggle-menu-btn {
-    -fx-background-color: transparent;
-    -fx-background-radius: 5px;
-    -fx-cursor: hand;
-    -fx-padding: 5px;
+.menu-label {
+    -fx-text-fill: -fx-white-color;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 0 15;
 }
 
-.toggle-menu-btn:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Área de conteúdo */
+/* ============= ÁREA DE CONTEÚDO ============= */
 .content-pane {
+    -fx-background-color: #F5F7FA;
+    -fx-padding: 20;
+}
+
+/* ============= RODAPÉ ============= */
+.footer {
     -fx-background-color: -fx-light-color;
-    -fx-padding: 20px;
-}
-
-/* Efeitos de transição */
-.transition-all {
-    -fx-transition: all 0.3s ease;
-}
-
-/* Estado recolhido do menu */
-.sidebar.collapsed {
-    -fx-pref-width: 60px;
-}
-
-.sidebar.collapsed .menu-btn {
-    -fx-padding: 10px;
+    -fx-padding: 10;
     -fx-alignment: center;
 }
 
-.sidebar.collapsed .menu-btn .text {
-    -fx-visible: false;
-    -fx-managed: false;
+.footer-text {
+    -fx-text-fill: #7F8C8D;
+    -fx-font-size: 12px;
 }
 
-.sidebar.collapsed .menu-btn .graphic {
-    -fx-padding: 0;
+/* ============= CARDS ============= */
+.card {
+    -fx-background-color: -fx-white-color;
+    -fx-background-radius: 5;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+.card-title {
+    -fx-text-fill: -fx-primary-color;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.card-content {
+    -fx-text-fill: -fx-secondary-color;
+    -fx-font-size: 14px;
+}
+
+/* ============= BOTÕES ============= */
+.primary-button {
+    -fx-background-color: -fx-accent-color;
+    -fx-text-fill: -fx-white-color;
+    -fx-font-weight: bold;
+    -fx-padding: 8 15;
+    -fx-background-radius: 4;
+}
+
+.primary-button:hover {
+    -fx-background-color: #2980B9;
+}
+
+.secondary-button {
+    -fx-background-color: -fx-light-color;
+    -fx-text-fill: -fx-primary-color;
+    -fx-font-weight: bold;
+    -fx-padding: 8 15;
+    -fx-background-radius: 4;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #D5DBDB;
+}
+
+/* ============= STATUS ============= */
+.status-operational {
+    -fx-text-fill: -fx-success-color;
+    -fx-font-weight: bold;
+}
+
+.status-warning {
+    -fx-text-fill: -fx-warning-color;
+    -fx-font-weight: bold;
+}
+
+.status-error {
+    -fx-text-fill: -fx-danger-color;
+    -fx-font-weight: bold;
+}
+
+/* ============= ÍCONES DE USUÁRIO ============= */
+.user-avatar {
+    -fx-fit-height: 40;
+    -fx-fit-width: 40;
+    -fx-border-radius: 20;
+    -fx-border-color: -fx-white-color;
+    -fx-border-width: 2;
+}
+
+/* ============= ANIMAÇÕES ============= */
+@keyframes fade-in {
+    from { -fx-opacity: 0; }
+    to { -fx-opacity: 1; }
+}
+
+.fade-in {
+    -fx-animation: fade-in 0.3s ease;
 }

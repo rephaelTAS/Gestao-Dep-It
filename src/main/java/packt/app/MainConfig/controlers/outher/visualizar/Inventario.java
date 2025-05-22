@@ -4,17 +4,16 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
-import javafx.util.Callback;
 import packt.app.MainConfig.controlers.outher.editar.EditarInventario;
 import packt.app.MainConfig.exportImport.ExportToExcel;
 import packt.app.MainConfig.modules.Module_Inventario;
 import packt.app.MainConfig.notificacao.Notificacao;
-import packt.app.services.InventarioService;
 import packt.app.views.ModalDialog;
 import packt.database.DB_Inventario;
 
@@ -34,9 +33,11 @@ public class Inventario {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final String DEFAULT_NULL_VALUE = "-";
 
+
     // Componentes FXML
     @FXML private TableView<Module_Inventario> tab_inventario;
     @FXML private TableColumn<Module_Inventario, String> colCodDep;
+    @FXML private TableColumn<Module_Inventario, String> idProdut;
     @FXML private TableColumn<Module_Inventario, String> colTipoEquipamento;
     @FXML private TableColumn<Module_Inventario, String> colMarca;
     @FXML private TableColumn<Module_Inventario, String> colModelo;
@@ -69,6 +70,7 @@ public class Inventario {
     private void configurarColunas() {
         // Configuração básica para colunas de texto
         colCodDep.setCellValueFactory(cellData -> formatStringProperty(cellData.getValue().getCodDep()));
+        idProdut.setCellValueFactory(cellData -> formatStringProperty(cellData.getValue().getIdProdut()));
         colTipoEquipamento.setCellValueFactory(cellData -> formatStringProperty(cellData.getValue().getTipoEquipamento()));
         colMarca.setCellValueFactory(cellData -> formatStringProperty(cellData.getValue().getMarca()));
         colModelo.setCellValueFactory(cellData -> formatStringProperty(cellData.getValue().getModelo()));

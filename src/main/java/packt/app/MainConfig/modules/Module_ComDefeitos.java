@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Module_ComDefeitos {
 
     private String codDep;
+    private String idProdut; // Adicionando o campo idProdut
     private String tipoEquipamento;
     private String marca;
     private String numSerie;
@@ -16,8 +17,10 @@ public class Module_ComDefeitos {
     private String departamento;
     private String obs;
 
-    public void module_ComDefeitos(String codDep, String tipoEquipamento, String marca, String numSerie, LocalDate dataEntrada, LocalDate ultimaVerificacao, String operador, String funcao, String localSala, String departamento, String obs) {
+    // Construtor
+    public void module_ComDefeitos(String codDep, String idProdut, String tipoEquipamento, String marca, String numSerie, LocalDate dataEntrada, LocalDate ultimaVerificacao, String operador, String funcao, String localSala, String departamento, String obs) {
         this.codDep = codDep;
+        this.idProdut = idProdut; // Inicializando idProdut
         this.tipoEquipamento = tipoEquipamento;
         this.marca = marca;
         this.numSerie = numSerie;
@@ -30,12 +33,21 @@ public class Module_ComDefeitos {
         this.obs = obs;
     }
 
+    // Getters e Setters
     public String getCodDep() {
         return codDep;
     }
 
     public void setCodDep(String codDep) {
         this.codDep = codDep;
+    }
+
+    public String getIdProdut() {
+        return idProdut; // Getter para idProdut
+    }
+
+    public void setIdProdut(String idProdut) {
+        this.idProdut = idProdut; // Setter para idProdut
     }
 
     public String getTipoEquipamento() {

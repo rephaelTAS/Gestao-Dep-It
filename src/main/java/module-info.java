@@ -21,15 +21,18 @@ module packt.sample {
     opens packt.app.MainConfig.controlers.outher.visualizar to javafx.fxml;
     opens packt.app.MainConfig.controlers.outher.relatorio to javafx.fxml;
     opens packt.app.MainConfig.controlers.outher.additem to javafx.fxml;
+    exports packt.app.MainConfig.controlers.main to javafx.fxml;
+    exports packt.app.MainConfig.controlers.reports to javafx.fxml;
+    opens packt.app.MainConfig.controlers.reports to javafx.fxml;
+
+
     exports packt.app.MainConfig.controlers.outher.additem to javafx.fxml;
     exports packt.app.MainConfig.controlers.outher.relatorio to javafx.fxml;
     exports packt.app.MainConfig.controlers.outher.visualizar to javafx.fxml;
     opens packt.app.MainConfig.controlers.outher.editar to  javafx.fxml;
     exports packt.app.MainConfig.controlers.outher.editar to  javafx.fxml;
+
     // Exportação de pacotes
-
-
-    exports packt.app.MainConfig.controlers.main;
     exports packt.app.MainConfig.controlers.login;
     exports packt.app; // Se necessário
 }

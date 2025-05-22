@@ -1,6 +1,5 @@
 package packt.app.MainConfig.controlers.outher.relatorio;
 
-import packt.database.DB_Inventario_Stock;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,7 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import packt.app.MainConfig.modules.Module_InventarioStock;
+import packt.app.MainConfig.modules.Module_Inventario;
+import packt.database.DB_Inventario;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -18,45 +18,45 @@ import java.util.ResourceBundle;
 public class RelaInventarioStock implements Initializable {
 
     @FXML
-    private TableView<Module_InventarioStock> tab_inventario;
+    private TableView<Module_Inventario> tab_inventario;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colCodDep;
+    private TableColumn<Module_Inventario, String> colCodDep;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colTipoEquipamento;
+    private TableColumn<Module_Inventario, String> colTipoEquipamento;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colMarca;
+    private TableColumn<Module_Inventario, String> colMarca;
 
     @FXML
-    private TableColumn<Module_InventarioStock, Integer> colQuantidade;
+    private TableColumn<Module_Inventario, Integer> colQuantidade;
 
     @FXML
-    private TableColumn<Module_InventarioStock, LocalDate> colDataEntrada;
+    private TableColumn<Module_Inventario, LocalDate> colDataEntrada;
 
     @FXML
-    private TableColumn<Module_InventarioStock, LocalDate> colUltimaVerificacao;
+    private TableColumn<Module_Inventario, LocalDate> colUltimaVerificacao;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colOperador;
+    private TableColumn<Module_Inventario, String> colOperador;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colFuncao;
+    private TableColumn<Module_Inventario, String> colFuncao;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colLocalSala;
+    private TableColumn<Module_Inventario, String> colLocalSala;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colDepartamento;
+    private TableColumn<Module_Inventario, String> colDepartamento;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colSituacaoEquipamento;
+    private TableColumn<Module_Inventario, String> colSituacaoEquipamento;
 
     @FXML
-    private TableColumn<Module_InventarioStock, String> colObs;
+    private TableColumn<Module_Inventario, String> colObs;
 
-    private DB_Inventario_Stock dbInventarioStock = new DB_Inventario_Stock();
+    private DB_Inventario dbInventarioStock = new DB_Inventario();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -80,10 +80,10 @@ public class RelaInventarioStock implements Initializable {
 
     private void carregarDados() {
         // Obtém os dados do banco de dados
-        List<Module_InventarioStock> dados = dbInventarioStock.mostrarDadosInventarioStock();
+        List<Module_Inventario> dados = dbInventarioStock.mostrarInventario();
 
         // Converte a lista para um ObservableList
-        ObservableList<Module_InventarioStock> listaObservavel = FXCollections.observableArrayList(dados);
+        ObservableList<Module_Inventario> listaObservavel = FXCollections.observableArrayList(dados);
 
         // Define os dados na TableView
         tab_inventario.setItems(listaObservavel);

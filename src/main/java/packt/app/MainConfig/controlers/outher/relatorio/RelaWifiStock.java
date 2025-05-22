@@ -12,8 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import packt.app.MainConfig.exportImport.ExportToExcel;
-import packt.app.MainConfig.modules.Module_WifiStock;
-import packt.database.DB_WifiStock;
+import packt.app.MainConfig.modules.Module_Wifi;
+import packt.database.DB_Wifi;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,43 +25,43 @@ import java.util.ResourceBundle;
 public class RelaWifiStock implements Initializable {
 
     @FXML
-    private TableView<Module_WifiStock> tab_wifiStock;
+    private TableView<Module_Wifi> tab_wifiStock;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colCodDep;
+    private TableColumn<Module_Wifi, String> colCodDep;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colTipoEquipamento;
+    private TableColumn<Module_Wifi, String> colTipoEquipamento;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colMarca;
+    private TableColumn<Module_Wifi, String> colMarca;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colModelo;
+    private TableColumn<Module_Wifi, String> colModelo;
 
     @FXML
-    private TableColumn<Module_WifiStock, Integer> colQuantidade;
+    private TableColumn<Module_Wifi, Integer> colQuantidade;
 
     @FXML
-    private TableColumn<Module_WifiStock, LocalDate> colDataEntrada;
+    private TableColumn<Module_Wifi, LocalDate> colDataEntrada;
 
     @FXML
-    private TableColumn<Module_WifiStock, LocalDate> colDataVerificacao;
+    private TableColumn<Module_Wifi, LocalDate> colDataVerificacao;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colOperador;
+    private TableColumn<Module_Wifi, String> colOperador;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colSituacao;
+    private TableColumn<Module_Wifi, String> colSituacao;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colObs;
+    private TableColumn<Module_Wifi, String> colObs;
 
     @FXML
     private Button Btn_GerarExcel;
 
     // Lista observável para armazenar os dados da tabela
-    private ObservableList<Module_WifiStock> listaObservavel = FXCollections.observableArrayList();
+    private ObservableList<Module_Wifi> listaObservavel = FXCollections.observableArrayList();
 
 
     @Override
@@ -97,8 +97,8 @@ public class RelaWifiStock implements Initializable {
 
     private void carregarDados() {
         // Obtém os dados do banco de dados
-        DB_WifiStock dbWifiStock = new DB_WifiStock();
-        List<Module_WifiStock> dados = dbWifiStock.mostrarDadosWifiStock();
+        DB_Wifi dbWifiStock = new DB_Wifi();
+        List<Module_Wifi> dados = dbWifiStock.mostrarDadosWifi();
 
         // Limpa a lista observável e adiciona os novos dados
         listaObservavel.clear();
@@ -118,7 +118,7 @@ public class RelaWifiStock implements Initializable {
 
         if (file != null) {
             ExportToExcel exporter = new ExportToExcel();
-            exporter.exportarWifiStockParaExcel(listaObservavel, file.getAbsolutePath());
+            exporter.exportarWifiParaExcel(listaObservavel, file.getAbsolutePath());
         } else {
             System.out.println("Exportação cancelada.");
         }

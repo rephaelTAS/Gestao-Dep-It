@@ -2,10 +2,12 @@ package packt.app.MainConfig.modules;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import packt.database.DB_UsuToner;
 
 public class Module_UsuToner {
 
     private final SimpleStringProperty codDep;
+    private final SimpleStringProperty idProdut; // Adicionando o campo idProdut
     private final SimpleStringProperty toner;
     private final SimpleStringProperty marca;
     private final SimpleStringProperty cor;
@@ -18,9 +20,12 @@ public class Module_UsuToner {
     private final SimpleStringProperty departamento;
     private final SimpleStringProperty Obs;
 
+    DB_UsuToner usuToner = new DB_UsuToner();
+
     // Construtor
-    public Module_UsuToner(String codDep, String toner, String marca, String cor, String impressora, Integer unidade, String data, String operador, String funcao, String localizacao, String departamento, String Obs) {
+    public Module_UsuToner(String codDep, String idProdut, String toner, String marca, String cor, String impressora, Integer unidade, String data, String operador, String funcao, String localizacao, String departamento, String Obs) {
         this.codDep = new SimpleStringProperty(codDep);
+        this.idProdut = new SimpleStringProperty(idProdut); // Inicializando idProdut
         this.toner = new SimpleStringProperty(toner);
         this.marca = new SimpleStringProperty(marca);
         this.cor = new SimpleStringProperty(cor);
@@ -46,6 +51,18 @@ public class Module_UsuToner {
 
     public SimpleStringProperty codDepProperty() {
         return codDep;
+    }
+
+    public String getIdProdut() {
+        return idProdut.get(); // Getter para idProdut
+    }
+
+    public void setIdProdut(String idProdut) {
+        this.idProdut.set(idProdut); // Setter para idProdut
+    }
+
+    public SimpleStringProperty idProdutProperty() {
+        return idProdut; // Property para idProdut
     }
 
     public String getToner() {
@@ -171,9 +188,16 @@ public class Module_UsuToner {
     public String getObs() {
         return Obs.get();
     }
-    
+
+    public void setObs(String obs) {
+        this.Obs.set(obs);
+    }
 
     public SimpleStringProperty obsProperty() {
         return Obs;
+    }
+
+    public void cadastrar_dados() {
+        usuToner.createToner(this);
     }
 }

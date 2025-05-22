@@ -2,34 +2,47 @@ package packt.app.MainConfig.modules;
 
 import java.time.LocalDate;
 
-public class Module_WifiStock {
-
+public class Module_Historico {
     private String codDep;
+    private String idPodut;
     private String tipoEquipamento;
     private String marca;
     private String modelo;
-    private int quantidade;
+    private String numSerie;
     private LocalDate dataEntrada;
     private LocalDate ultimaVerificacao;
+    private LocalDate dataMovimentacao;
     private String operador;
-    private String situacaoEquipamento;
-    private String obs;
+    private String sala;
+    private String departamento;
+    private String Obs;
 
-    // Construtor
-    public void module_WifiStock(String codDep, String tipoEquipamento, String marca, String modelo, int quantidade, LocalDate dataEntrada, LocalDate ultimaVerificacao, String operador, String situacaoEquipamento, String obs) {
+    //Construtor
+
+    public void module_Historico(String codDep, String idPodut, String tipoEquipamento, String marca, String modelo, String numSerie, LocalDate dataEntrada, LocalDate ultimaVerificacao, LocalDate dataMovimentacao, String operador, String sala, String departamento, String obs) {
         this.codDep = codDep;
+        this.idPodut = idPodut;
         this.tipoEquipamento = tipoEquipamento;
         this.marca = marca;
         this.modelo = modelo;
-        this.quantidade = quantidade;
+        this.numSerie = numSerie;
         this.dataEntrada = dataEntrada;
         this.ultimaVerificacao = ultimaVerificacao;
+        this.dataMovimentacao = dataMovimentacao;
         this.operador = operador;
-        this.situacaoEquipamento = situacaoEquipamento;
-        this.obs = obs;
+        this.sala = sala;
+        this.departamento = departamento;
+        Obs = obs;
     }
 
-    // Getters e Setters
+    public String getIdPodut() {
+        return idPodut;
+    }
+
+    public void setIdPodut(String idPodut) {
+        this.idPodut = idPodut;
+    }
+
     public String getCodDep() {
         return codDep;
     }
@@ -62,12 +75,12 @@ public class Module_WifiStock {
         this.modelo = modelo;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public String getNumSerie() {
+        return numSerie;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setNumSerie(String numSerie) {
+        this.numSerie = numSerie;
     }
 
     public LocalDate getDataEntrada() {
@@ -86,6 +99,14 @@ public class Module_WifiStock {
         this.ultimaVerificacao = ultimaVerificacao;
     }
 
+    public LocalDate getDataMovimentacao() {
+        return dataMovimentacao;
+    }
+
+    public void setDataMovimentacao(LocalDate dataMovimentacao) {
+        this.dataMovimentacao = dataMovimentacao;
+    }
+
     public String getOperador() {
         return operador;
     }
@@ -94,19 +115,27 @@ public class Module_WifiStock {
         this.operador = operador;
     }
 
-    public String getSituacaoEquipamento() {
-        return situacaoEquipamento;
+    public String getSala() {
+        return sala;
     }
 
-    public void setSituacaoEquipamento(String situacaoEquipamento) {
-        this.situacaoEquipamento = situacaoEquipamento;
+    public void setSala(String sala) {
+        this.sala = sala;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
     }
 
     public String getObs() {
-        return obs;
+        return Obs;
     }
 
     public void setObs(String obs) {
-        this.obs = obs;
+        Obs = obs;
     }
 }

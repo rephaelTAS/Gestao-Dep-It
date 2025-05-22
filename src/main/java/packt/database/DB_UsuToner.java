@@ -15,23 +15,24 @@ public class DB_UsuToner {
 
     // CREATE: Inserir um novo registro na tabela usutoner
     public void createToner(Module_UsuToner toner) {
-        String sql = "INSERT INTO usutoner (codDep, toner, marca, cor, impressora, unidade, data, operador, funcao, localizacao, departamento, Obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usutoner (codDep, idProdut, toner, marca, cor, impressora, unidade, data, operador, funcao, localizacao, departamento, Obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = dbConnection.connect();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, toner.getCodDep());
-            stmt.setString(2, toner.getToner());
-            stmt.setString(3, toner.getMarca());
-            stmt.setString(4, toner.getCor());
-            stmt.setString(5, toner.getImpressora());
-            stmt.setInt(6, toner.getUnidade());
-            stmt.setString(7, toner.getData());
-            stmt.setString(8, toner.getOperador());
-            stmt.setString(9, toner.getFuncao());
-            stmt.setString(10, toner.getLocalizacao());
-            stmt.setString(11, toner.getDepartamento());
-            stmt.setString(12, toner.getObs());
+            stmt.setString(2, toner.getIdProdut()); // Adicionando idProdut
+            stmt.setString(3, toner.getToner());
+            stmt.setString(4, toner.getMarca());
+            stmt.setString(5, toner.getCor());
+            stmt.setString(6, toner.getImpressora());
+            stmt.setInt(7, toner.getUnidade());
+            stmt.setString(8, toner.getData());
+            stmt.setString(9, toner.getOperador());
+            stmt.setString(10, toner.getFuncao());
+            stmt.setString(11, toner.getLocalizacao());
+            stmt.setString(12, toner.getDepartamento());
+            stmt.setString(13, toner.getObs());
 
             int rowsInserted = stmt.executeUpdate();
             System.out.println(rowsInserted + " registro(s) inserido(s).");
@@ -54,6 +55,7 @@ public class DB_UsuToner {
             while (rs.next()) {
                 Module_UsuToner toner = new Module_UsuToner(
                         rs.getString("codDep"),
+                        rs.getString("idProdut"), // Adicionando idProdut
                         rs.getString("toner"),
                         rs.getString("marca"),
                         rs.getString("cor"),
@@ -79,22 +81,23 @@ public class DB_UsuToner {
 
     // UPDATE: Atualizar um registro na tabela usutoner
     public void updateToner(Module_UsuToner toner) {
-        String sql = "UPDATE usutoner SET toner = ?, marca = ?, cor = ?, impressora = ?, unidade = ?, data = ?, operador = ?, funcao = ?, localizacao = ?, departamento = ? WHERE codDep = ?";
+        String sql = "UPDATE usutoner SET idProdut = ?, toner = ?, marca = ?, cor = ?, impressora = ?, unidade = ?, data = ?, operador = ?, funcao = ?, localizacao = ?, departamento = ? WHERE codDep = ?";
 
         try (Connection conn = dbConnection.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, toner.getToner());
-            stmt.setString(2, toner.getMarca());
-            stmt.setString(3, toner.getCor());
-            stmt.setString(4, toner.getImpressora());
-            stmt.setInt(5, toner.getUnidade());
-            stmt.setString(6, toner.getData());
-            stmt.setString(7, toner.getOperador());
-            stmt.setString(8, toner.getFuncao());
-            stmt.setString(9, toner.getLocalizacao());
-            stmt.setString(10, toner.getDepartamento());
-            stmt.setString(11, toner.getCodDep());
+            stmt.setString(1, toner.getIdProdut()); // Adicionando idProdut
+            stmt.setString(2, toner.getToner());
+            stmt.setString(3, toner.getMarca());
+            stmt.setString(4, toner.getCor());
+            stmt.setString(5, toner.getImpressora());
+            stmt.setInt(6, toner.getUnidade());
+            stmt.setString(7, toner.getData());
+            stmt.setString(8, toner.getOperador());
+            stmt.setString(9, toner.getFuncao());
+            stmt.setString(10, toner.getLocalizacao());
+            stmt.setString(11, toner.getDepartamento());
+            stmt.setString(12, toner.getCodDep());
 
             int rowsUpdated = stmt.executeUpdate();
             System.out.println(rowsUpdated + " registro(s) atualizado(s).");
@@ -106,7 +109,7 @@ public class DB_UsuToner {
     }
 
     // DELETE: Excluir um registro da tabela usutoner
-    public void deleteToner(String codDep ) {
+    public void deleteToner(String codDep) {
         String sql = "DELETE FROM usutoner WHERE codDep = ?";
 
         try (Connection conn = dbConnection.connect();

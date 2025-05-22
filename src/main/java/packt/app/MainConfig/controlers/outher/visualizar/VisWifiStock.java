@@ -1,6 +1,5 @@
 package packt.app.MainConfig.controlers.outher.visualizar;
 
-import packt.database.DB_WifiStock;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,7 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import packt.app.MainConfig.modules.Module_WifiStock;
+import packt.app.MainConfig.modules.Module_Wifi;
+import packt.database.DB_Wifi;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -18,46 +18,46 @@ import java.util.ResourceBundle;
 public class VisWifiStock implements Initializable {
 
     @FXML
-    private TableView<Module_WifiStock> tab_inventario;
+    private TableView<Module_Wifi> tab_inventario;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colCodDep;
+    private TableColumn<Module_Wifi, String> colCodDep;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colTipoEquipamento;
+    private TableColumn<Module_Wifi, String> colTipoEquipamento;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colMarca;
+    private TableColumn<Module_Wifi, String> colMarca;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colModelo;
+    private TableColumn<Module_Wifi, String> colModelo;
 
     @FXML
-    private TableColumn<Module_WifiStock, Integer> colNumSerie;
+    private TableColumn<Module_Wifi, Integer> colNumSerie;
 
     @FXML
-    private TableColumn<Module_WifiStock, LocalDate> colDataEntrada;
+    private TableColumn<Module_Wifi, LocalDate> colDataEntrada;
 
     @FXML
-    private TableColumn<Module_WifiStock, LocalDate> colDataVerificacao;
+    private TableColumn<Module_Wifi, LocalDate> colDataVerificacao;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colOperador;
+    private TableColumn<Module_Wifi, String> colOperador;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colFuncao;
+    private TableColumn<Module_Wifi, String> colFuncao;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colStatus;
+    private TableColumn<Module_Wifi, String> colStatus;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colSituacao;
+    private TableColumn<Module_Wifi, String> colSituacao;
 
     @FXML
-    private TableColumn<Module_WifiStock, String> colObs;
+    private TableColumn<Module_Wifi, String> colObs;
 
     // Converte a lista para um ObservableList
-    ObservableList<Module_WifiStock> listaObservavel = FXCollections.observableArrayList();
+    ObservableList<Module_Wifi> listaObservavel = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -81,8 +81,8 @@ public class VisWifiStock implements Initializable {
 
     private void carregarDados() {
         // Obtém os dados do banco de dados
-        DB_WifiStock dbWifiStock = new DB_WifiStock();
-        List<Module_WifiStock> dados = dbWifiStock.mostrarDadosWifiStock();
+        DB_Wifi dbWifiStock = new DB_Wifi();
+        List<Module_Wifi> dados = dbWifiStock.mostrarDadosWifi();
 
 
         listaObservavel.clear();
